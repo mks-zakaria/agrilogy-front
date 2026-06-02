@@ -1,0 +1,66 @@
+name: Vercel PR Preview
+
+# A working preview URL on every PR, commented back on the PR.
+#
+# Why this exists instead of Vercel's native Git previews: Vercel attributes
+# Git-triggered deployments to the commit author and BLOCKS them when that
+# author (here `mks-zakaria`) isn't matched to a team member. This job strips
+# the git metadata and deploys via a token, so the deployment is attributed to
+# the token's account — never blocked. Requires repo secrets:
+#   VERCEL_TOKEN  (Account Settings -> Tokens, scoped to "Agrilogy's projects")
+#   VERCEL_ORG_ID, VERCEL_PROJECT_ID  (already set)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: vercel-preview-pr-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Drop git metadata → Vercel attributes the deploy to the CI token, not
+      # the commit author. This is what unblocks `mks-zakaria`-authored PRs.
+      - name: Strip git metadata
+        run: rm -rf .git
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy preview
+        id: deploy
+        run: |
+          url=$(vercel deploy --yes --token="${{ secrets.VERCEL_TOKEN }}")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview URL on the PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.deploy.outputs.url }}';
+            const marker = '<!-- vercel-preview -->';
+            const body = `${marker}\n🔍 **Vercel preview:** ${url}\n\n<sub>Deployed by CI (token-attributed), so it works regardless of the git author.</sub>`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const prev = comments.find((c) => (c.body || '').includes(marker));
+            if (prev) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner, repo: context.repo.repo, comment_id: prev.id, body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number, body,
+              });
+            }
