@@ -55,27 +55,36 @@ const ET0LastData = ({
   const subColor = useColorModeValue('gray.500', 'gray.400');
   const valueDaily = useColorModeValue('green.700', 'green.200');
 
-  // FAO-56: daily ET₀ = Σ of the 24 hourly values (each mm/h over its hour ⇒
-  // the sum is mm/day). We aggregate the *calculated* model series by local
-  // day. The previous full day's total is what the next day's irrigation uses.
+  // FAO-56 daily ET₀ = Σ of the 24 hourly values. The calculated series is a
+  // mm/h *rate* sampled sub-hourly (15-min cadence), so we can't just sum the
+  // samples (that over-counts ~4×). Daily ET₀ = mean(rate over the day) × 24h,
+  // which is cadence-independent and equals the Σ-of-24-hourly for a full day.
+  // The previous full day's total is what the next day's irrigation uses.
   const daily = useMemo(() => {
-    const byDay = new Map<string, number>();
+    const byDay = new Map<string, { sum: number; count: number }>();
     for (const d of calculatedData) {
       const v = typeof d.value === 'number' ? d.value : NaN;
       if (Number.isNaN(v)) continue;
       const day = new Date(d.timestamp).toLocaleDateString('fr-CA'); // YYYY-MM-DD, local
-      byDay.set(day, (byDay.get(day) ?? 0) + Math.max(0, v));
+      const e = byDay.get(day) ?? { sum: 0, count: 0 };
+      e.sum += Math.max(0, v);
+      e.count += 1;
+      byDay.set(day, e);
     }
     const days = [...byDay.keys()].sort();
     if (days.length === 0) return null;
+    const dayTotal = (k: string) => {
+      const e = byDay.get(k);
+      return e && e.count ? (e.sum / e.count) * 24 : 0;
+    };
     const latestDay = days[days.length - 1];
     const prevDay = days.length > 1 ? days[days.length - 2] : null;
     return {
       latestDay,
-      latestTotal: byDay.get(latestDay) ?? 0,
+      latestTotal: dayTotal(latestDay),
       prevDay,
-      prevTotal: prevDay ? (byDay.get(prevDay) ?? 0) : null,
-      cumulative: [...byDay.values()].reduce((a, b) => a + b, 0),
+      prevTotal: prevDay ? dayTotal(prevDay) : null,
+      cumulative: days.reduce((a, k) => a + dayTotal(k), 0),
       dayCount: days.length,
     };
   }, [calculatedData]);
