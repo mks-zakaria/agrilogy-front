@@ -1,4 +1,11 @@
-import { Box, Text, VStack, useColorModeValue } from '@chakra-ui/react';
+import { useMemo } from 'react';
+import {
+  Box,
+  Text,
+  VStack,
+  Divider,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { GiWaterDrop } from 'react-icons/gi';
 import {
   formatCalibratedReading,
@@ -46,6 +53,32 @@ const ET0LastData = ({
   const valueMeteo = useColorModeValue('blue.700', 'blue.200');
   const valueCalc = useColorModeValue('teal.700', 'teal.200');
   const subColor = useColorModeValue('gray.500', 'gray.400');
+  const valueDaily = useColorModeValue('green.700', 'green.200');
+
+  // FAO-56: daily ET₀ = Σ of the 24 hourly values (each mm/h over its hour ⇒
+  // the sum is mm/day). We aggregate the *calculated* model series by local
+  // day. The previous full day's total is what the next day's irrigation uses.
+  const daily = useMemo(() => {
+    const byDay = new Map<string, number>();
+    for (const d of calculatedData) {
+      const v = typeof d.value === 'number' ? d.value : NaN;
+      if (Number.isNaN(v)) continue;
+      const day = new Date(d.timestamp).toLocaleDateString('fr-CA'); // YYYY-MM-DD, local
+      byDay.set(day, (byDay.get(day) ?? 0) + Math.max(0, v));
+    }
+    const days = [...byDay.keys()].sort();
+    if (days.length === 0) return null;
+    const latestDay = days[days.length - 1];
+    const prevDay = days.length > 1 ? days[days.length - 2] : null;
+    return {
+      latestDay,
+      latestTotal: byDay.get(latestDay) ?? 0,
+      prevDay,
+      prevTotal: prevDay ? (byDay.get(prevDay) ?? 0) : null,
+      cumulative: [...byDay.values()].reduce((a, b) => a + b, 0),
+      dayCount: days.length,
+    };
+  }, [calculatedData]);
 
   const newestTs =
     latestWeather && latestCalculated
@@ -110,6 +143,43 @@ const ET0LastData = ({
           <Text mt={4} fontSize="sm" color={subColor}>
             Aucune donnée récente
           </Text>
+        )}
+
+        {daily && (
+          <>
+            <Divider my={4} />
+            <VStack spacing={3} align="stretch" w="100%">
+              <Box>
+                <Text fontSize="xs" fontWeight="medium" color={labelMuted}>
+                  ET₀ du jour ({daily.latestDay})
+                </Text>
+                <Text fontSize="lg" fontWeight="bold" color={valueDaily}>
+                  {daily.latestTotal.toFixed(2)} mm/j
+                </Text>
+              </Box>
+              {daily.prevTotal != null && (
+                <Box>
+                  <Text fontSize="xs" fontWeight="medium" color={labelMuted}>
+                    ET₀ de la veille ({daily.prevDay})
+                  </Text>
+                  <Text fontSize="lg" fontWeight="semibold" color={valueDaily}>
+                    {daily.prevTotal.toFixed(2)} mm/j
+                  </Text>
+                  <Text fontSize="xs" color={subColor}>
+                    utilisée pour l’irrigation du jour
+                  </Text>
+                </Box>
+              )}
+              <Box>
+                <Text fontSize="xs" fontWeight="medium" color={labelMuted}>
+                  Cumul ({daily.dayCount} j)
+                </Text>
+                <Text fontSize="md" fontWeight="semibold" color={valueDaily}>
+                  {daily.cumulative.toFixed(2)} mm
+                </Text>
+              </Box>
+            </VStack>
+          </>
         )}
 
         {newestTs && (
