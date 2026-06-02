@@ -42,17 +42,6 @@ const TEMP_HUM_FIELDS = [
   { dataKey: 'humidity_weather', sensorKey: 'humidity_weather' },
 ] as const;
 
-// Point de rosée (Magnus/Tetens) — per "Les modifications" #15.
-// dew point (°C) from air temp (°C) + relative humidity (%); RH clamped 1–100%.
-const DEW_A = 17.625;
-const DEW_B = 243.04;
-function dewPointC(tempC: number, rhPct: number): number | null {
-  if (!Number.isFinite(tempC) || !Number.isFinite(rhPct)) return null;
-  const rh = Math.max(1, Math.min(100, rhPct));
-  const gamma = Math.log(rh / 100) + (DEW_A * tempC) / (DEW_B + tempC);
-  return (DEW_B * gamma) / (DEW_A - gamma);
-}
-
 const TempHumidityGraph = ({ data }: { data: any }) => {
   const { bg, textColor } = useColorModeStyles();
   const { axis, tickFill, grid } = useChartAxisColors();
@@ -69,14 +58,7 @@ const TempHumidityGraph = ({ data }: { data: any }) => {
     TEMP_HUM_FIELDS
   );
   const chartData = useMemo(
-    () =>
-      addTimeMsToChartRows(chartRows, 'timestamp').map((r: any) => {
-        const dp = dewPointC(
-          Number(r.temperature_weather),
-          Number(r.humidity_weather)
-        );
-        return dp == null ? r : { ...r, dew_point: Math.round(dp * 100) / 100 };
-      }),
+    () => addTimeMsToChartRows(chartRows, 'timestamp'),
     [chartRows]
   );
   const xAxisProps = mergeAxisTheme(
@@ -92,17 +74,11 @@ const TempHumidityGraph = ({ data }: { data: any }) => {
   const [seriesVisible, setSeriesVisible] = useState({
     temperature_weather: true,
     humidity_weather: true,
-    dew_point: true,
   });
 
   const handleLegendClick = (e: ChartLegendPayloadEntry) => {
     const k = e.dataKey;
-    if (
-      k !== 'temperature_weather' &&
-      k !== 'humidity_weather' &&
-      k !== 'dew_point'
-    )
-      return;
+    if (k !== 'temperature_weather' && k !== 'humidity_weather') return;
     setSeriesVisible((p) => ({ ...p, [k]: !p[k as keyof typeof p] }));
   };
 
@@ -121,7 +97,7 @@ const TempHumidityGraph = ({ data }: { data: any }) => {
     >
       <Box mb={4}>
         <ChartPanelHeading
-          title="Air — température, humidité relative et point de rosée"
+          title="Air — température et humidité relative"
           subtitle={data?.sensor_names?.temperature_humidity_weather}
           color={textColor}
         />
@@ -193,21 +169,6 @@ const TempHumidityGraph = ({ data }: { data: any }) => {
                 data.sensor_colors?.humidity_weather_color ?? '#0d9488'
               )}
               hide={!seriesVisible.humidity_weather}
-            />
-            <Line
-              yAxisId="left"
-              type="monotone"
-              dataKey="dew_point"
-              stroke="#6366f1"
-              name={`Point de rosée (${tempUnit})`}
-              strokeWidth={2}
-              strokeDasharray="5 4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              dot={false}
-              connectNulls
-              activeDot={activeDotForSeries('#6366f1')}
-              hide={!seriesVisible.dew_point}
             />
           </LineChart>
         </ResponsiveContainer>
