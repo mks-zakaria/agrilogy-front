@@ -36,6 +36,7 @@ const PlantMain = () => {
           zoneName,
           startDate: range.startDate,
           endDate: range.endDate,
+          t,
         })}
         zoneControl={
           <ZoneSelect

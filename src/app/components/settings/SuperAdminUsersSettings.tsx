@@ -41,6 +41,10 @@ type ListedUser = {
 
 const SuperAdminUsersSettings = () => {
   const t = useTranslations();
+  const readingFor = (it: { key: string; readingLabel: string }) =>
+    t.has(`sensorCatalog.${it.key}.reading`)
+      ? t(`sensorCatalog.${it.key}.reading`)
+      : it.readingLabel;
   const toast = useToast();
   const { textColor, bgColor, borderColor, mutedTextColor } =
     useColorModeStyles();
@@ -237,7 +241,7 @@ const SuperAdminUsersSettings = () => {
               size="sm"
             >
               <Text as="span" fontSize="xs">
-                {c.readingLabel}{' '}
+                {readingFor(c)}{' '}
                 <Text as="span" color={mutedTextColor}>
                   ({c.key})
                 </Text>

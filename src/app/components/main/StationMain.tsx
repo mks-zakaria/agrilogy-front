@@ -41,6 +41,7 @@ const StationMain = () => {
           zoneName,
           startDate: range.startDate,
           endDate: range.endDate,
+          t,
         })}
         zoneControl={
           <ZoneSelect

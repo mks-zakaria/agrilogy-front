@@ -132,6 +132,14 @@ function loadRows(): UnitSettingRow[] {
 
 const SensorReadingsSettings = () => {
   const t = useTranslations();
+  const readingFor = (it: { key: string; readingLabel: string }) =>
+    t.has(`sensorCatalog.${it.key}.reading`)
+      ? t(`sensorCatalog.${it.key}.reading`)
+      : it.readingLabel;
+  const typeFor = (it: { key: string; typeLabel: string }) =>
+    t.has(`sensorCatalog.${it.key}.type`)
+      ? t(`sensorCatalog.${it.key}.type`)
+      : it.typeLabel;
   const toast = useToast();
   const [rows, setRows] = useState<UnitSettingRow[]>(() => getDefaultRows());
   const [search, setSearch] = useState('');
@@ -429,8 +437,8 @@ const SensorReadingsSettings = () => {
         <Tbody>
           {filteredRows.map((row) => (
             <Tr key={row.key}>
-              <Td minW="220px">{row.readingLabel}</Td>
-              <Td>{row.typeLabel}</Td>
+              <Td minW="220px">{readingFor(row)}</Td>
+              <Td>{typeFor(row)}</Td>
               <Td minW="120px">{row.unit}</Td>
               <Td minW="120px">{row.scaleA}</Td>
               <Td minW="120px">{row.offsetB}</Td>
