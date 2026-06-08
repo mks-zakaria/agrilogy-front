@@ -1420,7 +1420,12 @@
       "title": "Tableau de bord",
       "subtitle": "Vue d'ensemble de la ferme — météo, zones, et état du réseau d'irrigation",
       "zonesAvailable": "Zones disponibles",
-      "electrovannesAvailable": "Électrovannes disponibles"
+      "electrovannesAvailable": "Électrovannes disponibles",
+      "pompesAvailable": "Pompes disponibles"
+    },
+    "pompeCard": {
+      "running": "En marche",
+      "stopped": "Arrêtée"
     },
     "electrovanCard": {
       "devEui": "DevEUI",

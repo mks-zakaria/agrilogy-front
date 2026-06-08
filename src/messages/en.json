@@ -1420,7 +1420,12 @@
       "title": "Dashboard",
       "subtitle": "Farm overview — weather, zones, and irrigation network status",
       "zonesAvailable": "Available zones",
-      "electrovannesAvailable": "Available solenoid valves"
+      "electrovannesAvailable": "Available solenoid valves",
+      "pompesAvailable": "Available pumps"
+    },
+    "pompeCard": {
+      "running": "Running",
+      "stopped": "Stopped"
     },
     "electrovanCard": {
       "devEui": "DevEUI",

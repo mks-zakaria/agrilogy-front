@@ -1420,7 +1420,12 @@
       "title": "لوحة التحكم",
       "subtitle": "نظرة عامة على المزرعة — الطقس والمناطق وحالة شبكة الري",
       "zonesAvailable": "المناطق المتاحة",
-      "electrovannesAvailable": "الصمامات الكهربائية المتاحة"
+      "electrovannesAvailable": "الصمامات الكهربائية المتاحة",
+      "pompesAvailable": "المضخات المتاحة"
+    },
+    "pompeCard": {
+      "running": "قيد التشغيل",
+      "stopped": "متوقفة"
     },
     "electrovanCard": {
       "devEui": "DevEUI",
