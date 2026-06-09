@@ -23,6 +23,8 @@ export type PageInfoBarProps = {
   zoneControl?: ReactNode;
   /** Controls slot - usually a ChartDateRangeControl. */
   dateRange?: ReactNode;
+  /** Controls slot - usually a ChartFrequencyControl (data density picker). */
+  frequencyControl?: ReactNode;
   /** Trailing actions (notification bell, export buttons, etc.). */
   actions?: ReactNode;
 };
@@ -44,11 +46,14 @@ export function PageInfoBar({
   subtitle,
   zoneControl,
   dateRange,
+  frequencyControl,
   actions,
 }: PageInfoBarProps) {
   const [borderColor] = useToken('colors', ['app.border']);
 
-  const hasControls = Boolean(zoneControl || dateRange || actions);
+  const hasControls = Boolean(
+    zoneControl || dateRange || frequencyControl || actions
+  );
 
   return (
     <Box
@@ -102,6 +107,7 @@ export function PageInfoBar({
           >
             {zoneControl}
             {dateRange}
+            {frequencyControl}
             {actions}
           </HStack>
         ) : null}
