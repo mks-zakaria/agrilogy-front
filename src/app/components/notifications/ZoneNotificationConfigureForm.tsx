@@ -286,6 +286,7 @@ const ZoneNotificationConfigureForm: React.FC<
   const [zones, setZones] = useState<{ id: number; name: string }[]>([]);
   const [zoneId, setZoneId] = useState<number>(0);
   const [form, setForm] = useState<ZoneNotificationConfig | null>(null);
+  const [nameError, setNameError] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -428,7 +429,21 @@ const ZoneNotificationConfigureForm: React.FC<
       });
       return;
     }
-    const toSave = { ...form, zoneId: resolvedZoneId, configId: cfgId };
+    const notificationName = (form.notificationName ?? '').trim();
+    if (!notificationName) {
+      setNameError(true);
+      toast({
+        title: t('notifications.configForm.nameRequired'),
+        status: 'warning',
+      });
+      return;
+    }
+    const toSave = {
+      ...form,
+      zoneId: resolvedZoneId,
+      configId: cfgId,
+      notificationName,
+    };
 
     removeLocalZoneTemplateNotificationsForConfig(cfgId);
     saveZoneNotificationConfig(toSave);
@@ -600,17 +615,26 @@ const ZoneNotificationConfigureForm: React.FC<
                 </Text>
               </FormControl>
 
-              <FormControl>
+              <FormControl isRequired isInvalid={nameError}>
                 <LabelWithIcon icon={FaPen} labelColor={textColor}>
                   {t('notifications.configForm.notificationNameLabel')}
                 </LabelWithIcon>
                 <Input
                   value={form.notificationName}
-                  onChange={(e) => update('notificationName', e.target.value)}
+                  onChange={(e) => {
+                    update('notificationName', e.target.value);
+                    if (nameError && e.target.value.trim()) setNameError(false);
+                  }}
                   placeholder={t(
                     'notifications.configForm.notificationNamePlaceholder'
                   )}
+                  data-testid="notif-name-input"
                 />
+                {nameError && (
+                  <Text fontSize="xs" color="red.500" mt={1}>
+                    {t('notifications.configForm.nameRequired')}
+                  </Text>
+                )}
               </FormControl>
 
               <FormControl>
