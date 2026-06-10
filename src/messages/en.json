@@ -626,7 +626,10 @@
       "thresholdPlaceholder": "Threshold",
       "thresholdHint": "The alert triggers as soon as the sensor value satisfies the chosen condition.",
       "description": "Description",
-      "active": "Active"
+      "active": "Active",
+      "channels": "Notification channels",
+      "channelEmail": "Email",
+      "channelWhatsapp": "WhatsApp"
     }
   },
   "analytics": {

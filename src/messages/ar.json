@@ -626,7 +626,10 @@
       "thresholdPlaceholder": "العتبة",
       "thresholdHint": "يُشغَّل التنبيه بمجرد أن تستوفي قيمة المستشعر الشرط المختار.",
       "description": "الوصف",
-      "active": "مُفعّل"
+      "active": "مُفعّل",
+      "channels": "قنوات التنبيه",
+      "channelEmail": "البريد الإلكتروني",
+      "channelWhatsapp": "واتساب"
     }
   },
   "analytics": {

@@ -68,6 +68,8 @@ describe('AlertForm', () => {
       condition: '>',
       condition_nbr: 30.5,
       is_active: true,
+      notify_email: true,
+      notify_whatsapp: false,
     });
     await formRef!.submit();
 
@@ -81,6 +83,8 @@ describe('AlertForm', () => {
       sensor_key: 'temperature_weather',
       zone: null,
       is_active: true,
+      notify_email: true,
+      notify_whatsapp: false,
     });
   });
 
@@ -106,6 +110,8 @@ describe('AlertForm', () => {
       condition: '>',
       condition_nbr: 30,
       is_active: true,
+      notify_email: true,
+      notify_whatsapp: false,
     });
 
     await expect(formRef!.validateFields()).rejects.toBeTruthy();
@@ -124,6 +130,8 @@ describe('AlertForm', () => {
       sensor_key: 'soil_moisture_medium',
       zone: null,
       is_active: false,
+      notify_email: true,
+      notify_whatsapp: false,
       last_triggered_at: null,
       created_at: null,
       updated_at: null,

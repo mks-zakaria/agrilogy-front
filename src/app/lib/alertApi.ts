@@ -19,6 +19,8 @@ export interface AlertRecord {
   sensor_key: string;
   zone: number | null;
   is_active: boolean;
+  notify_email: boolean;
+  notify_whatsapp: boolean;
   last_triggered_at: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -50,6 +52,8 @@ export interface AlertWritePayload {
   sensor_key: string;
   zone?: number | null;
   is_active?: boolean;
+  notify_email?: boolean;
+  notify_whatsapp?: boolean;
 }
 
 export const alertApi = {

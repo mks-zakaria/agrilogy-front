@@ -29,6 +29,8 @@ export interface AlertFormValues {
   condition: '>' | '<' | '=';
   condition_nbr: number;
   is_active: boolean;
+  notify_email: boolean;
+  notify_whatsapp: boolean;
 }
 
 export interface AlertFormProps {
@@ -52,6 +54,8 @@ const toFormValues = (alert: AlertRecord): AlertFormValues => ({
       ? Number(alert.condition_nbr)
       : Number(alert.condition_nbr ?? 0)),
   is_active: alert.is_active ?? true,
+  notify_email: alert.notify_email ?? true,
+  notify_whatsapp: alert.notify_whatsapp ?? false,
 });
 
 const DEFAULT_VALUES: AlertFormValues = {
@@ -63,6 +67,8 @@ const DEFAULT_VALUES: AlertFormValues = {
   condition: '>',
   condition_nbr: 30,
   is_active: true,
+  notify_email: true,
+  notify_whatsapp: false,
 };
 
 const AlertForm: React.FC<AlertFormProps> = ({
@@ -102,6 +108,8 @@ const AlertForm: React.FC<AlertFormProps> = ({
       sensor_key: values.sensor_key,
       zone: values.zone ?? null,
       is_active: values.is_active ?? true,
+      notify_email: values.notify_email ?? true,
+      notify_whatsapp: values.notify_whatsapp ?? false,
     };
     return onSubmit(payload);
   };
@@ -237,6 +245,28 @@ const AlertForm: React.FC<AlertFormProps> = ({
       >
         <Switch />
       </Form.Item>
+
+      <div className={styles.label} style={{ marginBottom: 8 }}>
+        {t('alertsPage.form.channels')}
+      </div>
+      <Space size="large">
+        <Form.Item
+          name="notify_email"
+          label={t('alertsPage.form.channelEmail')}
+          valuePropName="checked"
+          style={{ marginBottom: 0 }}
+        >
+          <Switch />
+        </Form.Item>
+        <Form.Item
+          name="notify_whatsapp"
+          label={t('alertsPage.form.channelWhatsapp')}
+          valuePropName="checked"
+          style={{ marginBottom: 0 }}
+        >
+          <Switch />
+        </Form.Item>
+      </Space>
     </Form>
   );
 };

@@ -626,7 +626,10 @@
       "thresholdPlaceholder": "Seuil",
       "thresholdHint": "L'alerte se déclenche dès que la valeur du capteur satisfait la condition choisie.",
       "description": "Description",
-      "active": "Active"
+      "active": "Active",
+      "channels": "Canaux de notification",
+      "channelEmail": "E-mail",
+      "channelWhatsapp": "WhatsApp"
     }
   },
   "analytics": {
