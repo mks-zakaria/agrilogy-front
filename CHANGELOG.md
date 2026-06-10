@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.15.0...v1.15.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **notifications:** close modal on save + exactly one config card ([#136](https://github.com/AgriLogy/agrilogy-front/issues/136)) ([89df9f2](https://github.com/AgriLogy/agrilogy-front/commit/89df9f2eefc775feeac8607e69efc9b519033d5c))
+
 # [1.15.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.14.3...v1.15.0) (2026-06-10)
 
 
