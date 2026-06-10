@@ -74,7 +74,11 @@ import {
 import KcProtocolTableModal from '@/app/components/notifications/KcProtocolTableModal';
 import { evaluateV1NotificationDecision } from '@/app/lib/notificationDecisionEngine';
 import { dispatchZoneNotificationOutbound } from '@/app/lib/notificationDispatch';
-import { removeLocalZoneTemplateNotificationsForConfig } from '@/app/lib/notificationsCacheStorage';
+import {
+  prependNotificationsToCache,
+  removeLocalZoneTemplateNotificationsForConfig,
+} from '@/app/lib/notificationsCacheStorage';
+import { buildLocalZoneConfirmationNotification } from '@/app/lib/zoneNotificationTemplate';
 import {
   DELIVERY_RATE_PRESETS,
   DELIVERY_UNITS,
@@ -432,15 +436,21 @@ const ZoneNotificationConfigureForm: React.FC<
     const zoneLabel =
       zones.find((z) => z.id === toSave.zoneId)?.name ??
       t('notifications.configForm.zoneNumber', { id: toSave.zoneId });
-    // Acknowledge the save with a toast — we no longer inject a placeholder
-    // "confirmation" row into the notification inbox. Only real scheduled
-    // reminders belong there.
-    toast({
-      title: t('notifications.configForm.savedToast'),
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
+
+    // Exactly ONE card per config: removeLocalZoneTemplate… above cleared any
+    // prior representation row for this config, so this re-adds a single
+    // editable/deletable card. (Reverts the "toast, no card" change — the card
+    // is how a saved config appears in the list; the periodic reminder no longer
+    // fires immediately, so there's no second card on save.)
+    prependNotificationsToCache([
+      buildLocalZoneConfirmationNotification({
+        configId: cfgId,
+        zoneId: toSave.zoneId,
+        zoneName: zoneLabel,
+        notificationName: toSave.notificationName,
+        secteurLabel: toSave.secteurLabel,
+      }),
+    ]);
 
     const sample = evaluateV1NotificationDecision({
       et0Mm: 5,
@@ -453,8 +463,11 @@ const ZoneNotificationConfigureForm: React.FC<
     });
     sample.logs.forEach((l) => console.info('[zone-config-apply]', l));
 
+    // Outbound delivery is best-effort and FIRE-AND-FORGET — it must never
+    // block (or, if it hangs, freeze) the modal close. The config is already
+    // persisted; the email/SMS/WhatsApp send runs in the background.
     if (toSave.notifyEmail || toSave.notifySms || toSave.notifyWhatsapp) {
-      await dispatchZoneNotificationOutbound({
+      void dispatchZoneNotificationOutbound({
         zoneId: toSave.zoneId,
         subject: t('notifications.configForm.outboundSubject', {
           name: toSave.notificationName || zoneLabel,
@@ -469,7 +482,9 @@ const ZoneNotificationConfigureForm: React.FC<
           rulesFired: sample.rulesFired,
           et0TimesKc: sample.et0TimesKc,
         },
-      });
+      }).catch((e) =>
+        console.error('zone notification outbound dispatch failed', e)
+      );
     }
 
     toast({
@@ -1206,6 +1221,7 @@ const ZoneNotificationConfigureForm: React.FC<
           size="lg"
           leftIcon={<Icon as={FaBell} />}
           onClick={() => void apply()}
+          data-testid="zone-config-save"
         >
           {t('notifications.configForm.saveZoneNotification')}
         </Button>
