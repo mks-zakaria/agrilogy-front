@@ -40,7 +40,13 @@ export default function LoginBox() {
         localStorage.setItem('accessToken', data.access);
         localStorage.setItem('refreshToken', data.refresh);
         localStorage.setItem('isTechnician', data.is_technician ? '1' : '0');
-        router.push(data.is_staff ? '/admin' : '/');
+        // Admin now lives in the separate agri-admin app (its own domain).
+        // NEXT_PUBLIC_ADMIN_URL points staff there; farmers stay on this app.
+        if (data.is_staff && process.env.NEXT_PUBLIC_ADMIN_URL) {
+          window.location.href = process.env.NEXT_PUBLIC_ADMIN_URL;
+        } else {
+          router.push('/');
+        }
       }
     } catch {
       notification.error({
