@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation';
 import { AgrilogyChatBot } from './ChatBot';
 
-const LOGIN_PATHS = new Set(['/login', '/admin/login']);
+const LOGIN_PATHS = new Set(['/login']);
 
 const LeafIcon = ({ size = 22 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
