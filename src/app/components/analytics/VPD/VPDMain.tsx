@@ -12,12 +12,11 @@ import api from '@/app/lib/api';
 import { logOptionalApiFailure } from '@/app/utils/apiClientErrors';
 import { useUnitOverridesRevision } from '@/app/hooks/useUnitOverridesRevision';
 import { calibrateChartValue } from '@/app/utils/chartSeriesCalibration';
-import { calculateVPD } from '@/app/utils/calculateVPD';
 import VPDChart, { type VPDDataPoint } from './VPDChart';
 import VPDLastData from './VPDLastData';
 import { CHART_SHELL_MAX_HEIGHT } from '@/app/utils/chartAxisConfig';
 
-interface WeatherData {
+interface VPDReading {
   id: number;
   timestamp: string;
   default_unit: string;
@@ -37,60 +36,40 @@ const VPDMain = ({
   };
 }) => {
   const { startDate, endDate, selectedZone } = filters;
-  const [humidityData, setHumidityData] = useState<WeatherData[]>([]);
-  const [temperatureData, setTemperatureData] = useState<WeatherData[]>([]);
+  const [vpdData, setVpdData] = useState<VPDReading[]>([]);
   const [loading, setLoading] = useState(true);
   const unitRev = useUnitOverridesRevision();
   const freq = useChartFrequency();
 
+  // VPD is computed + stored server-side (VPDWeather, hourly, kPa) by the same
+  // task as ET0, so we read the series directly instead of re-deriving it from
+  // humidity + temperature. The client-side join required exact-equal
+  // timestamps and produced nothing when readings arrived on separate uplinks.
   useEffect(() => {
-    const fetchHumidity = api.get<WeatherData[]>('/sensors/humidityweather', {
-      params: {
-        start_date: startDate,
-        end_date: endDate,
-        zone: selectedZone,
-      },
-    });
-    const fetchTemperature = api.get<WeatherData[]>(
-      '/sensors/temperatureweather',
-      {
+    setLoading(true);
+    api
+      .get<VPDReading[]>('/sensors/vpdweather', {
         params: {
           start_date: startDate,
           end_date: endDate,
           zone: selectedZone,
         },
-      }
-    );
-    Promise.all([fetchHumidity, fetchTemperature])
-      .then(([humRes, tempRes]) => {
-        setHumidityData(humRes.data);
-        setTemperatureData(tempRes.data);
       })
-      .catch((err) =>
-        logOptionalApiFailure('VPDMain: fetch humidity/temperature', err)
-      )
+      .then((res) => setVpdData(res.data))
+      .catch((err) => logOptionalApiFailure('VPDMain: fetch vpd', err))
       .finally(() => setLoading(false));
   }, [startDate, endDate, selectedZone]);
 
   const series = useMemo((): VPDDataPoint[] => {
-    const tempMap = new Map<string, number>(
-      temperatureData.map((t) => [t.timestamp, t.value])
-    );
-    const rows = humidityData
-      .map((h) => {
-        const temp = tempMap.get(h.timestamp);
-        if (temp == null || Number.isNaN(temp)) return null;
-        const vpdRaw = calculateVPD(
-          calibrateChartValue('temperature_weather', temp),
-          calibrateChartValue('humidity_weather', h.value)
-        );
-        const vpd = calibrateChartValue('vpd', vpdRaw);
-        return { timestamp: h.timestamp, vpd };
-      })
-      .filter((d): d is VPDDataPoint => d != null);
-    // Bucket the computed VPD series to the page frequency (avg per bucket).
+    const rows = vpdData
+      .filter((d) => d.value != null && !Number.isNaN(d.value))
+      .map((d) => ({
+        timestamp: d.timestamp,
+        vpd: calibrateChartValue('vpd', d.value),
+      }));
+    // Bucket the VPD series to the page frequency (avg per bucket).
     return averageByFrequency(sortByTimestamp(rows), freq);
-  }, [humidityData, temperatureData, unitRev, freq]);
+  }, [vpdData, unitRev, freq]);
 
   const timeline = useMemo(() => series.map((d) => d.timestamp), [series]);
 
