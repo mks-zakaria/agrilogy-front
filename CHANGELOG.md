@@ -1,3 +1,11 @@
+## [1.15.2](https://github.com/AgriLogy/agrilogy-front/compare/v1.15.1...v1.15.2) (2026-06-13)
+
+
+### Bug Fixes
+
+* **analytics:** add Create alert button to the DPV (VPD) card ([#138](https://github.com/AgriLogy/agrilogy-front/issues/138)) ([45bf60e](https://github.com/AgriLogy/agrilogy-front/commit/45bf60e12ad4e4c0dcae65ec0e82a21d7d3c8ea9))
+* **analytics:** fetch server-computed VPD series for the DPV chart ([#140](https://github.com/AgriLogy/agrilogy-front/issues/140)) ([58d8105](https://github.com/AgriLogy/agrilogy-front/commit/58d81056fd082bc5fc28ace9b59a83f89ce4d34a))
+
 ## [1.15.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.15.0...v1.15.1) (2026-06-10)
 
 
