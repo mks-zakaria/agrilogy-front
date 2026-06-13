@@ -35,7 +35,7 @@ const SPECS: Record<string, SensorEndpointSpec> = {
     kind: 'firstNonEmpty',
     paths: ['/sensors/et0weather', '/sensors/et0calculated'],
   },
-  vpd: { kind: 'single', path: '/sensors/vpd' },
+  vpd: { kind: 'single', path: '/sensors/vpdweather' },
   precipitation_rate: {
     kind: 'single',
     path: '/sensors/precipitationrate',
