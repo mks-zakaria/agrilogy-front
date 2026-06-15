@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.18.2...v1.19.0) (2026-06-15)
+
+
+### Features
+
+* **notifications:** align config form to the irrigation spec ([5f014eb](https://github.com/AgriLogy/agrilogy-front/commit/5f014eb2a98bdad3d424262046fec8815bd37871)), closes [#153](https://github.com/AgriLogy/agrilogy-front/issues/153)
+
 ## [1.18.2](https://github.com/AgriLogy/agrilogy-front/compare/v1.18.1...v1.18.2) (2026-06-15)
 
 ## [1.18.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.18.0...v1.18.1) (2026-06-15)
