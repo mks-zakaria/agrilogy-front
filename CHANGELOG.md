@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.15.2...v1.16.0) (2026-06-15)
+
+
+### Features
+
+* ship pending alpha work to production (soil params, channels, basin, technician, dashboard DPV) ([ddbf2a9](https://github.com/AgriLogy/agrilogy-front/commit/ddbf2a960e3f13f85ced31df69df75dc85fd25e6)), closes [#143](https://github.com/AgriLogy/agrilogy-front/issues/143)
+
 ## [1.15.2](https://github.com/AgriLogy/agrilogy-front/compare/v1.15.1...v1.15.2) (2026-06-13)
 
 
