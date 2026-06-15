@@ -92,17 +92,13 @@ export interface ZoneNotificationConfig {
   kcProtocolName: string;
   /** Stades with duration, Kc range, and optional mm amount per row. */
   kcStages: KcProtocolStageRow[];
-  /** Humidity inputs used with Kc (depth / profile). */
-  kcSensorHumidityLow: boolean;
-  kcSensorHumidityMid: boolean;
-  kcSensorHumidityHigh: boolean;
   et0Source: 'weather_station' | 'calculated';
   precipSource: string;
   krFactor: number;
   zoneAreaHa: number;
   cropType: string;
   flowRateM3h: number;
-  irrigationMethod: 'drip' | 'drip_sprinkler' | 'subsurface_drip';
+  irrigationMethod: 'drip' | 'sprinkler' | 'surface';
   /** @deprecated kept for back-compat; the cadence is now `deliveryRate`. */
   intervalMinutes: number;
   /**
@@ -116,10 +112,8 @@ export interface ZoneNotificationConfig {
   soilPermeabilityPct: number;
   /** Vanne is manual-only (the automatic mode was removed). */
   valveMode: 'manual';
-  /** VPD (kPa) read live from the `/sensors/vpd` captor — not user-entered. */
-  vpdThresholdKpa: number;
-  rootMonitoring: 'on' | 'off';
   criticalThresholdPct: number;
+  /** ET0×Kc advisory threshold (mm) — used internally by the decision engine. */
   et0KcAdvisoryMm: number;
   maxWaterM3: number;
   notifyEmail: boolean;
