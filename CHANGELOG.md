@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.16.0...v1.17.0) (2026-06-15)
+
+
+### Features
+
+* **notifications:** remove soil-moisture source selector — read sensors directly ([27c001c](https://github.com/AgriLogy/agrilogy-front/commit/27c001cfb81fecdeea0d5a72c964b0f14b8aabce)), closes [#145](https://github.com/AgriLogy/agrilogy-front/issues/145)
+
 # [1.16.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.15.2...v1.16.0) (2026-06-15)
 
 
