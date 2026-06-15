@@ -1155,7 +1155,10 @@ const ZoneNotificationConfigureForm: React.FC<
                 <LabelWithIcon icon={FaFan} labelColor={textColor}>
                   {t('notifications.configForm.vpdThreshold')}
                 </LabelWithIcon>
-                <NumberInput value={vpdLive ?? form.vpdThresholdKpa} isReadOnly>
+                <NumberInput
+                  value={(vpdLive ?? form.vpdThresholdKpa).toFixed(2)}
+                  isReadOnly
+                >
                   <NumberInputField opacity={0.85} />
                 </NumberInput>
                 <Text fontSize="xs" color={mutedTextColor} mt={1}>
