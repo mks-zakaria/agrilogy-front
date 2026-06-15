@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.17.0...v1.18.0) (2026-06-15)
+
+
+### Features
+
+* **notifications:** inline personalized contact field per channel ([ca76e27](https://github.com/AgriLogy/agrilogy-front/commit/ca76e2728ac5adbdf492ad5a1d098256afed9a75)), closes [#147](https://github.com/AgriLogy/agrilogy-front/issues/147)
+
 # [1.17.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.16.0...v1.17.0) (2026-06-15)
 
 
