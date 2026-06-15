@@ -1269,67 +1269,86 @@ const ZoneNotificationConfigureForm: React.FC<
               </Text>
 
               <VStack align="stretch" spacing={3} pl={1}>
-                <Checkbox
-                  isChecked={form.notifyEmail}
-                  onChange={(e) => update('notifyEmail', e.target.checked)}
-                  colorScheme="brand"
-                >
-                  <HStack spacing={2} as="span">
-                    <Icon as={FaEnvelopeOpenText} color="primary.400" />
-                    <span>E-mail</span>
-                  </HStack>
-                </Checkbox>
-                <Checkbox
-                  isChecked={form.notifySms}
-                  onChange={(e) => update('notifySms', e.target.checked)}
-                  colorScheme="brand"
-                >
-                  <HStack spacing={2} as="span">
-                    <Icon as={FaMobileAlt} color="green.500" />
-                    <span>SMS</span>
-                  </HStack>
-                </Checkbox>
-                <Checkbox
-                  isChecked={form.notifyWhatsapp}
-                  onChange={(e) => update('notifyWhatsapp', e.target.checked)}
-                  colorScheme="brand"
-                >
-                  <HStack spacing={2} as="span">
-                    <Icon as={FaWhatsapp} color="green.400" />
-                    <span>WhatsApp</span>
-                  </HStack>
-                </Checkbox>
+                <HStack spacing={3} align="center">
+                  <Checkbox
+                    isChecked={form.notifyEmail}
+                    onChange={(e) => update('notifyEmail', e.target.checked)}
+                    colorScheme="brand"
+                    minW="120px"
+                    flexShrink={0}
+                  >
+                    <HStack spacing={2} as="span">
+                      <Icon as={FaEnvelopeOpenText} color="primary.400" />
+                      <span>E-mail</span>
+                    </HStack>
+                  </Checkbox>
+                  <Input
+                    size="sm"
+                    type="email"
+                    value={form.overrideEmail ?? ''}
+                    onChange={(e) => update('overrideEmail', e.target.value)}
+                    isDisabled={!form.notifyEmail}
+                    aria-label={t('notifications.configForm.overrideEmail')}
+                    placeholder={t(
+                      'notifications.configForm.overrideEmailPlaceholder'
+                    )}
+                  />
+                </HStack>
 
-                {(form.notifySms || form.notifyWhatsapp) && (
-                  <FormControl>
-                    <FormLabel fontSize="sm" mb={1}>
-                      {t('notifications.configForm.overridePhone')}
-                    </FormLabel>
-                    <Input
-                      size="sm"
-                      value={form.overridePhone ?? ''}
-                      onChange={(e) => update('overridePhone', e.target.value)}
-                      placeholder={t(
-                        'notifications.configForm.overrideContactHint'
-                      )}
-                    />
-                  </FormControl>
-                )}
-                {form.notifyEmail && (
-                  <FormControl>
-                    <FormLabel fontSize="sm" mb={1}>
-                      {t('notifications.configForm.overrideEmail')}
-                    </FormLabel>
-                    <Input
-                      size="sm"
-                      value={form.overrideEmail ?? ''}
-                      onChange={(e) => update('overrideEmail', e.target.value)}
-                      placeholder={t(
-                        'notifications.configForm.overrideContactHint'
-                      )}
-                    />
-                  </FormControl>
-                )}
+                <HStack spacing={3} align="center">
+                  <Checkbox
+                    isChecked={form.notifySms}
+                    onChange={(e) => update('notifySms', e.target.checked)}
+                    colorScheme="brand"
+                    minW="120px"
+                    flexShrink={0}
+                  >
+                    <HStack spacing={2} as="span">
+                      <Icon as={FaMobileAlt} color="green.500" />
+                      <span>SMS</span>
+                    </HStack>
+                  </Checkbox>
+                  <Input
+                    size="sm"
+                    type="tel"
+                    value={form.overridePhone ?? ''}
+                    onChange={(e) => update('overridePhone', e.target.value)}
+                    isDisabled={!form.notifySms && !form.notifyWhatsapp}
+                    aria-label={t('notifications.configForm.overridePhone')}
+                    placeholder={t(
+                      'notifications.configForm.overridePhonePlaceholder'
+                    )}
+                  />
+                </HStack>
+
+                <HStack spacing={3} align="center">
+                  <Checkbox
+                    isChecked={form.notifyWhatsapp}
+                    onChange={(e) => update('notifyWhatsapp', e.target.checked)}
+                    colorScheme="brand"
+                    minW="120px"
+                    flexShrink={0}
+                  >
+                    <HStack spacing={2} as="span">
+                      <Icon as={FaWhatsapp} color="green.400" />
+                      <span>WhatsApp</span>
+                    </HStack>
+                  </Checkbox>
+                  <Input
+                    size="sm"
+                    type="tel"
+                    value={form.overridePhone ?? ''}
+                    onChange={(e) => update('overridePhone', e.target.value)}
+                    isDisabled={!form.notifySms && !form.notifyWhatsapp}
+                    aria-label={t('notifications.configForm.overridePhone')}
+                    placeholder={t(
+                      'notifications.configForm.overridePhonePlaceholder'
+                    )}
+                  />
+                </HStack>
+                <Text fontSize="xs" color="gray.500">
+                  {t('notifications.configForm.overrideContactHint')}
+                </Text>
               </VStack>
             </VStack>
           </Box>
