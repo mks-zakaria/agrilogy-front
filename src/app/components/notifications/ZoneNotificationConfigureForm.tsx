@@ -104,7 +104,6 @@ const defaultConfig = (
   soilRawMm: 60,
   soilFcPct: 30,
   soilWpPct: 12,
-  soilMoistureSource: 'avg_sensors',
   kcMode: 'table',
   kc: 0.85,
   et0Source: 'weather_station',
@@ -768,29 +767,6 @@ const ZoneNotificationConfigureForm: React.FC<
                     </NumberInput>
                   </Box>
                 </SimpleGrid>
-              </FormControl>
-
-              <FormControl>
-                <LabelWithIcon icon={FaTint} labelColor={textColor}>
-                  {t('notifications.configForm.soilMoistureSourceLabel')}
-                </LabelWithIcon>
-                <Select
-                  value={form.soilMoistureSource}
-                  onChange={(e) => update('soilMoistureSource', e.target.value)}
-                >
-                  <option value="avg_sensors">
-                    {t('notifications.configForm.avgSensors')}
-                  </option>
-                  <option value="sensor_1">
-                    {t('notifications.configForm.sensor1')}
-                  </option>
-                  <option value="sensor_2">
-                    {t('notifications.configForm.sensor2')}
-                  </option>
-                  <option value="sensor_3">
-                    {t('notifications.configForm.sensor3')}
-                  </option>
-                </Select>
               </FormControl>
 
               <SimpleGrid columns={2} spacing={4}>

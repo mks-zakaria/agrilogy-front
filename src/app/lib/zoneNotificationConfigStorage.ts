@@ -86,7 +86,6 @@ export interface ZoneNotificationConfig {
   soilRawMm: number;
   soilFcPct: number;
   soilWpPct: number;
-  soilMoistureSource: string;
   kcMode: 'table' | 'manual';
   kc: number;
   /** Label for the Kc table protocol (e.g. crop / season). */
