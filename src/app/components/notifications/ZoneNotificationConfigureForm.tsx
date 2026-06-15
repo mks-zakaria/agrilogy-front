@@ -38,7 +38,6 @@ import {
   FaCloud,
   FaCubes,
   FaEnvelopeOpenText,
-  FaFan,
   FaFilter,
   FaInfoCircle,
   FaLeaf,
@@ -54,7 +53,6 @@ import {
   FaSun,
   FaTachometerAlt,
   FaTint,
-  FaTree,
   FaVectorSquare,
   FaWater,
   FaWhatsapp,
@@ -63,7 +61,6 @@ import { useTranslations } from 'next-intl';
 import useColorModeStyles from '@/app/utils/useColorModeStyles';
 import api from '@/app/lib/api';
 import { logOptionalApiFailure } from '@/app/utils/apiClientErrors';
-import { fetchLastSensorSample } from '@/app/utils/fetchSensorLastValue';
 import {
   saveZoneNotificationConfig,
   getNotificationConfigById,
@@ -112,14 +109,12 @@ const defaultConfig = (
   zoneAreaHa: 5,
   cropType: 'Tomates',
   flowRateM3h: 30,
-  irrigationMethod: 'drip_sprinkler',
+  irrigationMethod: 'drip',
   intervalMinutes: 60,
   deliveryRate: { amount: 1, unit: 'hour' },
   lastNotifiedAt: null,
   soilPermeabilityPct: 75,
   valveMode: 'manual',
-  vpdThresholdKpa: 0.5,
-  rootMonitoring: 'on',
   criticalThresholdPct: 20,
   et0KcAdvisoryMm: 4,
   maxWaterM3: 50,
@@ -131,9 +126,6 @@ const defaultConfig = (
   updatedAt: '',
   kcProtocolName: 'Protocole météo culture',
   kcStages: defaultKcProtocolStages(),
-  kcSensorHumidityLow: true,
-  kcSensorHumidityMid: true,
-  kcSensorHumidityHigh: true,
 });
 
 function normalizeKcStages(
@@ -178,15 +170,6 @@ function mergeZoneConfig(
   }
   if (merged.kcMode === 'table') {
     merged.kc = representativeKcFromStages(merged.kcStages);
-  }
-  if (typeof merged.kcSensorHumidityLow !== 'boolean') {
-    merged.kcSensorHumidityLow = base.kcSensorHumidityLow;
-  }
-  if (typeof merged.kcSensorHumidityMid !== 'boolean') {
-    merged.kcSensorHumidityMid = base.kcSensorHumidityMid;
-  }
-  if (typeof merged.kcSensorHumidityHigh !== 'boolean') {
-    merged.kcSensorHumidityHigh = base.kcSensorHumidityHigh;
   }
   return merged;
 }
@@ -292,9 +275,6 @@ const ZoneNotificationConfigureForm: React.FC<
   const [zoneId, setZoneId] = useState<number>(0);
   const [form, setForm] = useState<ZoneNotificationConfig | null>(null);
   const [nameError, setNameError] = useState(false);
-  /** Live VPD reading pulled from the captor (`/sensors/vpd`) for the selected zone. */
-  const [vpdLive, setVpdLive] = useState<number | null>(null);
-  const [vpdLoading, setVpdLoading] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -382,30 +362,6 @@ const ZoneNotificationConfigureForm: React.FC<
     };
     void load();
   }, [initialZoneId, initialConfigId, intent, toast]);
-
-  // VPD is read from the captor, never typed by the user. Pull the latest
-  // `/sensors/vpd` sample for the selected zone and mirror it into the form so
-  // the saved config + decision engine use the real sensor value.
-  useEffect(() => {
-    if (!zoneId) return;
-    let cancelled = false;
-    setVpdLoading(true);
-    fetchLastSensorSample('vpd', zoneId)
-      .then((sample) => {
-        if (cancelled) return;
-        const v = sample?.rawValue ?? null;
-        setVpdLive(v);
-        if (v != null) {
-          setForm((f) => (f ? { ...f, vpdThresholdKpa: v } : f));
-        }
-      })
-      .finally(() => {
-        if (!cancelled) setVpdLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [zoneId]);
 
   const update = <K extends keyof ZoneNotificationConfig>(
     key: K,
@@ -843,78 +799,6 @@ const ZoneNotificationConfigureForm: React.FC<
                 </FormControl>
               </SimpleGrid>
 
-              <Grid
-                templateColumns={{ base: '1fr', md: 'minmax(140px,auto) 1fr' }}
-                gap={{ base: 2, md: 6 }}
-                alignItems="start"
-                mt={2}
-              >
-                <Text
-                  fontWeight="semibold"
-                  fontSize="sm"
-                  color={textColor}
-                  pt={1}
-                >
-                  {t('notifications.configForm.kcCoefficient')}
-                </Text>
-                <VStack align="stretch" spacing={2}>
-                  <Checkbox
-                    colorScheme="brand"
-                    isChecked={form.kcSensorHumidityLow}
-                    onChange={(e) =>
-                      update('kcSensorHumidityLow', e.target.checked)
-                    }
-                    sx={{
-                      '& .chakra-checkbox__label': {
-                        color: 'green.600',
-                        fontWeight: '500',
-                      },
-                    }}
-                    _dark={{
-                      '& .chakra-checkbox__label': { color: 'green.300' },
-                    }}
-                  >
-                    {t('notifications.configForm.humidityLow')}
-                  </Checkbox>
-                  <Checkbox
-                    colorScheme="brand"
-                    isChecked={form.kcSensorHumidityMid}
-                    onChange={(e) =>
-                      update('kcSensorHumidityMid', e.target.checked)
-                    }
-                    sx={{
-                      '& .chakra-checkbox__label': {
-                        color: 'green.600',
-                        fontWeight: '500',
-                      },
-                    }}
-                    _dark={{
-                      '& .chakra-checkbox__label': { color: 'green.300' },
-                    }}
-                  >
-                    {t('notifications.configForm.humidityMid')}
-                  </Checkbox>
-                  <Checkbox
-                    colorScheme="brand"
-                    isChecked={form.kcSensorHumidityHigh}
-                    onChange={(e) =>
-                      update('kcSensorHumidityHigh', e.target.checked)
-                    }
-                    sx={{
-                      '& .chakra-checkbox__label': {
-                        color: 'green.600',
-                        fontWeight: '500',
-                      },
-                    }}
-                    _dark={{
-                      '& .chakra-checkbox__label': { color: 'green.300' },
-                    }}
-                  >
-                    {t('notifications.configForm.humidityHigh')}
-                  </Checkbox>
-                </VStack>
-              </Grid>
-
               <FormControl>
                 <LabelWithIcon icon={FaSun} labelColor={textColor}>
                   {t('notifications.configForm.et0ReferenceLabel')}
@@ -1043,11 +927,11 @@ const ZoneNotificationConfigureForm: React.FC<
                     <Radio value="drip">
                       {t('notifications.configForm.drip')}
                     </Radio>
-                    <Radio value="drip_sprinkler">
-                      {t('notifications.configForm.dripSprinkler')}
+                    <Radio value="sprinkler">
+                      {t('notifications.configForm.sprinkler')}
                     </Radio>
-                    <Radio value="subsurface_drip">
-                      {t('notifications.configForm.subsurfaceDrip')}
+                    <Radio value="surface">
+                      {t('notifications.configForm.surface')}
                     </Radio>
                   </Stack>
                 </RadioGroup>
@@ -1151,47 +1035,6 @@ const ZoneNotificationConfigureForm: React.FC<
                 </Text>
               </FormControl>
 
-              <FormControl>
-                <LabelWithIcon icon={FaFan} labelColor={textColor}>
-                  {t('notifications.configForm.vpdThreshold')}
-                </LabelWithIcon>
-                <NumberInput
-                  value={(vpdLive ?? form.vpdThresholdKpa).toFixed(2)}
-                  isReadOnly
-                >
-                  <NumberInputField opacity={0.85} />
-                </NumberInput>
-                <Text fontSize="xs" color={mutedTextColor} mt={1}>
-                  {vpdLoading
-                    ? t('notifications.configForm.vpdLoading')
-                    : vpdLive != null
-                      ? t('notifications.configForm.vpdSensorHint')
-                      : t('notifications.configForm.vpdNoData')}
-                </Text>
-              </FormControl>
-
-              <FormControl>
-                <LabelWithIcon icon={FaTree} labelColor={textColor}>
-                  {t('notifications.configForm.rootMonitoringLabel')}
-                </LabelWithIcon>
-                <Select
-                  value={form.rootMonitoring}
-                  onChange={(e) =>
-                    update(
-                      'rootMonitoring',
-                      e.target.value as ZoneNotificationConfig['rootMonitoring']
-                    )
-                  }
-                >
-                  <option value="on">
-                    {t('notifications.configForm.enabled')}
-                  </option>
-                  <option value="off">
-                    {t('notifications.configForm.disabled')}
-                  </option>
-                </Select>
-              </FormControl>
-
               <Divider />
 
               <HStack spacing={2}>
@@ -1225,24 +1068,6 @@ const ZoneNotificationConfigureForm: React.FC<
                   {t('notifications.configForm.criticalSoilHumidityHint', {
                     value: form.criticalThresholdPct,
                   })}
-                </Text>
-              </FormControl>
-
-              <FormControl>
-                <LabelWithIcon icon={FaBolt} labelColor={textColor}>
-                  {t('notifications.configForm.et0KcAdvisoryLabel')}
-                </LabelWithIcon>
-                <NumberInput
-                  value={form.et0KcAdvisoryMm}
-                  min={0}
-                  max={20}
-                  step={0.5}
-                  onChange={(_, v) => update('et0KcAdvisoryMm', v)}
-                >
-                  <NumberInputField />
-                </NumberInput>
-                <Text fontSize="sm" color="gray.500">
-                  {t('notifications.configForm.et0KcAdvisoryHint')}
                 </Text>
               </FormControl>
 

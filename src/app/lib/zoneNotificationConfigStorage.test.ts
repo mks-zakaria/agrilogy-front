@@ -48,9 +48,6 @@ function makeConfig(
         active: true,
       },
     ],
-    kcSensorHumidityLow: true,
-    kcSensorHumidityMid: true,
-    kcSensorHumidityHigh: true,
     et0Source: 'weather_station',
     precipSource: 'sensor',
     krFactor: 0.4,
@@ -63,8 +60,6 @@ function makeConfig(
     lastNotifiedAt: null,
     soilPermeabilityPct: 75,
     valveMode: 'manual',
-    vpdThresholdKpa: 0.52,
-    rootMonitoring: 'on',
     criticalThresholdPct: 20,
     et0KcAdvisoryMm: 4,
     maxWaterM3: 50,
@@ -102,7 +97,6 @@ describe('save / load round-trip', () => {
     expect(got?.soilWpPct).toBe(12);
     expect(got?.irrigationMethod).toBe('drip');
     expect(got?.valveMode).toBe('manual');
-    expect(got?.vpdThresholdKpa).toBe(0.52);
     expect(got?.maxWaterM3).toBe(50);
     expect(got?.updatedAt).not.toBe('');
   });
