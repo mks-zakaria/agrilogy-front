@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.18.0...v1.18.1) (2026-06-15)
+
+
+### Bug Fixes
+
+* **notifications:** show sensor VPD with two decimals ([e50f8da](https://github.com/AgriLogy/agrilogy-front/commit/e50f8da166915a6db364eaccd91df4ce8458778b)), closes [#149](https://github.com/AgriLogy/agrilogy-front/issues/149)
+
 # [1.18.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.17.0...v1.18.0) (2026-06-15)
 
 
