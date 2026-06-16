@@ -10,7 +10,7 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
-  SimpleGrid,
+  VStack,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -234,16 +234,25 @@ const NotificationsMain: React.FC = () => {
         }
       />
 
-      <SimpleGrid
-        spacing={{ base: 3, md: 4 }}
-        columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
-      >
-        {notifications.map((notification) => {
-          const zid = notificationRowZoneId(notification);
-          const rowCfgId = resolveStoredNotificationConfigId(notification);
-          return (
-            <Box key={notification.id}>
+      {notifications.length === 0 ? (
+        <Box maxW="820px" mx="auto" w="full" mt={6}>
+          <EmptyBox variant="empty" />
+        </Box>
+      ) : (
+        <VStack
+          spacing={{ base: 3, md: 4 }}
+          align="stretch"
+          maxW="820px"
+          mx="auto"
+          w="full"
+          mt={{ base: 3, md: 4 }}
+        >
+          {notifications.map((notification) => {
+            const zid = notificationRowZoneId(notification);
+            const rowCfgId = resolveStoredNotificationConfigId(notification);
+            return (
               <Notification
+                key={notification.id}
                 id={notification.id}
                 notification={{
                   ...notification.notification,
@@ -264,10 +273,10 @@ const NotificationsMain: React.FC = () => {
                     : undefined
                 }
               />
-            </Box>
-          );
-        })}
-      </SimpleGrid>
+            );
+          })}
+        </VStack>
+      )}
 
       <Modal
         isOpen={isOpen}

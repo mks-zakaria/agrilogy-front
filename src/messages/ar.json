@@ -1120,7 +1120,19 @@
       "lastDate": "آخر تاريخ",
       "usedWater": "الماء المستخدم",
       "editNotification": "تعديل الإشعار",
-      "deleteNotification": "حذف الإشعار"
+      "deleteNotification": "حذف الإشعار",
+      "airTemperature": "حرارة الهواء",
+      "airHumidity": "رطوبة الهواء",
+      "soilMoisture": "رطوبة التربة",
+      "soilTemperature": "حرارة التربة",
+      "soilPh": "حموضة التربة",
+      "et0Label": "ET0",
+      "tagOk": "جيد",
+      "tagAdvisory": "إرشاد",
+      "tagCritical": "حرج",
+      "metricsHeading": "القياسات",
+      "vsYesterday": "مقارنة بالأمس",
+      "noData": "—"
     },
     "main": {
       "title": "الإشعارات",
