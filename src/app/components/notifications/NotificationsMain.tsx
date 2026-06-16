@@ -32,6 +32,7 @@ import {
   writeNotificationsToCache,
 } from '@/app/lib/notificationsCacheStorage';
 import EmptyBox from '../common/EmptyBox';
+import useColorModeStyles from '@/app/utils/useColorModeStyles';
 import { useTranslations } from 'next-intl';
 import { useNotificationBellCounts } from '@/app/hooks/useNotificationBellCounts';
 import ZoneNotificationConfigureForm from '@/app/components/notifications/ZoneNotificationConfigureForm';
@@ -46,6 +47,7 @@ import {
 const NotificationsMain: React.FC = () => {
   const t = useTranslations();
   const toast = useToast();
+  const { navBgColor } = useColorModeStyles();
   const deleteCancelRef = useRef<HTMLButtonElement>(null);
   const [notifications, setNotifications] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -217,22 +219,37 @@ const NotificationsMain: React.FC = () => {
   if (loading) return <EmptyBox variant="loading" />;
 
   return (
-    <Box px={{ base: 3, md: 4 }} py={{ base: 3, md: 4 }}>
-      <PageInfoBar
-        title={t('notifications.main.title')}
-        subtitle={t('notifications.main.subtitle')}
-        actions={
-          <Button
-            colorScheme="brand"
-            leftIcon={<AddIcon />}
-            size="sm"
-            onClick={openConfigure}
-            data-testid="add-zone-notif"
-          >
-            {t('notifications.main.addZoneNotification')}
-          </Button>
-        }
-      />
+    <Box px={{ base: 3, md: 4 }} pb={{ base: 3, md: 4 }}>
+      {/* Fixed top panel: pinned to the scroll container top so only the
+          notification list scrolls beneath it. Full-bleed background hides
+          cards as they pass under. */}
+      <Box
+        position="sticky"
+        top={0}
+        zIndex={3}
+        bg={navBgColor}
+        mx={{ base: -3, md: -4 }}
+        px={{ base: 3, md: 4 }}
+        pt={{ base: 3, md: 4 }}
+        pb={{ base: 3, md: 4 }}
+        sx={{ '& > [role="region"]': { marginBottom: 0 } }}
+      >
+        <PageInfoBar
+          title={t('notifications.main.title')}
+          subtitle={t('notifications.main.subtitle')}
+          actions={
+            <Button
+              colorScheme="brand"
+              leftIcon={<AddIcon />}
+              size="sm"
+              onClick={openConfigure}
+              data-testid="add-zone-notif"
+            >
+              {t('notifications.main.addZoneNotification')}
+            </Button>
+          }
+        />
+      </Box>
 
       {notifications.length === 0 ? (
         <Box maxW="820px" mx="auto" w="full" mt={6}>
