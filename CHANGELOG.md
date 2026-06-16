@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.19.0...v1.20.0) (2026-06-16)
+
+
+### Features
+
+* **notifications:** tablet-style vertical list with restructured cards ([#156](https://github.com/AgriLogy/agrilogy-front/issues/156)) ([704ed9d](https://github.com/AgriLogy/agrilogy-front/commit/704ed9d299f47ac05eca885491bdba108496c45d))
+
 # [1.19.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.18.2...v1.19.0) (2026-06-15)
 
 
