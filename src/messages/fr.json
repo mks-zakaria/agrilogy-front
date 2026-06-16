@@ -1120,7 +1120,19 @@
       "lastDate": "Dernière date",
       "usedWater": "Eau utilisée",
       "editNotification": "Modifier la notification",
-      "deleteNotification": "Supprimer la notification"
+      "deleteNotification": "Supprimer la notification",
+      "airTemperature": "Temp. air",
+      "airHumidity": "Humidité air",
+      "soilMoisture": "Humidité sol",
+      "soilTemperature": "Temp. sol",
+      "soilPh": "pH sol",
+      "et0Label": "ET0",
+      "tagOk": "OK",
+      "tagAdvisory": "Conseil",
+      "tagCritical": "Critique",
+      "metricsHeading": "Mesures",
+      "vsYesterday": "vs hier",
+      "noData": "—"
     },
     "main": {
       "title": "Notifications",
