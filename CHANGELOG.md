@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.20.0...v1.21.0) (2026-06-16)
+
+
+### Features
+
+* **notifications:** pin the page header, scroll only the list ([#158](https://github.com/AgriLogy/agrilogy-front/issues/158)) ([43fff93](https://github.com/AgriLogy/agrilogy-front/commit/43fff93b07ea6e0b12a0d03c595e4a2adf3bff5d))
+
 # [1.20.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.19.0...v1.20.0) (2026-06-16)
 
 
