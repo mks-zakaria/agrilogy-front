@@ -650,7 +650,10 @@
       "pageTitle": "إدارة التنبيهات",
       "pageSubtitle": "اضبط العتبات لكل مستشعر. يُرسم كل تنبيه تلقائيًا على الرسم البياني المقابل.",
       "newAlert": "تنبيه جديد",
-      "emptyText": "لا يوجد تنبيه مُهيّأ"
+      "emptyText": "لا يوجد تنبيه مُهيّأ",
+      "columnLastTriggered": "آخر تفعيل",
+      "neverTriggered": "أبدًا",
+      "atLimitTooltip": "تم بلوغ حد {max} تنبيهات"
     },
     "form": {
       "name": "الاسم",

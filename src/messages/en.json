@@ -650,7 +650,10 @@
       "pageTitle": "Alert management",
       "pageSubtitle": "Configure thresholds per sensor. Each alert is automatically plotted on the corresponding chart.",
       "newAlert": "New alert",
-      "emptyText": "No alert configured"
+      "emptyText": "No alert configured",
+      "columnLastTriggered": "Last triggered",
+      "neverTriggered": "Never",
+      "atLimitTooltip": "Limit of {max} alerts reached"
     },
     "form": {
       "name": "Name",

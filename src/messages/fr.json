@@ -650,7 +650,10 @@
       "pageTitle": "Gestion des alertes",
       "pageSubtitle": "Configurez des seuils par capteur. Chaque alerte se trace automatiquement sur le graphique correspondant.",
       "newAlert": "Nouvelle alerte",
-      "emptyText": "Aucune alerte configurée"
+      "emptyText": "Aucune alerte configurée",
+      "columnLastTriggered": "Dernier déclenchement",
+      "neverTriggered": "Jamais",
+      "atLimitTooltip": "Limite de {max} alertes atteinte"
     },
     "form": {
       "name": "Nom",
