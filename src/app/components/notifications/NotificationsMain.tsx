@@ -333,6 +333,7 @@ const NotificationsMain: React.FC = () => {
                       variant={statusFilter === s ? 'solid' : 'outline'}
                       colorScheme={statusFilter === s ? 'brand' : 'gray'}
                       onClick={() => setStatusFilter(s)}
+                      aria-pressed={statusFilter === s}
                     >
                       {s === 'all'
                         ? t('notifications.filters.allStatus')
@@ -351,6 +352,7 @@ const NotificationsMain: React.FC = () => {
                       variant={levelFilter === c.value ? 'solid' : 'outline'}
                       colorScheme={levelFilter === c.value ? c.scheme : 'gray'}
                       onClick={() => setLevelFilter(c.value)}
+                      aria-pressed={levelFilter === c.value}
                     >
                       {c.label}
                     </Button>
