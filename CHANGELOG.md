@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.31.1...v1.32.0) (2026-06-17)
+
+
+### Features
+
+* **dashboard:** error states + retry on card fetch failures ([#191](https://github.com/AgriLogy/agrilogy-front/issues/191)) ([ac7f0c3](https://github.com/AgriLogy/agrilogy-front/commit/ac7f0c383c65d52356a0bfe6d0dd9d484fa263a4))
+
 ## [1.31.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.31.0...v1.31.1) (2026-06-17)
 
 # [1.31.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.30.0...v1.31.0) (2026-06-17)
