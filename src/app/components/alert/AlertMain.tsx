@@ -64,17 +64,27 @@ const AlertMain: React.FC = () => {
     <Space size={8}>
       {row.notify_email !== false && (
         <Tooltip title={t('alertsPage.main.channelEmail')}>
-          <MailOutlined />
+          <MailOutlined
+            role="img"
+            aria-label={t('alertsPage.main.channelEmail')}
+          />
         </Tooltip>
       )}
       {row.notify_sms && (
         <Tooltip title={t('alertsPage.main.channelSms')}>
-          <MessageOutlined />
+          <MessageOutlined
+            role="img"
+            aria-label={t('alertsPage.main.channelSms')}
+          />
         </Tooltip>
       )}
       {row.notify_whatsapp && (
         <Tooltip title={t('alertsPage.main.channelWhatsapp')}>
-          <WhatsAppOutlined style={{ color: '#25D366' }} />
+          <WhatsAppOutlined
+            role="img"
+            aria-label={t('alertsPage.main.channelWhatsapp')}
+            style={{ color: '#25D366' }}
+          />
         </Tooltip>
       )}
     </Space>
