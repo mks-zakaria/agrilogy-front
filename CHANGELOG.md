@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.28.0...v1.29.0) (2026-06-17)
+
+
+### Features
+
+* **analytics:** persist selected zone + data frequency ([#180](https://github.com/AgriLogy/agrilogy-front/issues/180)) ([58b3230](https://github.com/AgriLogy/agrilogy-front/commit/58b323071b1695d977d6b7ded6daa1b25207dc05))
+
 # [1.28.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.27.0...v1.28.0) (2026-06-17)
 
 
