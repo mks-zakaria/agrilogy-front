@@ -3,22 +3,15 @@
 Living checklist of outstanding work for the customer web app. Grouped by who's
 needed and rough effort. Keep it honest — only real, observed items.
 
-## 🟢 Solo (front-end, no blockers)
+## ✅ Done (solo front-end push)
 
-- [ ] Persist analytics **date range as a relative preset** (e.g. "last 7 days")
-      so it recomputes fresh instead of freezing to a stale absolute window.
-- [ ] **Titles for the 2 sub-routes**: `/alerts/wind-speed`,
-      `/vannes-pompes/schema`.
-- [ ] **Localize page titles** (next-intl `getTranslations`) — currently
-      hardcoded French.
-- [ ] **Per-chart collapse/expand** on the long data pages (soil = 6 charts,
-      station more), with persisted state.
-- [ ] **Global next-intl jest mock** (`setupFilesAfterEnv`) so component tests
-      don't each need a per-file mock.
-- [ ] **Component tests** for the redesigned notification / alerts UI
-      (today only pure-logic modules are tested).
-- [ ] **Accessibility pass** on the new components (keyboard nav, focus, aria).
-- [ ] **Error states** on data-fetch failures (some cards just log / show empty).
+- [x] Persist analytics **date range as a relative preset** (recomputed vs today).
+- [x] **Titles for the 2 sub-routes** (`/alerts/wind-speed`, `/vannes-pompes/schema`).
+- [x] **Localize page titles** (next-intl server `generateMetadata`, fr/en/ar).
+- [x] **Global next-intl jest mock** + jest-dom (unblocks component tests).
+- [x] **Component tests** for the redesigned Notification card.
+- [x] **Accessibility**: `aria-pressed` filter chips + labelled alert channel icons.
+- [x] **Error states** + Retry on dashboard cards (alerts summary, recent notifications).
 
 ## 🟡 Needs a product decision
 
@@ -42,5 +35,10 @@ needed and rough effort. Keep it honest — only real, observed items.
 
 ## 🟣 Larger / infra
 
+- [ ] **Per-chart collapse/expand** — attempted as a ChartSection wrapper, but
+      an absolute toggle collides with existing chart controls / the right-data
+      panel's stacking and isn't reliably clickable. Needs the toggle built into
+      `ChartPanelHeading` controlling the sibling chart body — a structural
+      chart-rendering refactor.
 - [ ] **Turborepo monorepo** (`apps/web` + `apps/admin`) — 2 Vercel projects,
       domains, env, pick PR base & merge, fix the legacy deploy workflow.
