@@ -15,7 +15,14 @@ import {
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useLocale, useTranslations } from 'next-intl';
-import { EditOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  PlusOutlined,
+  DeleteOutlined,
+  MailOutlined,
+  MessageOutlined,
+  WhatsAppOutlined,
+} from '@ant-design/icons';
 import { alertApi, type AlertRecord } from '@/app/lib/alertApi';
 import {
   ALERT_CHOICES,
@@ -50,6 +57,28 @@ const AlertMain: React.FC = () => {
           timeStyle: 'short',
         })
       : t('alertsPage.main.neverTriggered');
+
+  // Email is the base channel (defaults on); SMS/WhatsApp show only when
+  // explicitly enabled. Tolerant of a backend that omits the flags.
+  const renderChannels = (row: AlertRecord) => (
+    <Space size={8}>
+      {row.notify_email !== false && (
+        <Tooltip title={t('alertsPage.main.channelEmail')}>
+          <MailOutlined />
+        </Tooltip>
+      )}
+      {row.notify_sms && (
+        <Tooltip title={t('alertsPage.main.channelSms')}>
+          <MessageOutlined />
+        </Tooltip>
+      )}
+      {row.notify_whatsapp && (
+        <Tooltip title={t('alertsPage.main.channelWhatsapp')}>
+          <WhatsAppOutlined style={{ color: '#25D366' }} />
+        </Tooltip>
+      )}
+    </Space>
+  );
 
   const conditionLabel = (c: string) => {
     const choice = CONDITION_CHOICES.find((cc) => cc.value === c);
@@ -190,6 +219,11 @@ const AlertMain: React.FC = () => {
         ),
       },
       {
+        title: t('alertsPage.main.columnChannels'),
+        key: 'channels',
+        render: (_, row) => renderChannels(row),
+      },
+      {
         title: t('alertsPage.main.columnLastTriggered'),
         dataIndex: 'last_triggered_at',
         key: 'last_triggered_at',
@@ -307,6 +341,10 @@ const AlertMain: React.FC = () => {
                 {sensorKeys.find((s) => s.key === row.sensor_key)?.unit ?? ''}
               </span>
             ),
+          },
+          {
+            label: t('alertsPage.main.columnChannels'),
+            value: renderChannels(row),
           },
           {
             label: t('alertsPage.main.columnLastTriggered'),

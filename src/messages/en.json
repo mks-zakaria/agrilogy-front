@@ -653,7 +653,11 @@
       "emptyText": "No alert configured",
       "columnLastTriggered": "Last triggered",
       "neverTriggered": "Never",
-      "atLimitTooltip": "Limit of {max} alerts reached"
+      "atLimitTooltip": "Limit of {max} alerts reached",
+      "columnChannels": "Channels",
+      "channelEmail": "Email",
+      "channelSms": "SMS",
+      "channelWhatsapp": "WhatsApp"
     },
     "form": {
       "name": "Name",
