@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.26.2...v1.27.0) (2026-06-17)
+
+
+### Features
+
+* **seo:** per-page browser titles via server metadata ([#176](https://github.com/AgriLogy/agrilogy-front/issues/176)) ([bd74f34](https://github.com/AgriLogy/agrilogy-front/commit/bd74f34519bba2fceed48f7f421bac8b05aea440))
+
 ## [1.26.2](https://github.com/AgriLogy/agrilogy-front/compare/v1.26.1...v1.26.2) (2026-06-17)
 
 
