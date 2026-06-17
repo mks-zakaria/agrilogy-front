@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.22.0...v1.23.0) (2026-06-17)
+
+
+### Features
+
+* **notifications:** browser/desktop notifications when new ones arrive ([#162](https://github.com/AgriLogy/agrilogy-front/issues/162)) ([e94b8cb](https://github.com/AgriLogy/agrilogy-front/commit/e94b8cb987da0b5d0656fca831631d00fba9a365))
+
 # [1.22.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.21.0...v1.22.0) (2026-06-17)
 
 
