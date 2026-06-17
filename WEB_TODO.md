@@ -12,6 +12,8 @@ needed and rough effort. Keep it honest — only real, observed items.
 - [x] **Component tests** for the redesigned Notification card.
 - [x] **Accessibility**: `aria-pressed` filter chips + labelled alert channel icons.
 - [x] **Error states** + Retry on dashboard cards (alerts summary, recent notifications).
+- [x] **Per-chart collapse/expand** — collapsible chart sections with persisted
+      state (normal-flow toggle + title published via context).
 
 ## 🟡 Needs a product decision
 
@@ -35,10 +37,5 @@ needed and rough effort. Keep it honest — only real, observed items.
 
 ## 🟣 Larger / infra
 
-- [ ] **Per-chart collapse/expand** — attempted as a ChartSection wrapper, but
-      an absolute toggle collides with existing chart controls / the right-data
-      panel's stacking and isn't reliably clickable. Needs the toggle built into
-      `ChartPanelHeading` controlling the sibling chart body — a structural
-      chart-rendering refactor.
 - [ ] **Turborepo monorepo** (`apps/web` + `apps/admin`) — 2 Vercel projects,
       domains, env, pick PR base & merge, fix the legacy deploy workflow.
