@@ -17,8 +17,9 @@ import type { AlertRecord } from '@/app/lib/alertApi';
 // next-intl ships ESM that jest can't parse, and its hooks need a provider.
 // Stub it with a passthrough so this behaviour test runs without i18n context.
 jest.mock('next-intl', () => {
-  const translate = (key: string) => key;
-  (translate as { has: (k: string) => boolean }).has = () => true;
+  const translate = Object.assign((key: string) => key, {
+    has: () => true,
+  });
   return {
     useTranslations: () => translate,
     useLocale: () => 'fr',
