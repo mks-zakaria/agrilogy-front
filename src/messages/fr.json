@@ -1571,7 +1571,12 @@
       "recentNotifications": "Notifications récentes",
       "recentNotificationsEmpty": "Aucune notification récente",
       "viewAll": "Tout voir",
-      "electrovannesAvailable": "Électrovannes disponibles"
+      "electrovannesAvailable": "Électrovannes disponibles",
+      "alertsSummary": "Alertes",
+      "alertsNoConfig": "Aucune alerte configurée.",
+      "alertsActive": "{active}/{total} actives",
+      "alertsRecentlyTriggered": "Déclenchées récemment",
+      "alertsNoRecent": "Aucun déclenchement récent."
     },
     "electrovanCard": {
       "devEui": "DevEUI",

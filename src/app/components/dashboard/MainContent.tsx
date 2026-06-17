@@ -8,6 +8,7 @@ import ElectrovannesList from './ElectrovannesDashboardCard';
 import GoogleMapWeather from '../GoogleMapWeather';
 import WeatherDashboard from './WeatherDashboard';
 import RecentNotificationsCard from './RecentNotificationsCard';
+import AlertsSummaryCard from './AlertsSummaryCard';
 
 const Card = ({ children }: { children: React.ReactNode }) => (
   <Box
@@ -43,6 +44,9 @@ const MainContent = () => {
         </Card>
         <Card>
           <RecentNotificationsCard />
+        </Card>
+        <Card>
+          <AlertsSummaryCard />
         </Card>
         <Card>
           <ElectrovannesList />

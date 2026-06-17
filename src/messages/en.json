@@ -1571,7 +1571,12 @@
       "recentNotifications": "Recent notifications",
       "recentNotificationsEmpty": "No recent notifications",
       "viewAll": "View all",
-      "electrovannesAvailable": "Available solenoid valves"
+      "electrovannesAvailable": "Available solenoid valves",
+      "alertsSummary": "Alerts",
+      "alertsNoConfig": "No alerts configured.",
+      "alertsActive": "{active}/{total} active",
+      "alertsRecentlyTriggered": "Recently triggered",
+      "alertsNoRecent": "No recent triggers."
     },
     "electrovanCard": {
       "devEui": "DevEUI",

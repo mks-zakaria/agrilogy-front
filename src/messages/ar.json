@@ -1571,7 +1571,12 @@
       "recentNotifications": "أحدث الإشعارات",
       "recentNotificationsEmpty": "لا توجد إشعارات حديثة",
       "viewAll": "عرض الكل",
-      "electrovannesAvailable": "الصمامات الكهربائية المتاحة"
+      "electrovannesAvailable": "الصمامات الكهربائية المتاحة",
+      "alertsSummary": "التنبيهات",
+      "alertsNoConfig": "لا توجد تنبيهات مُعدّة.",
+      "alertsActive": "{active}/{total} مفعّلة",
+      "alertsRecentlyTriggered": "تم تفعيلها مؤخرًا",
+      "alertsNoRecent": "لا تفعيل حديث."
     },
     "electrovanCard": {
       "devEui": "DevEUI",
