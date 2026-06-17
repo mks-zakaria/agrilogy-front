@@ -1,22 +1,9 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import SettingsMain from '../components/settings/SettingsMain';
-import { AppPageShell } from '../components/layout/AppPageShell';
+import React from 'react';
+import type { Metadata } from 'next';
+import SettingsClient from '../components/settings/SettingsClient';
 
-const Page = () => {
-  const [mounted, setMounted] = useState(false);
+export const metadata: Metadata = { title: 'Paramètres' };
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  return (
-    <AppPageShell>
-      <SettingsMain />
-    </AppPageShell>
-  );
-};
+const Page = () => <SettingsClient />;
 
 export default Page;

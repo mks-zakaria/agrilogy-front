@@ -1,24 +1,9 @@
-'use client';
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { checkAuthTokens } from './lib/checkAuthTokens';
-import MainContent from './components/dashboard/MainContent';
-import { AppPageShell } from './components/layout/AppPageShell';
+import React from 'react';
+import type { Metadata } from 'next';
+import DashboardClient from './components/dashboard/DashboardClient';
 
-const Page = () => {
-  const router = useRouter();
+export const metadata: Metadata = { title: 'Tableau de bord' };
 
-  useEffect(() => {
-    const isAuthenticated = checkAuthTokens();
-    if (!isAuthenticated) {
-      router.push('/login');
-    }
-  }, [router]);
-  return (
-    <AppPageShell>
-      <MainContent />
-    </AppPageShell>
-  );
-};
+const Page = () => <DashboardClient />;
 
 export default Page;
