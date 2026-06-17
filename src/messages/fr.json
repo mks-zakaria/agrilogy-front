@@ -1659,7 +1659,11 @@
       "deleteConfirmBody": "La configuration de ce secteur (seuils, fréquence, canaux) sera effacée de cet appareil et les lignes locales liées retirées de la liste. Les autres notifications de la même zone ne sont pas modifiées.",
       "deleteConfirmOk": "Supprimer",
       "deletedToastTitle": "Notification supprimée",
-      "deletedToastBody": "Configuration effacée et entrées locales retirées de la liste sur cet appareil."
+      "deletedToastBody": "Configuration effacée et entrées locales retirées de la liste sur cet appareil.",
+      "desktopTitle": "Agrogo — nouvelle notification",
+      "desktopBody": "Vous avez {count} notification(s) non lue(s).",
+      "desktopEnable": "🔔 Activer les notifications bureau",
+      "desktopOn": "🔕 Désactiver les notifications bureau"
     },
     "adminMenu": {
       "logoAlt": "Logo Agrilogy",
