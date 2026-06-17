@@ -1863,5 +1863,20 @@
       "reading": "Consommation électrique",
       "type": "Électricité"
     }
+  },
+  "meta": {
+    "title": {
+      "dashboard": "Tableau de bord",
+      "notifications": "Notifications",
+      "alerts": "Alertes",
+      "settings": "Paramètres",
+      "soil": "Sol",
+      "water": "Eau",
+      "plant": "Plante",
+      "station": "Station",
+      "vannesPompes": "Vannes & pompes",
+      "windSpeed": "Vitesse du vent",
+      "schema": "Schéma"
+    }
   }
 }

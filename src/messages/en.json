@@ -1863,5 +1863,20 @@
       "reading": "Electricity consumption",
       "type": "Electricity"
     }
+  },
+  "meta": {
+    "title": {
+      "dashboard": "Dashboard",
+      "notifications": "Notifications",
+      "alerts": "Alerts",
+      "settings": "Settings",
+      "soil": "Soil",
+      "water": "Water",
+      "plant": "Plant",
+      "station": "Station",
+      "vannesPompes": "Valves & pumps",
+      "windSpeed": "Wind speed",
+      "schema": "Schematic"
+    }
   }
 }

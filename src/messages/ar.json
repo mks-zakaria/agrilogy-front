@@ -1863,5 +1863,20 @@
       "reading": "استهلاك الكهرباء",
       "type": "الكهرباء"
     }
+  },
+  "meta": {
+    "title": {
+      "dashboard": "لوحة القيادة",
+      "notifications": "الإشعارات",
+      "alerts": "التنبيهات",
+      "settings": "الإعدادات",
+      "soil": "التربة",
+      "water": "الماء",
+      "plant": "النبات",
+      "station": "المحطة",
+      "vannesPompes": "الصمامات والمضخات",
+      "windSpeed": "سرعة الرياح",
+      "schema": "المخطط"
+    }
   }
 }
