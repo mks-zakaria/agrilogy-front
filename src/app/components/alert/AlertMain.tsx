@@ -8,12 +8,13 @@ import {
   Empty,
   Popconfirm,
   Space,
+  Switch,
   Table,
   Tag,
   Tooltip,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { EditOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { alertApi, type AlertRecord } from '@/app/lib/alertApi';
 import {
@@ -33,10 +34,22 @@ import styles from './AlertMain.module.scss';
 
 const ALERT_LIMIT = 10;
 
+const localeTag = (locale: string): string =>
+  locale === 'ar' ? 'ar' : locale === 'en' ? 'en-GB' : 'fr-FR';
+
 const AlertMain: React.FC = () => {
   const t = useTranslations();
+  const locale = useLocale();
   const { message } = App.useApp();
   const isMobile = useIsMobile();
+
+  const formatTriggered = (iso: string | null): string =>
+    iso
+      ? new Date(iso).toLocaleString(localeTag(locale), {
+          dateStyle: 'short',
+          timeStyle: 'short',
+        })
+      : t('alertsPage.main.neverTriggered');
 
   const conditionLabel = (c: string) => {
     const choice = CONDITION_CHOICES.find((cc) => cc.value === c);
@@ -131,6 +144,7 @@ const AlertMain: React.FC = () => {
         title: t('alertsPage.main.columnName'),
         dataIndex: 'name',
         key: 'name',
+        sorter: (a, b) => a.name.localeCompare(b.name),
         render: (text: string, row) => (
           <Space size={8}>
             <strong>{text}</strong>
@@ -155,6 +169,11 @@ const AlertMain: React.FC = () => {
         title: t('alertsPage.main.columnCategory'),
         dataIndex: 'type',
         key: 'type',
+        filters: Array.from(new Set(alerts.map((a) => a.type))).map((type) => ({
+          text: typeLabel(type),
+          value: type,
+        })),
+        onFilter: (value, row) => row.type === value,
         render: (type: string) => <Tag>{typeLabel(type)}</Tag>,
       },
       {
@@ -171,9 +190,27 @@ const AlertMain: React.FC = () => {
         ),
       },
       {
+        title: t('alertsPage.main.columnLastTriggered'),
+        dataIndex: 'last_triggered_at',
+        key: 'last_triggered_at',
+        sorter: (a, b) =>
+          (a.last_triggered_at ? Date.parse(a.last_triggered_at) : 0) -
+          (b.last_triggered_at ? Date.parse(b.last_triggered_at) : 0),
+        render: (iso: string | null) => (
+          <span className={iso ? undefined : styles.thresholdHint}>
+            {formatTriggered(iso)}
+          </span>
+        ),
+      },
+      {
         title: t('alertsPage.main.columnActive'),
         dataIndex: 'is_active',
         key: 'is_active',
+        filters: [
+          { text: t('alertsPage.main.yes'), value: true },
+          { text: t('alertsPage.main.no'), value: false },
+        ],
+        onFilter: (value, row) => row.is_active === value,
         render: (on: boolean, row) => (
           <Tooltip
             title={
@@ -182,13 +219,16 @@ const AlertMain: React.FC = () => {
                 : t('alertsPage.main.activate')
             }
           >
-            <Tag
-              color={on ? 'green' : 'default'}
-              onClick={() => handleToggleActive(row)}
-              style={{ cursor: 'pointer' }}
-            >
-              {on ? t('alertsPage.main.yes') : t('alertsPage.main.no')}
-            </Tag>
+            <Switch
+              size="small"
+              checked={on}
+              onChange={() => handleToggleActive(row)}
+              aria-label={
+                on
+                  ? t('alertsPage.main.deactivate')
+                  : t('alertsPage.main.activate')
+              }
+            />
           </Tooltip>
         ),
       },
@@ -224,7 +264,7 @@ const AlertMain: React.FC = () => {
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [sensorKeys, t]
+    [sensorKeys, t, alerts, locale]
   );
 
   const sensorLabel = useCallback(
@@ -269,17 +309,22 @@ const AlertMain: React.FC = () => {
             ),
           },
           {
+            label: t('alertsPage.main.columnLastTriggered'),
+            value: formatTriggered(row.last_triggered_at),
+          },
+          {
             label: t('alertsPage.main.columnActive'),
             value: (
-              <Tag
-                color={row.is_active ? 'green' : 'default'}
-                onClick={() => handleToggleActive(row)}
-                style={{ cursor: 'pointer', marginInlineEnd: 0 }}
-              >
-                {row.is_active
-                  ? t('alertsPage.main.yes')
-                  : t('alertsPage.main.no')}
-              </Tag>
+              <Switch
+                size="small"
+                checked={row.is_active}
+                onChange={() => handleToggleActive(row)}
+                aria-label={
+                  row.is_active
+                    ? t('alertsPage.main.deactivate')
+                    : t('alertsPage.main.activate')
+                }
+              />
             ),
           },
         ],
@@ -312,7 +357,7 @@ const AlertMain: React.FC = () => {
         ),
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [alerts, sensorKeys, t, sensorLabel]
+    [alerts, sensorKeys, t, sensorLabel, locale]
   );
 
   return (
@@ -325,14 +370,28 @@ const AlertMain: React.FC = () => {
         title={t('alertsPage.main.pageTitle')}
         subtitle={t('alertsPage.main.pageSubtitle')}
         actions={
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={openCreate}
-            data-testid="alert-create-button"
-          >
-            {t('alertsPage.main.newAlert')}
-          </Button>
+          <Space size={10}>
+            <Tag color={alerts.length >= ALERT_LIMIT ? 'orange' : 'default'}>
+              {alerts.length}/{ALERT_LIMIT}
+            </Tag>
+            <Tooltip
+              title={
+                alerts.length >= ALERT_LIMIT
+                  ? t('alertsPage.main.atLimitTooltip', { max: ALERT_LIMIT })
+                  : undefined
+              }
+            >
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={openCreate}
+                disabled={alerts.length >= ALERT_LIMIT}
+                data-testid="alert-create-button"
+              >
+                {t('alertsPage.main.newAlert')}
+              </Button>
+            </Tooltip>
+          </Space>
         }
       />
 
