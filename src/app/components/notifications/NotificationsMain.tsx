@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { PageInfoBar } from '@/app/components/layout/PageInfoBar';
 import {
   AlertDialog,
@@ -10,7 +10,12 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
+  HStack,
+  Select,
+  Text,
   VStack,
+  Wrap,
+  WrapItem,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -24,6 +29,7 @@ import { AddIcon, BellIcon } from '@chakra-ui/icons';
 import Notification from '../notifications/Notification';
 import axiosInstance from '@/app/lib/api';
 import {
+  markAllNotificationsReadInCache,
   mergeNotificationsForStorage,
   normalizeApiNotificationsList,
   NOTIFICATIONS_CACHE_UPDATED_EVENT,
@@ -31,6 +37,8 @@ import {
   readNotificationsFromCache,
   writeNotificationsToCache,
 } from '@/app/lib/notificationsCacheStorage';
+import { decisionLevelForNotification } from '@/app/lib/notificationDecisionLevel';
+import type { NotificationDecisionLevel } from '@/app/lib/notificationDecisionEngine';
 import EmptyBox from '../common/EmptyBox';
 import useColorModeStyles from '@/app/utils/useColorModeStyles';
 import { useTranslations } from 'next-intl';
@@ -216,6 +224,68 @@ const NotificationsMain: React.FC = () => {
     });
   };
 
+  // ---- read/unread + filters ---------------------------------------------
+  const [statusFilter, setStatusFilter] = useState<'all' | 'unread'>('all');
+  const [levelFilter, setLevelFilter] = useState<'all' | NotificationDecisionLevel>(
+    'all'
+  );
+  const [zoneFilter, setZoneFilter] = useState<'all' | number>('all');
+
+  const unreadCount = useMemo(
+    () => notifications.filter((n) => !n?.is_read).length,
+    [notifications]
+  );
+
+  const zonesPresent = useMemo(() => {
+    const m = new Map<number, string>();
+    for (const n of notifications) {
+      const zid = notificationRowZoneId(n);
+      if (zid != null && !m.has(zid)) m.set(zid, n.zone_name || `#${zid}`);
+    }
+    return Array.from(m, ([id, name]) => ({ id, name }));
+  }, [notifications]);
+
+  const filtered = useMemo(() => {
+    return notifications.filter((n) => {
+      if (statusFilter === 'unread' && n?.is_read) return false;
+      const zid = notificationRowZoneId(n);
+      if (zoneFilter !== 'all' && zid !== zoneFilter) return false;
+      if (levelFilter !== 'all') {
+        const lvl = decisionLevelForNotification({
+          et0: String(n?.notification?.ET0 ?? ''),
+          soilHumidity: String(n?.notification?.soil_humidity ?? ''),
+          configId: resolveStoredNotificationConfigId(n),
+          zoneId: zid,
+          notificationName: n?.notification?.notification_name,
+          isTemplateSummary: Boolean(n?.notification?.template_summary),
+        });
+        if (lvl !== levelFilter) return false;
+      }
+      return true;
+    });
+  }, [notifications, statusFilter, zoneFilter, levelFilter]);
+
+  const handleMarkAllRead = () => {
+    markAllNotificationsReadInCache();
+    setNotifications(readNotificationsFromCache() as any[]);
+    void refreshBell();
+  };
+
+  const levelChips: Array<{
+    value: 'all' | NotificationDecisionLevel;
+    label: string;
+    scheme: string;
+  }> = [
+    { value: 'all', label: t('notifications.filters.allLevels'), scheme: 'brand' },
+    { value: 'critical', label: t('notifications.card.tagCritical'), scheme: 'red' },
+    {
+      value: 'advisory',
+      label: t('notifications.card.tagAdvisory'),
+      scheme: 'orange',
+    },
+    { value: 'ok', label: t('notifications.card.tagOk'), scheme: 'green' },
+  ];
+
   if (loading) return <EmptyBox variant="loading" />;
 
   return (
@@ -249,11 +319,97 @@ const NotificationsMain: React.FC = () => {
             </Button>
           }
         />
+
+        {notifications.length > 0 && (
+          <Box maxW="820px" mx="auto" w="full" mt={3}>
+            <Wrap spacing={2} align="center">
+              <WrapItem>
+                <HStack spacing={1}>
+                  {(['all', 'unread'] as const).map((s) => (
+                    <Button
+                      key={s}
+                      size="xs"
+                      borderRadius="full"
+                      variant={statusFilter === s ? 'solid' : 'outline'}
+                      colorScheme={statusFilter === s ? 'brand' : 'gray'}
+                      onClick={() => setStatusFilter(s)}
+                    >
+                      {s === 'all'
+                        ? t('notifications.filters.allStatus')
+                        : `${t('notifications.filters.unread')}${unreadCount > 0 ? ` (${unreadCount})` : ''}`}
+                    </Button>
+                  ))}
+                </HStack>
+              </WrapItem>
+              <WrapItem>
+                <HStack spacing={1}>
+                  {levelChips.map((c) => (
+                    <Button
+                      key={c.value}
+                      size="xs"
+                      borderRadius="full"
+                      variant={levelFilter === c.value ? 'solid' : 'outline'}
+                      colorScheme={levelFilter === c.value ? c.scheme : 'gray'}
+                      onClick={() => setLevelFilter(c.value)}
+                    >
+                      {c.label}
+                    </Button>
+                  ))}
+                </HStack>
+              </WrapItem>
+              {zonesPresent.length > 1 && (
+                <WrapItem>
+                  <Select
+                    size="xs"
+                    borderRadius="md"
+                    maxW="200px"
+                    value={String(zoneFilter)}
+                    onChange={(e) =>
+                      setZoneFilter(
+                        e.target.value === 'all'
+                          ? 'all'
+                          : Number(e.target.value)
+                      )
+                    }
+                    aria-label={t('notifications.filters.allZones')}
+                  >
+                    <option value="all">
+                      {t('notifications.filters.allZones')}
+                    </option>
+                    {zonesPresent.map((z) => (
+                      <option key={z.id} value={z.id}>
+                        {z.name}
+                      </option>
+                    ))}
+                  </Select>
+                </WrapItem>
+              )}
+              {unreadCount > 0 && (
+                <WrapItem>
+                  <Button
+                    size="xs"
+                    variant="ghost"
+                    colorScheme="brand"
+                    onClick={handleMarkAllRead}
+                  >
+                    {t('notifications.filters.markAllRead')}
+                  </Button>
+                </WrapItem>
+              )}
+            </Wrap>
+          </Box>
+        )}
       </Box>
 
       {notifications.length === 0 ? (
         <Box maxW="820px" mx="auto" w="full" mt={6}>
           <EmptyBox variant="empty" />
+        </Box>
+      ) : filtered.length === 0 ? (
+        <Box maxW="820px" mx="auto" w="full" mt={6} textAlign="center">
+          <Text fontSize="sm" color="gray.500">
+            {t('notifications.filters.noResults')}
+          </Text>
         </Box>
       ) : (
         <VStack
@@ -264,7 +420,7 @@ const NotificationsMain: React.FC = () => {
           w="full"
           mt={{ base: 3, md: 4 }}
         >
-          {notifications.map((notification) => {
+          {filtered.map((notification) => {
             const zid = notificationRowZoneId(notification);
             const rowCfgId = resolveStoredNotificationConfigId(notification);
             return (

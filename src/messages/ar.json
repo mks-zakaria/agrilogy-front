@@ -1132,7 +1132,8 @@
       "tagCritical": "حرج",
       "metricsHeading": "القياسات",
       "vsYesterday": "مقارنة بالأمس",
-      "noData": "—"
+      "noData": "—",
+      "unread": "غير مقروء"
     },
     "main": {
       "title": "الإشعارات",
@@ -1290,6 +1291,14 @@
         "week": "أسابيع"
       },
       "every": "{unit, select, minute {كل {amount} دقيقة} hour {كل {amount} ساعة} day {كل {amount} يوم} week {كل {amount} أسبوع} other {كل {amount}}}"
+    },
+    "filters": {
+      "allStatus": "الكل",
+      "unread": "غير المقروءة",
+      "allLevels": "كل المستويات",
+      "allZones": "كل المناطق",
+      "markAllRead": "تعليم الكل كمقروء",
+      "noResults": "لا توجد إشعارات مطابقة للمرشحات."
     }
   },
   "settings": {
