@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.27.0...v1.28.0) (2026-06-17)
+
+
+### Features
+
+* **pwa:** brand theme-color + iOS web-app metadata ([#178](https://github.com/AgriLogy/agrilogy-front/issues/178)) ([59ea491](https://github.com/AgriLogy/agrilogy-front/commit/59ea491380c4c48cac08dd927b87f2a13cf3f8c2)), closes [#1f7740](https://github.com/AgriLogy/agrilogy-front/issues/1f7740)
+
 # [1.27.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.26.2...v1.27.0) (2026-06-17)
 
 
