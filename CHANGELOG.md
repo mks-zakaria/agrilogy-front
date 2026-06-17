@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.25.0...v1.26.0) (2026-06-17)
+
+
+### Features
+
+* **dashboard:** alerts summary card ([#168](https://github.com/AgriLogy/agrilogy-front/issues/168)) ([ec12771](https://github.com/AgriLogy/agrilogy-front/commit/ec127715db4c30d1eb9e872356adb4b0f4fb1dc2))
+
 # [1.25.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.24.0...v1.25.0) (2026-06-17)
 
 
