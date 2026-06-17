@@ -1631,7 +1631,9 @@
       "stop": "STOP"
     },
     "common": {
-      "zoneFallback": "Zone"
+      "zoneFallback": "Zone",
+      "expand": "Expand",
+      "collapse": "Collapse"
     },
     "station": {
       "title": "Weather station"

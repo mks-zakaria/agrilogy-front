@@ -1631,7 +1631,9 @@
       "stop": "ARRÊTER"
     },
     "common": {
-      "zoneFallback": "Zone"
+      "zoneFallback": "Zone",
+      "expand": "Développer",
+      "collapse": "Réduire"
     },
     "station": {
       "title": "Station météo"

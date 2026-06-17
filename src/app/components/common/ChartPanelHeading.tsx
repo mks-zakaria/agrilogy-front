@@ -1,7 +1,8 @@
 'use client';
 
 import { Box, HStack, Text, useColorModeValue } from '@chakra-ui/react';
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
+import { useChartCollapse } from '@/app/components/layout/chartCollapseContext';
 
 export type ChartPanelHeadingProps = {
   title: string;
@@ -22,6 +23,13 @@ export default function ChartPanelHeading({
   startAdornment,
 }: ChartPanelHeadingProps) {
   const subtitleColor = useColorModeValue('gray.500', 'gray.400');
+
+  // Publish the title to an enclosing ChartSection (if any) so it can show it
+  // while collapsed. No-op outside a ChartSection.
+  const collapse = useChartCollapse();
+  useEffect(() => {
+    collapse?.registerTitle(title);
+  }, [collapse, title]);
 
   const textBlock = (
     <Box minW={0}>
