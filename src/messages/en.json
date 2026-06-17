@@ -1578,7 +1578,9 @@
       "alertsNoConfig": "No alerts configured.",
       "alertsActive": "{active}/{total} active",
       "alertsRecentlyTriggered": "Recently triggered",
-      "alertsNoRecent": "No recent triggers."
+      "alertsNoRecent": "No recent triggers.",
+      "loadError": "Unable to load data.",
+      "retry": "Retry"
     },
     "electrovanCard": {
       "devEui": "DevEUI",

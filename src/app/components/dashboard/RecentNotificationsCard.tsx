@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   Box,
+  Button,
   Flex,
   HStack,
   Text,
@@ -48,6 +49,7 @@ const RecentNotificationsCard = () => {
   const router = useRouter();
   const [rows, setRows] = useState<NotificationRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const tableBg = useColorModeValue('white', 'gray.800');
   const itemBg = useColorModeValue('gray.50', 'gray.700');
   const titleColor = useColorModeValue('gray.800', 'gray.100');
@@ -55,28 +57,28 @@ const RecentNotificationsCard = () => {
   const linkColor = useColorModeValue('brand.600', 'brand.300');
   const p = useBreakpointValue({ base: 2, md: 4 });
 
-  useEffect(() => {
-    let cancelled = false;
-    const load = async () => {
-      try {
-        const res = await axiosInstance.get('/notifications');
-        if (cancelled) return;
-        const apiRows = normalizeApiNotificationsList(res.data?.notifications);
-        const merged = mergeNotificationsForStorage(apiRows);
-        writeNotificationsToCache(merged);
-        setRows(merged as NotificationRow[]);
-      } catch {
-        if (!cancelled)
-          setRows(readNotificationsFromCache() as NotificationRow[]);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    };
-    load();
-    return () => {
-      cancelled = true;
-    };
+  const load = useCallback(async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await axiosInstance.get('/notifications');
+      const apiRows = normalizeApiNotificationsList(res.data?.notifications);
+      const merged = mergeNotificationsForStorage(apiRows);
+      writeNotificationsToCache(merged);
+      setRows(merged as NotificationRow[]);
+    } catch {
+      // Fall back to cache; only surface an error when there's nothing to show.
+      const cached = readNotificationsFromCache() as NotificationRow[];
+      setRows(cached);
+      if (cached.length === 0) setError(true);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
 
   useEffect(() => {
     const sync = () =>
@@ -92,6 +94,15 @@ const RecentNotificationsCard = () => {
 
   const content = loading ? (
     <Loading />
+  ) : error && recent.length === 0 ? (
+    <VStack spacing={2} align="start" py={4}>
+      <Text fontSize="sm" color={metaColor}>
+        {t('shell.dashboard.loadError')}
+      </Text>
+      <Button size="xs" variant="outline" onClick={() => void load()}>
+        {t('shell.dashboard.retry')}
+      </Button>
+    </VStack>
   ) : recent.length === 0 ? (
     <Text fontSize="sm" color={metaColor} py={4}>
       {t('shell.dashboard.recentNotificationsEmpty')}
