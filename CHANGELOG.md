@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.23.0...v1.24.0) (2026-06-17)
+
+
+### Features
+
+* **alerts:** list UX upgrade — count, sort/filter, switch, last-triggered ([#164](https://github.com/AgriLogy/agrilogy-front/issues/164)) ([3eb0d8e](https://github.com/AgriLogy/agrilogy-front/commit/3eb0d8ece8aea25ce95d424c841ddc306da1d9be))
+
 # [1.23.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.22.0...v1.23.0) (2026-06-17)
 
 
