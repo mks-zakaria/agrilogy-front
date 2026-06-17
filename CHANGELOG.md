@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.32.0...v1.33.0) (2026-06-17)
+
+
+### Features
+
+* **analytics:** collapsible chart sections ([#194](https://github.com/AgriLogy/agrilogy-front/issues/194)) ([2fbf641](https://github.com/AgriLogy/agrilogy-front/commit/2fbf6418cf331ff28d6911df3f72a40ee634a2ee))
+
 # [1.32.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.31.1...v1.32.0) (2026-06-17)
 
 
