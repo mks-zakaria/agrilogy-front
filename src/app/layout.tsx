@@ -1,6 +1,6 @@
 // app/layout.tsx
 import './globals.scss';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ColorModeScript } from '@chakra-ui/react';
 import { NextIntlClientProvider } from 'next-intl';
@@ -13,6 +13,21 @@ export const metadata: Metadata = {
   title: { default: 'Agrilogy', template: '%s · Agrilogy' },
   description:
     'Agrilogy is an innovative agriculture automation solution designed to enhance productivity, sustainability, and efficiency in farming. By utilizing smart technology and data-driven insights, Agrilogy optimizes irrigation, crop monitoring, and supply chain management, empowering farmers to achieve higher yields and reduce costs while promoting eco-friendly practices.',
+  // Field use is mostly mobile — make "add to home screen" behave like an app.
+  applicationName: 'Agrilogy',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Agrilogy',
+  },
+};
+
+// Brand-green browser chrome on mobile (primary[600]); explicit viewport so
+// the address bar / status bar match the app instead of the OS default.
+export const viewport: Viewport = {
+  themeColor: '#1f7740',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default async function RootLayout({
