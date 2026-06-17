@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.21.0...v1.22.0) (2026-06-17)
+
+
+### Features
+
+* **notifications:** read/unread indicators + feed filters ([#160](https://github.com/AgriLogy/agrilogy-front/issues/160)) ([f22b0ae](https://github.com/AgriLogy/agrilogy-front/commit/f22b0ae2f123ab9ee80baca306b709bbb498bc49))
+
 # [1.21.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.20.0...v1.21.0) (2026-06-16)
 
 
