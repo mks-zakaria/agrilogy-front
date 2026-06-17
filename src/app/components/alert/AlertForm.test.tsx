@@ -14,17 +14,7 @@ import { Form, App as AntdApp } from 'antd';
 import AlertForm, { type AlertFormValues } from './AlertForm';
 import type { AlertRecord } from '@/app/lib/alertApi';
 
-// next-intl ships ESM that jest can't parse, and its hooks need a provider.
-// Stub it with a passthrough so this behaviour test runs without i18n context.
-jest.mock('next-intl', () => {
-  const translate = Object.assign((key: string) => key, {
-    has: () => true,
-  });
-  return {
-    useTranslations: () => translate,
-    useLocale: () => 'fr',
-  };
-});
+// next-intl is globally stubbed in jest.setup.after.js.
 
 const SENSOR_KEYS = [
   { key: 'temperature_weather', label: 'Air', unit: '°C' },
