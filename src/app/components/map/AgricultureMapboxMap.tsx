@@ -4,8 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
-  Alert,
-  AlertIcon,
   Box,
   Button,
   Collapse,
@@ -975,14 +973,33 @@ export default function AgricultureMapboxMap({
 
   if (!token) {
     return (
-      <Alert status="warning" borderRadius="md" fontSize="sm">
-        <AlertIcon />
-        {t('misc.map.tokenMissingBefore')}{' '}
-        <Text as="span" fontWeight="semibold" mx={1}>
-          NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
-        </Text>{' '}
-        {t('misc.map.tokenMissingAfter')}
-      </Alert>
+      <VStack
+        align="center"
+        justify="center"
+        spacing={2}
+        w="100%"
+        minH={{ base: '220px', md: '300px' }}
+        color="gray.500"
+        textAlign="center"
+        px={4}
+      >
+        <Text fontSize="3xl" aria-hidden>
+          🗺️
+        </Text>
+        <Text fontWeight="semibold" color="gray.600" _dark={{ color: 'gray.300' }}>
+          {t('misc.map.unavailableTitle')}
+        </Text>
+        <Text fontSize="sm">{t('misc.map.unavailableBody')}</Text>
+        {process.env.NODE_ENV !== 'production' && (
+          <Text fontSize="xs" color="gray.400" mt={2}>
+            {t('misc.map.tokenMissingBefore')}{' '}
+            <Text as="span" fontWeight="semibold">
+              NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
+            </Text>{' '}
+            {t('misc.map.tokenMissingAfter')}
+          </Text>
+        )}
+      </VStack>
     );
   }
 

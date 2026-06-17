@@ -1044,7 +1044,9 @@
       "noSensorsYet": "No sensors yet. Add some via the menu above.",
       "outOfSector": "Outside sector",
       "deleteThisSensor": "Delete this sensor",
-      "bottomHint": "Hover over a sensor for the tooltip. Sectors (shape, name) and sensors are saved automatically in this browser; “{save}” shows a confirmation."
+      "bottomHint": "Hover over a sensor for the tooltip. Sectors (shape, name) and sensors are saved automatically in this browser; “{save}” shows a confirmation.",
+      "unavailableTitle": "Map unavailable",
+      "unavailableBody": "The sector map isn't available right now."
     },
     "chatbot": {
       "welcome": "Hello! I'm your Agrilogy assistant. Ask me about your fields, sensors, crop health, or your farm's performance. Type /help to see the available pages.",
