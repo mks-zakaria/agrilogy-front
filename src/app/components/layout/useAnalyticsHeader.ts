@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import dayjs from 'dayjs';
 
 import api from '@/app/lib/api';
 import getActiveGraphs, {
@@ -13,6 +14,7 @@ import type { ZoneOption } from './ZoneSelect';
 import {
   type ChartDateRange,
   defaultChartDateRange,
+  DATE_PRESETS,
 } from './ChartDateRangeControl';
 
 export type AnalyticsFilters = {
@@ -21,12 +23,44 @@ export type AnalyticsFilters = {
   selectedZone: number | null;
 };
 
-// Persist the user's zone + data-frequency choice so it carries across the
-// four analytics pages and reloads (was reset to the first zone + hourly every
-// visit). Date range is intentionally not persisted — an absolute window would
-// go stale between sessions.
+// Persist the user's zone + data-frequency + range choice so they carry across
+// the four analytics pages and reloads (was reset to the first zone + hourly +
+// 24h every visit). The date range is persisted only as a *relative preset*
+// (its day-span) and recomputed against "today" on load, so it never freezes
+// to a stale absolute window; custom calendar ranges are not persisted.
 const ZONE_KEY = 'agrilogy_analytics_zone_v1';
 const FREQ_KEY = 'agrilogy_analytics_frequency_v1';
+const RANGE_KEY = 'agrilogy_analytics_range_days_v1';
+
+const todayIso = () => dayjs().format('YYYY-MM-DD');
+
+/** A relative "last N days" window ending today. */
+const rangeFromDays = (days: number): ChartDateRange => ({
+  startDate: dayjs()
+    .subtract(days - 1, 'day')
+    .format('YYYY-MM-DD'),
+  endDate: todayIso(),
+});
+
+/** The matching preset day-span if `r` is a "last N days ending today" window. */
+const presetDaysForRange = (r: ChartDateRange): number | null => {
+  if (r.endDate !== todayIso()) return null;
+  const p = DATE_PRESETS.find(
+    (preset) => rangeFromDays(preset.days).startDate === r.startDate
+  );
+  return p ? p.days : null;
+};
+
+const readRangeDaysPref = (): number | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const v = localStorage.getItem(RANGE_KEY);
+    const n = v != null ? Number(v) : NaN;
+    return Number.isFinite(n) ? n : null;
+  } catch {
+    return null;
+  }
+};
 
 const readZonePref = (): number | null => {
   if (typeof window === 'undefined') return null;
@@ -58,6 +92,15 @@ const writePref = (key: string, value: string): void => {
   }
 };
 
+const removePref = (key: string): void => {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    /* ignore */
+  }
+};
+
 export type AnalyticsHeaderState = {
   zones: ZoneOption[];
   selectedZone: number | null;
@@ -83,7 +126,7 @@ export function useAnalyticsHeader(): AnalyticsHeaderState {
   const [activeGraph, setActiveGraph] = useState<ActiveGraphResponse | null>(
     null
   );
-  const [range, setRange] = useState<ChartDateRange>(defaultChartDateRange);
+  const [range, setRangeState] = useState<ChartDateRange>(defaultChartDateRange);
   // Default to hourly so freshly-loaded pages tame high-frequency devices
   // (e.g. router 02's per-minute flood) out of the box.
   const [frequency, setFrequencyState] = useState<ChartFrequency>({
@@ -100,10 +143,21 @@ export function useAnalyticsHeader(): AnalyticsHeaderState {
     writePref(FREQ_KEY, JSON.stringify(next));
   }, []);
 
-  // Restore the persisted frequency once on mount (client-only).
+  const setRange = useCallback((next: ChartDateRange) => {
+    setRangeState(next);
+    // Persist only preset windows (as a relative day-span); drop custom ranges
+    // so we never restore a stale/misleading absolute window.
+    const days = presetDaysForRange(next);
+    if (days != null) writePref(RANGE_KEY, String(days));
+    else removePref(RANGE_KEY);
+  }, []);
+
+  // Restore the persisted frequency + range preset once on mount (client-only).
   useEffect(() => {
-    const pref = readFrequencyPref();
-    if (pref) setFrequencyState(pref);
+    const freqPref = readFrequencyPref();
+    if (freqPref) setFrequencyState(freqPref);
+    const days = readRangeDaysPref();
+    if (days != null) setRangeState(rangeFromDays(days));
   }, []);
 
   useEffect(() => {
