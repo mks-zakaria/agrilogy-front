@@ -14,6 +14,17 @@ import { Form, App as AntdApp } from 'antd';
 import AlertForm, { type AlertFormValues } from './AlertForm';
 import type { AlertRecord } from '@/app/lib/alertApi';
 
+// next-intl ships ESM that jest can't parse, and its hooks need a provider.
+// Stub it with a passthrough so this behaviour test runs without i18n context.
+jest.mock('next-intl', () => {
+  const translate = (key: string) => key;
+  (translate as { has: (k: string) => boolean }).has = () => true;
+  return {
+    useTranslations: () => translate,
+    useLocale: () => 'fr',
+  };
+});
+
 const SENSOR_KEYS = [
   { key: 'temperature_weather', label: 'Air', unit: '°C' },
   { key: 'soil_moisture_medium', label: 'Sol', unit: '%' },
@@ -81,6 +92,12 @@ describe('AlertForm', () => {
       sensor_key: 'temperature_weather',
       zone: null,
       is_active: true,
+      // Per-alert delivery channels (default email-only) + optional overrides.
+      notify_email: true,
+      notify_sms: false,
+      notify_whatsapp: false,
+      override_email: null,
+      override_phone: null,
     });
   });
 
