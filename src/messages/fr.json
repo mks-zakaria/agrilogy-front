@@ -1044,7 +1044,9 @@
       "noSensorsYet": "Aucun capteur pour l'instant. Ajoutez-en via le menu ci-dessus.",
       "outOfSector": "Hors secteur",
       "deleteThisSensor": "Supprimer ce capteur",
-      "bottomHint": "Survolez un capteur pour l'info-bulle. Secteurs (forme, nom) et capteurs sont enregistrés automatiquement dans ce navigateur ; « {save} » affiche une confirmation."
+      "bottomHint": "Survolez un capteur pour l'info-bulle. Secteurs (forme, nom) et capteurs sont enregistrés automatiquement dans ce navigateur ; « {save} » affiche une confirmation.",
+      "unavailableTitle": "Carte indisponible",
+      "unavailableBody": "La carte des secteurs n'est pas disponible pour le moment."
     },
     "chatbot": {
       "welcome": "Bonjour ! Je suis votre assistant Agrilogy. Posez-moi vos questions sur vos champs, capteurs, santé des cultures ou performance de votre exploitation. Tapez /help pour voir les pages disponibles.",
