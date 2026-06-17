@@ -1,3 +1,10 @@
+## [1.26.2](https://github.com/AgriLogy/agrilogy-front/compare/v1.26.1...v1.26.2) (2026-06-17)
+
+
+### Bug Fixes
+
+* **test:** tsc error in AlertForm next-intl mock ([#172](https://github.com/AgriLogy/agrilogy-front/issues/172) follow-up) ([#174](https://github.com/AgriLogy/agrilogy-front/issues/174)) ([6ef289b](https://github.com/AgriLogy/agrilogy-front/commit/6ef289bf7e7deb26145c93de6b8333ddba229a15))
+
 ## [1.26.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.26.0...v1.26.1) (2026-06-17)
 
 
