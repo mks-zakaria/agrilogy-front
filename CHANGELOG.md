@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.26.0...v1.26.1) (2026-06-17)
+
+
+### Bug Fixes
+
+* **map:** friendly no-token fallback instead of raw env-var warning ([#170](https://github.com/AgriLogy/agrilogy-front/issues/170)) ([e1ae4fa](https://github.com/AgriLogy/agrilogy-front/commit/e1ae4fa644f6d84298286a5f9985dd83f576d25a))
+
 # [1.26.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.25.0...v1.26.0) (2026-06-17)
 
 
