@@ -58,6 +58,13 @@ import {
 } from '@/app/lib/notificationsCacheStorage';
 import { useNotificationBellCounts } from '@/app/hooks/useNotificationBellCounts';
 import {
+  isActive as desktopNotificationsActive,
+  isSupported as desktopNotificationsSupported,
+  requestPermission as requestDesktopPermission,
+  setEnabledPref as setDesktopEnabledPref,
+  showDesktopNotification,
+} from '@/app/lib/desktopNotifications';
+import {
   deleteNotificationConfigById,
   getNotificationConfigById,
   resolveStoredNotificationConfigId,
@@ -165,9 +172,44 @@ const NavbarNotificationsButton: React.FC = () => {
   const deleteCancelRef = useRef<HTMLButtonElement>(null);
   const { hoverColor, headerBarBorder, textColor, headerBarBg } =
     useColorModeStyles();
-  const { totalUnread, refresh } = useNotificationBellCounts();
+  const [desktopOn, setDesktopOn] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  // Poll a little when desktop notifications are on, so new ones surface
+  // without the user opening the app.
+  const { totalUnread, refresh } = useNotificationBellCounts(
+    desktopOn ? 60000 : undefined
+  );
+  const prevUnreadRef = useRef<number | null>(null);
   const [items, setItems] = useState<PopupNotification[]>([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setDesktopOn(desktopNotificationsActive());
+  }, []);
+
+  // Fire a desktop notification when the unread count rises (skip the first
+  // observation so we don't notify for the initial backlog on load).
+  useEffect(() => {
+    const prev = prevUnreadRef.current;
+    prevUnreadRef.current = totalUnread;
+    if (prev === null || totalUnread <= prev) return;
+    if (!desktopOn) return;
+    showDesktopNotification(t('shell.notifications.desktopTitle'), {
+      body: t('shell.notifications.desktopBody', { count: totalUnread }),
+      tag: 'agrilogy-notifications',
+    });
+  }, [totalUnread, desktopOn, t]);
+
+  const toggleDesktop = useCallback(async () => {
+    if (desktopNotificationsActive()) {
+      setDesktopEnabledPref(false);
+      setDesktopOn(false);
+      return;
+    }
+    const perm = await requestDesktopPermission();
+    setDesktopOn(perm === 'granted');
+  }, []);
   const {
     isOpen: isDetailOpen,
     onOpen: onDetailOpen,
@@ -413,6 +455,20 @@ const NavbarNotificationsButton: React.FC = () => {
               gap={2}
             >
               <Divider />
+              {mounted && desktopNotificationsSupported() && (
+                <Button
+                  size="xs"
+                  variant="ghost"
+                  width="full"
+                  borderRadius="lg"
+                  colorScheme={desktopOn ? 'brand' : 'gray'}
+                  onClick={toggleDesktop}
+                >
+                  {desktopOn
+                    ? t('shell.notifications.desktopOn')
+                    : t('shell.notifications.desktopEnable')}
+                </Button>
+              )}
               <Button
                 as={Link}
                 href="/notifications"

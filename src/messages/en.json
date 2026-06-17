@@ -1659,7 +1659,11 @@
       "deleteConfirmBody": "This sector's configuration (thresholds, frequency, channels) will be erased from this device and the related local rows removed from the list. Other notifications for the same zone are not affected.",
       "deleteConfirmOk": "Delete",
       "deletedToastTitle": "Notification deleted",
-      "deletedToastBody": "Configuration erased and local entries removed from the list on this device."
+      "deletedToastBody": "Configuration erased and local entries removed from the list on this device.",
+      "desktopTitle": "Agrogo — new notification",
+      "desktopBody": "You have {count} unread notification(s).",
+      "desktopEnable": "🔔 Enable desktop notifications",
+      "desktopOn": "🔕 Disable desktop notifications"
     },
     "adminMenu": {
       "logoAlt": "Agrilogy logo",
