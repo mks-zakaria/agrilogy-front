@@ -1132,7 +1132,8 @@
       "tagCritical": "Critique",
       "metricsHeading": "Mesures",
       "vsYesterday": "vs hier",
-      "noData": "—"
+      "noData": "—",
+      "unread": "Non lu"
     },
     "main": {
       "title": "Notifications",
@@ -1290,6 +1291,14 @@
         "week": "semaines"
       },
       "every": "{unit, select, minute {toutes les {amount} min} hour {toutes les {amount} h} day {tous les {amount} j} week {toutes les {amount} sem.} other {toutes les {amount}}}"
+    },
+    "filters": {
+      "allStatus": "Tous",
+      "unread": "Non lus",
+      "allLevels": "Tous niveaux",
+      "allZones": "Toutes les zones",
+      "markAllRead": "Tout marquer comme lu",
+      "noResults": "Aucune notification ne correspond aux filtres."
     }
   },
   "settings": {

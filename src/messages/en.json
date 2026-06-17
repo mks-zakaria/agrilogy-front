@@ -1132,7 +1132,8 @@
       "tagCritical": "Critical",
       "metricsHeading": "Readings",
       "vsYesterday": "vs yesterday",
-      "noData": "—"
+      "noData": "—",
+      "unread": "Unread"
     },
     "main": {
       "title": "Notifications",
@@ -1290,6 +1291,14 @@
         "week": "weeks"
       },
       "every": "{unit, select, minute {every {amount} min} hour {every {amount} h} day {every {amount} d} week {every {amount} wk} other {every {amount}}}"
+    },
+    "filters": {
+      "allStatus": "All",
+      "unread": "Unread",
+      "allLevels": "All levels",
+      "allZones": "All zones",
+      "markAllRead": "Mark all read",
+      "noResults": "No notifications match the filters."
     }
   },
   "settings": {

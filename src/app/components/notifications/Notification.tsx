@@ -132,7 +132,7 @@ const StatTile: React.FC<{
 const Notification: React.FC<NotificationProps> = ({
   id,
   notification,
-  is_read: _isRead,
+  is_read: isRead,
   onEditZone,
   onDeleteZone,
 }) => {
@@ -289,9 +289,27 @@ const Notification: React.FC<NotificationProps> = ({
         {/* Header: title + meta on the left, status tag on the right */}
         <Flex justify="space-between" align="flex-start" gap={3}>
           <Box minW={0}>
-            <Text fontWeight="bold" fontSize="lg" lineHeight="short" noOfLines={2}>
-              {title}
-            </Text>
+            <HStack spacing={2} align="center">
+              {!isRead && (
+                <Box
+                  w="9px"
+                  h="9px"
+                  borderRadius="full"
+                  bg="primary.500"
+                  flexShrink={0}
+                  aria-label={t('notifications.card.unread')}
+                  title={t('notifications.card.unread')}
+                />
+              )}
+              <Text
+                fontWeight="bold"
+                fontSize="lg"
+                lineHeight="short"
+                noOfLines={2}
+              >
+                {title}
+              </Text>
+            </HStack>
             <HStack
               spacing={3}
               mt={1.5}
