@@ -1578,7 +1578,9 @@
       "alertsNoConfig": "Aucune alerte configurée.",
       "alertsActive": "{active}/{total} actives",
       "alertsRecentlyTriggered": "Déclenchées récemment",
-      "alertsNoRecent": "Aucun déclenchement récent."
+      "alertsNoRecent": "Aucun déclenchement récent.",
+      "loadError": "Impossible de charger les données.",
+      "retry": "Réessayer"
     },
     "electrovanCard": {
       "devEui": "DevEUI",

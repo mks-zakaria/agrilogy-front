@@ -1578,7 +1578,9 @@
       "alertsNoConfig": "لا توجد تنبيهات مُعدّة.",
       "alertsActive": "{active}/{total} مفعّلة",
       "alertsRecentlyTriggered": "تم تفعيلها مؤخرًا",
-      "alertsNoRecent": "لا تفعيل حديث."
+      "alertsNoRecent": "لا تفعيل حديث.",
+      "loadError": "تعذّر تحميل البيانات.",
+      "retry": "إعادة المحاولة"
     },
     "electrovanCard": {
       "devEui": "DevEUI",

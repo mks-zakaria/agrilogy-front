@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   Badge,
   Box,
+  Button,
   Flex,
   HStack,
   Tag,
@@ -30,6 +31,7 @@ const AlertsSummaryCard = () => {
   const router = useRouter();
   const [alerts, setAlerts] = useState<AlertRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const tableBg = useColorModeValue('white', 'gray.800');
   const itemBg = useColorModeValue('gray.50', 'gray.700');
@@ -38,23 +40,23 @@ const AlertsSummaryCard = () => {
   const linkColor = useColorModeValue('brand.600', 'brand.300');
   const p = useBreakpointValue({ base: 2, md: 4 });
 
-  useEffect(() => {
-    let cancelled = false;
-    void alertApi
-      .list()
-      .then((data) => {
-        if (!cancelled) setAlerts(Array.isArray(data) ? data : []);
-      })
-      .catch(() => {
-        if (!cancelled) setAlerts([]);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
+  const load = useCallback(async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const data = await alertApi.list();
+      setAlerts(Array.isArray(data) ? data : []);
+    } catch {
+      setError(true);
+      setAlerts([]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
 
   const activeCount = alerts.filter((a) => a.is_active).length;
   const triggered = [...alerts]
@@ -68,6 +70,15 @@ const AlertsSummaryCard = () => {
 
   const content = loading ? (
     <Loading />
+  ) : error ? (
+    <VStack spacing={2} align="start" py={4}>
+      <Text fontSize="sm" color={metaColor}>
+        {t('shell.dashboard.loadError')}
+      </Text>
+      <Button size="xs" variant="outline" onClick={() => void load()}>
+        {t('shell.dashboard.retry')}
+      </Button>
+    </VStack>
   ) : alerts.length === 0 ? (
     <Text fontSize="sm" color={metaColor} py={4}>
       {t('shell.dashboard.alertsNoConfig')}
