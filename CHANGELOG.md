@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.30.0...v1.31.0) (2026-06-17)
+
+
+### Features
+
+* **seo:** localize page titles + cover sub-routes ([#185](https://github.com/AgriLogy/agrilogy-front/issues/185)) ([5bc4cf7](https://github.com/AgriLogy/agrilogy-front/commit/5bc4cf724dc4fde1b253daef53fd9339c6567ca3))
+
 # [1.30.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.29.1...v1.30.0) (2026-06-17)
 
 
