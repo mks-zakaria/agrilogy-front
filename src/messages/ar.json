@@ -1631,7 +1631,9 @@
       "stop": "إيقاف"
     },
     "common": {
-      "zoneFallback": "منطقة"
+      "zoneFallback": "منطقة",
+      "expand": "توسيع",
+      "collapse": "طي"
     },
     "station": {
       "title": "محطة الطقس"
