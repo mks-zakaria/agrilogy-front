@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.29.1...v1.30.0) (2026-06-17)
+
+
+### Features
+
+* **analytics:** persist date range as a relative preset ([#183](https://github.com/AgriLogy/agrilogy-front/issues/183)) ([d868dff](https://github.com/AgriLogy/agrilogy-front/commit/d868dfff2c6e9abb121010bfbb23f973366f6926))
+
 ## [1.29.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.29.0...v1.29.1) (2026-06-17)
 
 # [1.29.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.28.0...v1.29.0) (2026-06-17)
