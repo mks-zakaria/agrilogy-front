@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.24.0...v1.25.0) (2026-06-17)
+
+
+### Features
+
+* **alerts:** show delivery channels (email/SMS/WhatsApp) per alert ([#166](https://github.com/AgriLogy/agrilogy-front/issues/166)) ([e4665f4](https://github.com/AgriLogy/agrilogy-front/commit/e4665f4b5dd895149461e54ccd71040999ffb839))
+
 # [1.24.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.23.0...v1.24.0) (2026-06-17)
 
 
