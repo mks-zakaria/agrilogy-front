@@ -653,7 +653,11 @@
       "emptyText": "لا يوجد تنبيه مُهيّأ",
       "columnLastTriggered": "آخر تفعيل",
       "neverTriggered": "أبدًا",
-      "atLimitTooltip": "تم بلوغ حد {max} تنبيهات"
+      "atLimitTooltip": "تم بلوغ حد {max} تنبيهات",
+      "columnChannels": "القنوات",
+      "channelEmail": "البريد",
+      "channelSms": "SMS",
+      "channelWhatsapp": "واتساب"
     },
     "form": {
       "name": "الاسم",
