@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.39.0...v1.40.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** zones card (/zones command) ([#214](https://github.com/AgriLogy/agrilogy-front/issues/214)) ([fabdae8](https://github.com/AgriLogy/agrilogy-front/commit/fabdae80aa73eb3b131d64a5e5719f7b0b3b0906)), closes [#213](https://github.com/AgriLogy/agrilogy-front/issues/213)
+
 # [1.39.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.38.0...v1.39.0) (2026-06-18)
 
 
