@@ -1,3 +1,5 @@
+## [1.33.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.33.0...v1.33.1) (2026-06-18)
+
 # [1.33.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.32.0...v1.33.0) (2026-06-17)
 
 
