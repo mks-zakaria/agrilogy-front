@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.33.2...v1.34.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** chat tab, slide-out, command surface & per-page greeting ([#202](https://github.com/AgriLogy/agrilogy-front/issues/202)) ([205ff69](https://github.com/AgriLogy/agrilogy-front/commit/205ff691d3cbb1921a809efb5e60e2cfe3979bda)), closes [#200](https://github.com/AgriLogy/agrilogy-front/issues/200)
+
 ## [1.33.2](https://github.com/AgriLogy/agrilogy-front/compare/v1.33.1...v1.33.2) (2026-06-18)
 
 ## [1.33.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.33.0...v1.33.1) (2026-06-18)
