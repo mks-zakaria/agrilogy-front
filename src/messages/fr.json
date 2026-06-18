@@ -1114,6 +1114,53 @@
         "show": "Historique",
         "hide": "Masquer l'historique",
         "delete": "Supprimer la conversation"
+      },
+      "commands": {
+        "sitemap": "Afficher le plan du site",
+        "help": "Lister les commandes disponibles",
+        "alerts": "Afficher les alertes actives",
+        "status": "Aperçu de l'état de l'exploitation",
+        "weather": "Conditions météo actuelles",
+        "clear": "Effacer la conversation"
+      },
+      "examples": {
+        "sitemap": "Afficher le plan du site",
+        "alerts": "Quelles sont mes alertes ?",
+        "status": "Comment va mon exploitation ?",
+        "weather": "Quel temps fait-il ?"
+      },
+      "commandsCard": {
+        "title": "🧭 Commandes disponibles",
+        "intro": "Voici ce que je peux faire — cliquez une commande pour l'essayer :"
+      },
+      "alertsCard": {
+        "title": "🔔 Alertes actives",
+        "intro": "Voici les alertes actives sur votre exploitation :"
+      },
+      "statusCard": {
+        "title": "🌾 État de l'exploitation",
+        "intro": "Voici un aperçu de vos mesures clés :"
+      },
+      "weatherCard": {
+        "title": "🌤️ Météo actuelle",
+        "intro": "Voici les conditions météo actuelles :"
+      },
+      "cleared": "Conversation effacée.",
+      "data": {
+        "sensor": {
+          "soilMoisture": "Humidité du sol",
+          "soilTemp": "Température du sol",
+          "vpd": "VPD",
+          "et0": "ET0",
+          "airTemp": "Température de l'air",
+          "humidity": "Humidité de l'air",
+          "batterySignal": "Batterie / signal"
+        },
+        "weather": {
+          "condition": "Conditions",
+          "wind": "Vent",
+          "sunny": "Ensoleillé"
+        }
       }
     },
     "googleMapWeather": {

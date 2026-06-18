@@ -7,9 +7,17 @@ export type ChatErrorCode =
   | 'internal'
   | 'network';
 
-/** Structured attachment rendered beneath an assistant message (e.g. the
- *  sitemap card produced by the `/sitemap` command). */
-export type ChatCard = { type: 'sitemap' };
+/** Structured attachment rendered beneath an assistant message. Each command
+ *  produces a card; the data is pulled from the mock layer at render time, so
+ *  the card only needs to carry its type. */
+export type ChatCardType =
+  | 'sitemap'
+  | 'commands'
+  | 'alerts'
+  | 'farmStatus'
+  | 'weather';
+
+export type ChatCard = { type: ChatCardType };
 
 export interface Message {
   id: string;
