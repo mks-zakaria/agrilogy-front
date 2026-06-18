@@ -1130,13 +1130,15 @@
         "alerts": "Afficher les alertes actives",
         "status": "Aperçu de l'état de l'exploitation",
         "weather": "Conditions météo actuelles",
+        "zones": "Lister mes zones d'irrigation",
         "clear": "Effacer la conversation"
       },
       "examples": {
         "sitemap": "Afficher le plan du site",
         "alerts": "Quelles sont mes alertes ?",
         "status": "Comment va mon exploitation ?",
-        "weather": "Quel temps fait-il ?"
+        "weather": "Quel temps fait-il ?",
+        "zones": "Quelles sont mes zones ?"
       },
       "commandsCard": {
         "title": "🧭 Commandes disponibles",
@@ -1155,6 +1157,13 @@
         "title": "🌤️ Météo actuelle",
         "intro": "Voici les conditions météo actuelles :"
       },
+      "zonesCard": {
+        "title": "🗺️ Vos zones",
+        "intro": "Voici vos zones d'irrigation :",
+        "empty": "Aucune zone configurée pour le moment.",
+        "area": "{value} m²",
+        "critical": "seuil critique {value} %"
+      },
       "cleared": "Conversation effacée.",
       "status": {
         "thinking": "Réflexion…",
@@ -1162,6 +1171,7 @@
         "alerts": "Vérification de vos alertes…",
         "weather": "Consultation de la météo…",
         "sitemap": "Recherche dans l'application…",
+        "zones": "Consultation de vos zones…",
         "analyzing": "Analyse des données…"
       },
       "rate": {

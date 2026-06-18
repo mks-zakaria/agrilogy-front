@@ -20,6 +20,7 @@ const STATUS_KEYS = [
   'alerts',
   'weather',
   'sitemap',
+  'zones',
   'analyzing',
 ];
 

@@ -128,6 +128,24 @@ export const COMMANDS: CommandDef[] = [
     introKey: 'misc.chatbot.weatherCard.intro',
   },
   {
+    name: 'zones',
+    slash: '/zones',
+    descKey: 'misc.chatbot.commands.zones',
+    triggers: [
+      '/zones',
+      '/zone',
+      'zones',
+      'my zones',
+      'list zones',
+      'mes zones',
+      'liste des zones',
+      'مناطق',
+      'المناطق',
+    ],
+    card: 'zones',
+    introKey: 'misc.chatbot.zonesCard.intro',
+  },
+  {
     name: 'clear',
     slash: '/clear',
     descKey: 'misc.chatbot.commands.clear',
@@ -149,6 +167,7 @@ export const EXAMPLE_PROMPTS: { textKey: string; send: string }[] = [
   { textKey: 'misc.chatbot.examples.alerts', send: '/alerts' },
   { textKey: 'misc.chatbot.examples.status', send: '/status' },
   { textKey: 'misc.chatbot.examples.weather', send: '/weather' },
+  { textKey: 'misc.chatbot.examples.zones', send: '/zones' },
 ];
 
 const norm = (s: string) => s.trim().toLowerCase();

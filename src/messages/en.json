@@ -1130,13 +1130,15 @@
         "alerts": "Show active alerts",
         "status": "Overview of the farm's status",
         "weather": "Current weather conditions",
+        "zones": "List my irrigation zones",
         "clear": "Clear the conversation"
       },
       "examples": {
         "sitemap": "Show the site map",
         "alerts": "What are my alerts?",
         "status": "How is my farm doing?",
-        "weather": "What's the weather?"
+        "weather": "What's the weather?",
+        "zones": "What are my zones?"
       },
       "commandsCard": {
         "title": "🧭 Available commands",
@@ -1155,6 +1157,13 @@
         "title": "🌤️ Current weather",
         "intro": "Here are the current weather conditions:"
       },
+      "zonesCard": {
+        "title": "🗺️ Your zones",
+        "intro": "Here are your irrigation zones:",
+        "empty": "No zones configured yet.",
+        "area": "{value} m²",
+        "critical": "critical threshold {value}%"
+      },
       "cleared": "Conversation cleared.",
       "status": {
         "thinking": "Thinking…",
@@ -1162,6 +1171,7 @@
         "alerts": "Checking your alerts…",
         "weather": "Looking at the weather…",
         "sitemap": "Searching the app…",
+        "zones": "Looking at your zones…",
         "analyzing": "Analyzing the data…"
       },
       "rate": {
