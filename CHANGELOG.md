@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.40.0...v1.41.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** soil/plant/water snapshot cards ([#216](https://github.com/AgriLogy/agrilogy-front/issues/216)) ([28c46a7](https://github.com/AgriLogy/agrilogy-front/commit/28c46a7990fa92b40be18a3306e41b79d9d6027d))
+
 # [1.40.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.39.0...v1.40.0) (2026-06-18)
 
 
