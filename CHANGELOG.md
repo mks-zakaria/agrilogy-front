@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.41.0...v1.42.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** sensor trend card ([#218](https://github.com/AgriLogy/agrilogy-front/issues/218)) ([8ff29b6](https://github.com/AgriLogy/agrilogy-front/commit/8ff29b6317730f23238f6962192064a83bc07b34))
+
 # [1.41.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.40.0...v1.41.0) (2026-06-18)
 
 
