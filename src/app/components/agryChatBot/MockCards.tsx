@@ -11,6 +11,8 @@ import { COMMANDS } from './mockEngine';
 import {
   MOCK_ALERTS,
   MOCK_FARM_STATUS,
+  MOCK_IRRIGATION,
+  MOCK_NOTIFICATIONS,
   MOCK_PLANT,
   MOCK_SOIL,
   MOCK_TREND,
@@ -18,7 +20,9 @@ import {
   MOCK_WEATHER,
   MOCK_ZONES,
   type AlertRow,
+  type IrrigationRow,
   type MetricRow,
+  type NotificationRow,
   type Severity,
   type TrendRow,
   type ZoneRow,
@@ -465,6 +469,171 @@ export const TrendCard = ({ trend = MOCK_TREND }: { trend?: TrendRow }) => {
       <Text fontSize="10px" color={labelColor}>
         {t('misc.chatbot.trendCard.count', { count: trend.count })}
       </Text>
+    </Box>
+  );
+};
+
+/** /irrigation — irrigate/hold recommendation (from get_irrigation_advice). */
+export const IrrigationCard = ({
+  advice = MOCK_IRRIGATION,
+}: {
+  advice?: IrrigationRow;
+}) => {
+  const t = useTranslations();
+  const cardBg = useColorModeValue('gray.50', 'gray.700');
+  const cardBorder = useColorModeValue('gray.200', 'gray.600');
+  const labelColor = useColorModeValue('gray.500', 'gray.400');
+  const valueColor = useColorModeValue('gray.800', 'gray.100');
+  const reasonColor = useColorModeValue('gray.600', 'gray.300');
+  const irrigateBg = useColorModeValue('green.500', 'green.400');
+  const holdBg = useColorModeValue('gray.400', 'gray.500');
+  const unknownBg = useColorModeValue('gray.300', 'gray.600');
+  const badgeText = useColorModeValue('white', 'gray.900');
+
+  const rec = advice.recommendation;
+  const badgeBg =
+    rec === 'irrigate' ? irrigateBg : rec === 'hold' ? holdBg : unknownBg;
+
+  const figures: Array<[string, string]> = [];
+  if (advice.soil_moisture_pct != null)
+    figures.push([
+      t('misc.chatbot.irrigationCard.soilMoisture'),
+      `${advice.soil_moisture_pct} %`,
+    ]);
+  if (advice.critical_moisture_threshold != null)
+    figures.push([
+      t('misc.chatbot.irrigationCard.threshold'),
+      `${advice.critical_moisture_threshold} %`,
+    ]);
+  if (advice.et0_mm != null)
+    figures.push([t('misc.chatbot.irrigationCard.et0'), `${advice.et0_mm} mm`]);
+  if (advice.vpd_kpa != null)
+    figures.push([
+      t('misc.chatbot.irrigationCard.vpd'),
+      `${advice.vpd_kpa} kPa`,
+    ]);
+  if (advice.estimated_water_m3 != null)
+    figures.push([
+      t('misc.chatbot.irrigationCard.water'),
+      `${advice.estimated_water_m3} m³`,
+    ]);
+  if (advice.estimated_duration_min != null)
+    figures.push([
+      t('misc.chatbot.irrigationCard.duration'),
+      `${advice.estimated_duration_min} min`,
+    ]);
+
+  return (
+    <Box display="flex" flexDirection="column" gap="6px" w="100%">
+      <Flex align="center" justify="space-between" mb="2px">
+        <Text fontSize="13px" fontWeight={600} noOfLines={1}>
+          {advice.zone_name
+            ? t('misc.chatbot.irrigationCard.titleZone', {
+                zone: advice.zone_name,
+              })
+            : t('misc.chatbot.irrigationCard.title')}
+        </Text>
+        <Box
+          px="9px"
+          py="2px"
+          bg={badgeBg}
+          color={badgeText}
+          borderRadius="999px"
+          fontSize="11px"
+          fontWeight={700}
+          flexShrink={0}
+        >
+          {t(`misc.chatbot.irrigationCard.${rec}`)}
+        </Box>
+      </Flex>
+      <Box {...rowStyle(cardBg, cardBorder)}>
+        <Text fontSize="12px" color={reasonColor}>
+          {advice.reason}
+        </Text>
+      </Box>
+      {figures.length > 0 && (
+        <SimpleGrid columns={2} gap="6px">
+          {figures.map(([lbl, val]) => (
+            <Flex
+              key={lbl}
+              justify="space-between"
+              align="center"
+              {...rowStyle(cardBg, cardBorder)}
+            >
+              <Text fontSize="11px" color={labelColor} noOfLines={1}>
+                {lbl}
+              </Text>
+              <Text
+                fontSize="12px"
+                fontWeight={600}
+                color={valueColor}
+                fontFamily="mono"
+                flexShrink={0}
+              >
+                {val}
+              </Text>
+            </Flex>
+          ))}
+        </SimpleGrid>
+      )}
+    </Box>
+  );
+};
+
+/** /notifications — recent irrigation-summary notifications. */
+export const NotificationsCard = ({
+  notifications = MOCK_NOTIFICATIONS.notifications,
+}: {
+  notifications?: NotificationRow[];
+}) => {
+  const t = useTranslations();
+  const cardBg = useColorModeValue('gray.50', 'gray.700');
+  const cardBorder = useColorModeValue('gray.200', 'gray.600');
+  const titleColor = useColorModeValue('gray.800', 'gray.100');
+  const msgColor = useColorModeValue('gray.600', 'gray.300');
+  const dateColor = useColorModeValue('gray.400', 'gray.500');
+  const emptyColor = useColorModeValue('gray.400', 'gray.500');
+
+  return (
+    <Box display="flex" flexDirection="column" gap="6px" w="100%">
+      <Text fontSize="13px" fontWeight={600} mb="2px">
+        {t('misc.chatbot.notificationsCard.title')}
+      </Text>
+      {notifications.length === 0 ? (
+        <Text fontSize="12px" color={emptyColor}>
+          {t('misc.chatbot.notificationsCard.empty')}
+        </Text>
+      ) : (
+        notifications.map((n) => (
+          <Box key={n.id} {...rowStyle(cardBg, cardBorder)}>
+            <Flex justify="space-between" align="baseline" gap="8px">
+              <Text
+                fontSize="12.5px"
+                fontWeight={600}
+                color={titleColor}
+                noOfLines={1}
+              >
+                {n.title}
+              </Text>
+              {n.date && (
+                <Text
+                  fontSize="10px"
+                  color={dateColor}
+                  fontFamily="mono"
+                  flexShrink={0}
+                >
+                  {new Date(n.date).toLocaleDateString()}
+                </Text>
+              )}
+            </Flex>
+            {n.message && (
+              <Text fontSize="11px" color={msgColor} mt="2px">
+                {n.message}
+              </Text>
+            )}
+          </Box>
+        ))
+      )}
     </Box>
   );
 };

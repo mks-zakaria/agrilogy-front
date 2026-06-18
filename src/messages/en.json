@@ -1135,7 +1135,9 @@
         "soil": "Latest soil readings",
         "plant": "Latest plant readings",
         "water": "Latest water readings",
-        "trend": "Sensor trend over time"
+        "trend": "Sensor trend over time",
+        "irrigation": "Should I irrigate? (advice)",
+        "notifications": "Recent notifications"
       },
       "examples": {
         "sitemap": "Show the site map",
@@ -1145,7 +1147,9 @@
         "zones": "What are my zones?",
         "soil": "How is my soil?",
         "water": "How is my water?",
-        "trend": "How has my soil moisture changed today?"
+        "trend": "How has my soil moisture changed today?",
+        "irrigation": "Should I irrigate today?",
+        "notifications": "Show my recent notifications"
       },
       "commandsCard": {
         "title": "🧭 Available commands",
@@ -1183,7 +1187,9 @@
         "soil": "Reading your soil…",
         "plant": "Checking your plants…",
         "water": "Measuring your water…",
-        "trend": "Reading the trends…"
+        "trend": "Reading the trends…",
+        "irrigation": "Weighing irrigation…",
+        "notifications": "Fetching notifications…"
       },
       "rate": {
         "up": "Good answer",
@@ -1265,6 +1271,26 @@
         "rising": "Rising",
         "falling": "Falling",
         "flat": "Stable"
+      },
+      "irrigationCard": {
+        "title": "💧 Irrigation advice",
+        "titleZone": "💧 Irrigation — {zone}",
+        "intro": "Here is my irrigation recommendation:",
+        "empty": "No irrigation data available yet.",
+        "irrigate": "Irrigate",
+        "hold": "Hold",
+        "unknown": "Unknown",
+        "soilMoisture": "Soil moisture",
+        "threshold": "Critical threshold",
+        "et0": "ET0",
+        "vpd": "VPD",
+        "water": "Est. water",
+        "duration": "Est. duration"
+      },
+      "notificationsCard": {
+        "title": "🔔 Recent notifications",
+        "intro": "Here are your recent notifications:",
+        "empty": "No notifications yet."
       }
     },
     "googleMapWeather": {

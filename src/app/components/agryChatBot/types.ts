@@ -20,7 +20,9 @@ export type ChatCardType =
   | 'soil'
   | 'plant'
   | 'water'
-  | 'trend';
+  | 'trend'
+  | 'irrigation'
+  | 'notifications';
 
 export type ChatCard = { type: ChatCardType; data?: unknown };
 

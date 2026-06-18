@@ -15,12 +15,21 @@ import {
   PlantCard,
   WaterCard,
   TrendCard,
+  IrrigationCard,
+  NotificationsCard,
 } from './MockCards';
 import { COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
 import { useChat } from './ChatContext';
 import type { ChatCard } from './types';
 import type { SitemapRoute } from './siteRoutes';
-import type { AlertRow, MetricRow, TrendRow, ZoneRow } from './mockData';
+import type {
+  AlertRow,
+  IrrigationRow,
+  MetricRow,
+  NotificationRow,
+  TrendRow,
+  ZoneRow,
+} from './mockData';
 
 const renderCard = (card: ChatCard, onNavigate?: () => void) => {
   const data = (card.data ?? {}) as {
@@ -28,6 +37,7 @@ const renderCard = (card: ChatCard, onNavigate?: () => void) => {
     alerts?: AlertRow[];
     metrics?: MetricRow[];
     zones?: ZoneRow[];
+    notifications?: NotificationRow[];
   };
   switch (card.type) {
     case 'sitemap':
@@ -50,6 +60,10 @@ const renderCard = (card: ChatCard, onNavigate?: () => void) => {
       return <WaterCard metrics={data.metrics} />;
     case 'trend':
       return <TrendCard trend={card.data as TrendRow | undefined} />;
+    case 'irrigation':
+      return <IrrigationCard advice={card.data as IrrigationRow | undefined} />;
+    case 'notifications':
+      return <NotificationsCard notifications={data.notifications} />;
     default:
       return null;
   }

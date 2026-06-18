@@ -25,6 +25,8 @@ const STATUS_KEYS = [
   'plant',
   'water',
   'trend',
+  'irrigation',
+  'notifications',
   'analyzing',
 ];
 

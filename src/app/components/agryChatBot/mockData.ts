@@ -276,3 +276,72 @@ export const MOCK_TREND: TrendRow = {
   window_start: '2026-06-17T22:00:00Z',
   window_end: '2026-06-18T22:00:00Z',
 };
+
+export type IrrigationRecommendation = 'irrigate' | 'hold' | 'unknown';
+
+export interface IrrigationRow {
+  recommendation: IrrigationRecommendation;
+  reason: string;
+  soil_moisture_pct: number | null;
+  critical_moisture_threshold: number | null;
+  soil_moisture_status: Severity;
+  et0_mm: number | null;
+  vpd_kpa: number | null;
+  dr_today_mm: number | null;
+  raw_mm: number | null;
+  zone_name: string | null;
+  zone_area_m2: number | null;
+  estimated_water_m3: number | null;
+  estimated_duration_min: number | null;
+  morning_volume_m3: number | null;
+  evening_volume_m3: number | null;
+  decision_source: string;
+  last_update_timestamp: string | null;
+}
+
+export const MOCK_IRRIGATION: IrrigationRow = {
+  recommendation: 'irrigate',
+  reason: 'Humidité du sol 18.0 % < seuil critique 30.0 %.',
+  soil_moisture_pct: 18.0,
+  critical_moisture_threshold: 30.0,
+  soil_moisture_status: 'critical',
+  et0_mm: 4.6,
+  vpd_kpa: 1.3,
+  dr_today_mm: null,
+  raw_mm: null,
+  zone_name: 'Zone 1',
+  zone_area_m2: 1750.0,
+  estimated_water_m3: 3.5,
+  estimated_duration_min: 58.0,
+  morning_volume_m3: null,
+  evening_volume_m3: null,
+  decision_source: 'critical_threshold_fallback',
+  last_update_timestamp: '2026-06-18T20:00:00Z',
+};
+
+export interface NotificationRow {
+  id: number | string;
+  title: string;
+  message: string;
+  date: string | null;
+  type: string;
+}
+
+export const MOCK_NOTIFICATIONS: { notifications: NotificationRow[] } = {
+  notifications: [
+    {
+      id: 1,
+      title: 'Irrigation 2026-06-18',
+      message: 'ET0 4.6 mm · sol 18 % · 19 °C · 06:00 - 07:00',
+      date: '2026-06-18T05:30:00Z',
+      type: 'irrigation_summary',
+    },
+    {
+      id: 2,
+      title: 'Irrigation 2026-06-17',
+      message: 'ET0 4.2 mm · sol 24 % · 18 °C · 06:00 - 07:00',
+      date: '2026-06-17T05:30:00Z',
+      type: 'irrigation_summary',
+    },
+  ],
+};

@@ -17,6 +17,8 @@ describe('routeMockReply', () => {
     ['/plant', 'plant', 'plant'],
     ['/water', 'water', 'water'],
     ['/trend', 'trend', 'trend'],
+    ['/irrigation', 'irrigation', 'irrigation'],
+    ['/notifications', 'notifications', 'notifications'],
   ])(
     'routes %s to command %s with its card (instant)',
     (input, command, card) => {
@@ -45,6 +47,8 @@ describe('routeMockReply', () => {
     ['leaf temperature', 'plant'],
     ['water status', 'water'],
     ['show me the trend', 'trend'],
+    ['should i irrigate', 'irrigation'],
+    ['mes notifications', 'notifications'],
     ['خريطة الموقع', 'sitemap'],
   ])('recognizes natural language: %s', (input, command) => {
     expect(routeMockReply(input).command).toBe(command);
