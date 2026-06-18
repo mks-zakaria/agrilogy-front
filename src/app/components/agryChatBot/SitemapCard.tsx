@@ -2,13 +2,20 @@
 import Link from 'next/link';
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 import { useTranslations } from 'next-intl';
-import { SITEMAP_ROUTES } from './siteRoutes';
+import { SITEMAP_ROUTES, type SitemapRoute } from './siteRoutes';
 
 /**
  * The `/sitemap` command output: a navigable, localized list of every app
  * page. Clicking a row routes there (and closes the slide-out via onNavigate).
+ * `routes` come from the get_sitemap tool; falls back to the bundled list.
  */
-export const SitemapCard = ({ onNavigate }: { onNavigate?: () => void }) => {
+export const SitemapCard = ({
+  onNavigate,
+  routes = SITEMAP_ROUTES,
+}: {
+  onNavigate?: () => void;
+  routes?: SitemapRoute[];
+}) => {
   const t = useTranslations();
 
   const linkColor = useColorModeValue('green.600', 'green.300');
@@ -22,7 +29,7 @@ export const SitemapCard = ({ onNavigate }: { onNavigate?: () => void }) => {
       <Text fontSize="13px" fontWeight={600} mb="2px">
         {t('misc.chatbot.sitemap.title')}
       </Text>
-      {SITEMAP_ROUTES.map((route) => (
+      {routes.map((route) => (
         <Box
           key={route.path}
           as={Link}

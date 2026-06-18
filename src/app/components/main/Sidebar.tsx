@@ -22,8 +22,9 @@ import { MdWarningAmber } from 'react-icons/md';
 import { FaSeedling } from 'react-icons/fa6';
 import { WiDaySunny } from 'react-icons/wi';
 import { GiGrapes, GiValve } from 'react-icons/gi';
-import { IoChatbubbleEllipses, IoLogOut } from 'react-icons/io5';
+import { IoLogOut } from 'react-icons/io5';
 import { FaBell, FaCog, FaHome, FaWater } from 'react-icons/fa';
+import { RobotIcon } from '@/app/components/agryChatBot/RobotIcon';
 import useColorModeStyles from '@/app/utils/useColorModeStyles';
 
 const Sidebar = () => {
@@ -60,7 +61,7 @@ const Sidebar = () => {
     { href: '/notifications', icon: FaBell, label: t('nav.notifications') },
     { href: '/settings', icon: FaCog, label: t('nav.settings') },
     { href: '/alerts', icon: MdWarningAmber, label: t('nav.alerts') },
-    { href: '/chat', icon: IoChatbubbleEllipses, label: t('nav.chat') },
+    { href: '/chat', icon: RobotIcon, label: t('nav.chat') },
   ];
 
   const normalizedPath =

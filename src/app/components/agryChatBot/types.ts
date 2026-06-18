@@ -7,9 +7,9 @@ export type ChatErrorCode =
   | 'internal'
   | 'network';
 
-/** Structured attachment rendered beneath an assistant message. Each command
- *  produces a card; the data is pulled from the mock layer at render time, so
- *  the card only needs to carry its type. */
+/** Structured attachment rendered beneath an assistant message. Each tool/
+ *  command produces a card type; `data` is the payload returned by the backend
+ *  tool (or the mock fallback) and is what the card renders. */
 export type ChatCardType =
   | 'sitemap'
   | 'commands'
@@ -17,7 +17,7 @@ export type ChatCardType =
   | 'farmStatus'
   | 'weather';
 
-export type ChatCard = { type: ChatCardType };
+export type ChatCard = { type: ChatCardType; data?: unknown };
 
 export interface Message {
   id: string;

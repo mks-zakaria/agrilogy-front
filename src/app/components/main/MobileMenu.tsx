@@ -36,7 +36,8 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, MoonIcon, SunIcon, BellIcon } from '@chakra-ui/icons';
 import { FaUser, FaHome, FaCog } from 'react-icons/fa';
-import { IoChatbubbleEllipses, IoLogOut } from 'react-icons/io5';
+import { IoLogOut } from 'react-icons/io5';
+import { RobotIcon } from '@/app/components/agryChatBot/RobotIcon';
 import Image from 'next/image';
 import logo from '../../public/logo.png';
 import useColorModeStyles from '@/app/utils/useColorModeStyles';
@@ -110,7 +111,7 @@ const MobileMenu = () => {
       icon: <BellIcon />,
     },
     { href: '/settings', label: t('nav.settings'), icon: <FaCog /> },
-    { href: '/chat', label: t('nav.chat'), icon: <IoChatbubbleEllipses /> },
+    { href: '/chat', label: t('nav.chat'), icon: <RobotIcon size={18} /> },
   ];
 
   const NavRow = ({ item }: { item: NavItem }) => {
