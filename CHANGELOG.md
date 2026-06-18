@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.37.0...v1.38.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** sync conversation history to the server ([#210](https://github.com/AgriLogy/agrilogy-front/issues/210)) ([b55362c](https://github.com/AgriLogy/agrilogy-front/commit/b55362c6e6b95a48fc32d37417366e174c8b9571))
+
 # [1.37.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.36.0...v1.37.0) (2026-06-18)
 
 
