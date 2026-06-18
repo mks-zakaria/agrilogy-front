@@ -1,73 +1,96 @@
 /**
- * Demo data for the assistant's command cards. Purely illustrative so the
- * whole chat surface can be exercised without a backend — the real data will
- * come from the API once wired. Sensor / status labels resolve via i18n
- * (misc.chatbot.data.*); the values and zone names are left literal.
+ * Mock fallback data — shaped EXACTLY like the agri-api `/assistant` tool
+ * responses, so the cards render identically whether the data came from the
+ * backend or from here. Used only when the backend is unreachable (offline /
+ * not-yet-deployed); the real values come from the HTTP tools.
  */
-export type Severity = 'critical' | 'warning' | 'ok';
+export type Severity = 'critical' | 'warning' | 'ok' | 'unknown';
 
-export interface MockAlert {
-  id: string;
-  /** i18n key segment under misc.chatbot.data.sensor */
-  sensorKey: string;
-  zone: string;
-  value: string;
+export interface AlertRow {
+  id: number | string;
+  name: string;
+  sensor_key: string;
+  zone: string | null;
+  condition: string | null;
+  threshold: number | null;
+  last_triggered_at: string | null;
   severity: Severity;
 }
 
-export const MOCK_ALERTS: MockAlert[] = [
-  {
-    id: 'a1',
-    sensorKey: 'soilMoisture',
-    zone: 'Zone de maraîchage 1',
-    value: '14 %',
-    severity: 'critical',
-  },
-  {
-    id: 'a2',
-    sensorKey: 'vpd',
-    zone: 'Zone de maraîchage 1',
-    value: '2.1 kPa',
-    severity: 'warning',
-  },
-  {
-    id: 'a3',
-    sensorKey: 'airTemp',
-    zone: 'Verger nord',
-    value: '31 °C',
-    severity: 'warning',
-  },
-];
-
-export interface MockMetric {
-  /** i18n key segment under misc.chatbot.data.sensor */
+export interface MetricRow {
   key: string;
-  value: string;
-  status: Severity;
+  label: string;
+  value: number | null;
+  unit: string;
+  status?: Severity;
 }
 
-export const MOCK_FARM_STATUS: MockMetric[] = [
-  { key: 'soilMoisture', value: '14 %', status: 'critical' },
-  { key: 'soilTemp', value: '22 °C', status: 'ok' },
-  { key: 'vpd', value: '2.1 kPa', status: 'warning' },
-  { key: 'et0', value: '5.3 mm', status: 'ok' },
-  { key: 'airTemp', value: '28 °C', status: 'ok' },
-  { key: 'humidity', value: '46 %', status: 'ok' },
-];
+export const MOCK_ALERTS: { alerts: AlertRow[] } = {
+  alerts: [
+    {
+      id: 1,
+      name: 'Humidité du sol basse',
+      sensor_key: 'soilMoisture',
+      zone: 'Zone de maraîchage 1',
+      condition: '<',
+      threshold: 20,
+      last_triggered_at: '2026-06-18T09:12:00Z',
+      severity: 'warning',
+    },
+    {
+      id: 2,
+      name: 'VPD élevé',
+      sensor_key: 'vpd',
+      zone: 'Zone de maraîchage 1',
+      condition: '>',
+      threshold: 1.5,
+      last_triggered_at: null,
+      severity: 'ok',
+    },
+  ],
+};
 
-export interface MockWeather {
-  /** i18n key segment under misc.chatbot.data.weather */
-  conditionKey: string;
-  tempC: string;
-  humidity: string;
-  wind: string;
-  et0: string;
-}
+export const MOCK_FARM_STATUS: { metrics: MetricRow[] } = {
+  metrics: [
+    {
+      key: 'soilMoisture',
+      label: 'Soil moisture',
+      value: 14,
+      unit: '%',
+      status: 'critical',
+    },
+    {
+      key: 'soilTemp',
+      label: 'Soil temperature',
+      value: 22,
+      unit: '°C',
+      status: 'ok',
+    },
+    { key: 'vpd', label: 'VPD', value: 2.1, unit: 'kPa', status: 'warning' },
+    { key: 'et0', label: 'ET0', value: 5.3, unit: 'mm', status: 'ok' },
+    {
+      key: 'airTemp',
+      label: 'Air temperature',
+      value: 28,
+      unit: '°C',
+      status: 'ok',
+    },
+    {
+      key: 'humidity',
+      label: 'Air humidity',
+      value: 46,
+      unit: '%',
+      status: 'ok',
+    },
+  ],
+};
 
-export const MOCK_WEATHER: MockWeather = {
-  conditionKey: 'sunny',
-  tempC: '28 °C',
-  humidity: '46 %',
-  wind: '12 km/h',
-  et0: '5.3 mm',
+export const MOCK_WEATHER: { metrics: MetricRow[] } = {
+  metrics: [
+    { key: 'airTemp', label: 'Air temperature', value: 28, unit: '°C' },
+    { key: 'humidity', label: 'Air humidity', value: 46, unit: '%' },
+    { key: 'pressure', label: 'Pressure', value: 1013, unit: 'hPa' },
+    { key: 'et0', label: 'ET0', value: 5.3, unit: 'mm' },
+    { key: 'vpd', label: 'VPD', value: 2.1, unit: 'kPa' },
+  ],
 };

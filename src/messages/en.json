@@ -1116,7 +1116,7 @@
         "intro": "Here are the pages you can navigate to:"
       },
       "mock": {
-        "generic": "I'm in demo mode for now — the AI engine isn't wired up yet. Try the /sitemap command to see the site map."
+        "generic": "I can show your alerts, farm status, weather, or the site map. Try one of those, or type /help."
       },
       "history": {
         "empty": "No conversations yet. Start one!",
@@ -1144,7 +1144,8 @@
       },
       "alertsCard": {
         "title": "🔔 Active alerts",
-        "intro": "Here are the active alerts on your farm:"
+        "intro": "Here are the active alerts on your farm:",
+        "empty": "No active alerts right now."
       },
       "statusCard": {
         "title": "🌾 Farm status",
@@ -1174,6 +1175,7 @@
           "et0": "ET0",
           "airTemp": "Air temperature",
           "humidity": "Air humidity",
+          "pressure": "Pressure",
           "batterySignal": "Battery / signal"
         },
         "weather": {

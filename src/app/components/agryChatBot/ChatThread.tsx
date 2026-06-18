@@ -12,20 +12,27 @@ import {
 } from './MockCards';
 import { COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
 import { useChat } from './ChatContext';
-import type { ChatCardType } from './types';
+import type { ChatCard } from './types';
+import type { SitemapRoute } from './siteRoutes';
+import type { AlertRow, MetricRow } from './mockData';
 
-const renderCard = (type: ChatCardType, onNavigate?: () => void) => {
-  switch (type) {
+const renderCard = (card: ChatCard, onNavigate?: () => void) => {
+  const data = (card.data ?? {}) as {
+    routes?: SitemapRoute[];
+    alerts?: AlertRow[];
+    metrics?: MetricRow[];
+  };
+  switch (card.type) {
     case 'sitemap':
-      return <SitemapCard onNavigate={onNavigate} />;
+      return <SitemapCard onNavigate={onNavigate} routes={data.routes} />;
     case 'commands':
       return <CommandsCard />;
     case 'alerts':
-      return <AlertsCard />;
+      return <AlertsCard alerts={data.alerts} />;
     case 'farmStatus':
-      return <FarmStatusCard />;
+      return <FarmStatusCard metrics={data.metrics} />;
     case 'weather':
-      return <WeatherCard />;
+      return <WeatherCard metrics={data.metrics} />;
     default:
       return null;
   }
@@ -266,7 +273,7 @@ export const ChatThread = ({
                   borderColor={asstBubbleBorder}
                   borderRadius="12px 12px 12px 4px"
                 >
-                  {renderCard(msg.card.type, onNavigate)}
+                  {renderCard(msg.card, onNavigate)}
                 </Box>
                 <Text
                   fontSize="10px"

@@ -20,6 +20,7 @@ import React, {
 import { useTranslations } from 'next-intl';
 import { loadConversations, saveConversations } from './chatHistoryStorage';
 import { routeMockReply, streamReply } from './mockEngine';
+import { requestAssistant } from './chatService';
 import type { ChatCard, Conversation, Message } from './types';
 
 interface ChatContextValue {
@@ -108,10 +109,9 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       const text = raw.trim();
       if (!text || streaming) return;
 
-      const routed = routeMockReply(text);
-
-      // /clear wipes the active conversation instead of replying.
-      if (routed.action === 'clear') {
+      // /clear is a pure client action — wipe the active conversation locally,
+      // no round-trip needed. (The backend also recognizes it for offline parity.)
+      if (routeMockReply(text).action === 'clear') {
         if (activeId) {
           setConversations((prev) =>
             prev.map((c) =>
@@ -166,10 +166,6 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       });
       if (!activeId) setActiveId(convId);
 
-      // Stream the routed mock reply.
-      const result = routed;
-      const replyText = t(result.replyKey, result.values);
-      const card: ChatCard | undefined = result.card;
       const targetId = convId as string;
 
       abortRef.current?.abort();
@@ -177,21 +173,30 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       abortRef.current = controller;
       setStreaming(true);
 
-      streamReply(
-        replyText,
-        (chunk) =>
-          patchLastMessage(targetId, (m) =>
-            m.role === 'assistant' ? { ...m, content: m.content + chunk } : m
-          ),
-        controller.signal,
-        { instant: !result.stream }
-      )
-        .then(() => {
-          if (card) {
-            patchLastMessage(targetId, (m) =>
-              m.role === 'assistant' ? { ...m, card } : m
-            );
-          }
+      // Ask the backend orchestrator (falls back to the local mock on failure),
+      // then stream the resolved reply text and attach any card.
+      requestAssistant(text)
+        .then((reply) => {
+          if (controller.signal.aborted) return undefined;
+          const replyText = t(reply.replyKey, reply.values);
+          const card: ChatCard | undefined = reply.card;
+          return streamReply(
+            replyText,
+            (chunk) =>
+              patchLastMessage(targetId, (m) =>
+                m.role === 'assistant'
+                  ? { ...m, content: m.content + chunk }
+                  : m
+              ),
+            controller.signal,
+            { instant: !reply.stream }
+          ).then(() => {
+            if (card) {
+              patchLastMessage(targetId, (m) =>
+                m.role === 'assistant' ? { ...m, card } : m
+              );
+            }
+          });
         })
         .finally(() => {
           // Drop a never-filled assistant bubble if the send was aborted early.

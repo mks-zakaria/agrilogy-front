@@ -1116,7 +1116,7 @@
         "intro": "Voici les pages que vous pouvez consulter :"
       },
       "mock": {
-        "generic": "Je suis en mode démonstration pour l'instant — la connexion au moteur d'IA n'est pas encore activée. Essayez la commande /sitemap pour afficher le plan du site."
+        "generic": "Je peux vous montrer vos alertes, l'état de votre exploitation, la météo ou le plan du site. Essayez l'une de ces commandes, ou tapez /help."
       },
       "history": {
         "empty": "Aucune conversation pour le moment. Démarrez-en une !",
@@ -1144,7 +1144,8 @@
       },
       "alertsCard": {
         "title": "🔔 Alertes actives",
-        "intro": "Voici les alertes actives sur votre exploitation :"
+        "intro": "Voici les alertes actives sur votre exploitation :",
+        "empty": "Aucune alerte active pour le moment."
       },
       "statusCard": {
         "title": "🌾 État de l'exploitation",
@@ -1174,6 +1175,7 @@
           "et0": "ET0",
           "airTemp": "Température de l'air",
           "humidity": "Humidité de l'air",
+          "pressure": "Pression",
           "batterySignal": "Batterie / signal"
         },
         "weather": {
