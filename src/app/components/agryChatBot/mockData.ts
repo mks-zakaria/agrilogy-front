@@ -130,3 +130,118 @@ export const MOCK_WEATHER: { metrics: MetricRow[] } = {
     { key: 'vpd', label: 'VPD', value: 2.1, unit: 'kPa' },
   ],
 };
+
+export const MOCK_SOIL: { metrics: MetricRow[] } = {
+  metrics: [
+    {
+      key: 'soilMoistureMedium',
+      label: 'Soil moisture (medium)',
+      value: 18,
+      unit: '%',
+      status: 'warning',
+    },
+    {
+      key: 'soilMoistureHigh',
+      label: 'Soil moisture (shallow)',
+      value: 24,
+      unit: '%',
+      status: 'ok',
+    },
+    {
+      key: 'soilTempMedium',
+      label: 'Soil temperature (medium)',
+      value: 21,
+      unit: '°C',
+      status: 'ok',
+    },
+    { key: 'phSoil', label: 'Soil pH', value: 6.8, unit: 'pH', status: 'ok' },
+    {
+      key: 'soilSalinity',
+      label: 'Soil salinity',
+      value: 1.2,
+      unit: 'dS/m',
+      status: 'ok',
+    },
+    {
+      key: 'ecSoilMedium',
+      label: 'Soil EC (medium)',
+      value: 1.4,
+      unit: 'dS/m',
+      status: 'ok',
+    },
+  ],
+};
+
+export const MOCK_PLANT: { metrics: MetricRow[] } = {
+  metrics: [
+    {
+      key: 'leafMoisture',
+      label: 'Leaf moisture',
+      value: 62,
+      unit: '%',
+      status: 'ok',
+    },
+    {
+      key: 'leafTemperature',
+      label: 'Leaf temperature',
+      value: 24,
+      unit: '°C',
+      status: 'ok',
+    },
+    {
+      key: 'fruitSize',
+      label: 'Fruit size',
+      value: 41,
+      unit: 'mm',
+      status: 'ok',
+    },
+    {
+      key: 'largeFruitDiameter',
+      label: 'Large fruit diameter',
+      value: 58,
+      unit: 'mm',
+      status: 'ok',
+    },
+  ],
+};
+
+export const MOCK_WATER: { metrics: MetricRow[] } = {
+  metrics: [
+    {
+      key: 'waterFlow',
+      label: 'Water flow',
+      value: 3.4,
+      unit: 'L/s',
+      status: 'ok',
+    },
+    {
+      key: 'waterPressure',
+      label: 'Water pressure',
+      value: 2.1,
+      unit: 'Bar',
+      status: 'ok',
+    },
+    {
+      key: 'waterEC',
+      label: 'Water conductivity',
+      value: 780,
+      unit: 'µS/cm',
+      status: 'ok',
+    },
+    { key: 'waterPH', label: 'Water pH', value: 7.1, unit: 'pH', status: 'ok' },
+    {
+      key: 'precipitation',
+      label: 'Precipitation rate',
+      value: 0,
+      unit: 'mm/h',
+      status: 'ok',
+    },
+    {
+      key: 'waterLevel',
+      label: 'Water level',
+      value: 145,
+      unit: 'cm',
+      status: 'ok',
+    },
+  ],
+};

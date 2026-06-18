@@ -11,6 +11,9 @@ import { COMMANDS } from './mockEngine';
 import {
   MOCK_ALERTS,
   MOCK_FARM_STATUS,
+  MOCK_PLANT,
+  MOCK_SOIL,
+  MOCK_WATER,
   MOCK_WEATHER,
   MOCK_ZONES,
   type AlertRow,
@@ -177,11 +180,15 @@ export const AlertsCard = ({
   );
 };
 
-/** /status — snapshot of key metrics (from the get_farm_status tool). */
+/** /status — snapshot of key metrics (from the get_farm_status tool). The
+ *  same grid renders the per-domain soil/plant/water snapshots, varying only
+ *  the heading via `titleKey`. */
 export const FarmStatusCard = ({
   metrics = MOCK_FARM_STATUS.metrics,
+  titleKey = 'misc.chatbot.statusCard.title',
 }: {
   metrics?: MetricRow[];
+  titleKey?: string;
 }) => {
   const t = useTranslations();
   const sevColor = useSeverityColor();
@@ -193,7 +200,7 @@ export const FarmStatusCard = ({
   return (
     <Box display="flex" flexDirection="column" gap="6px" w="100%">
       <Text fontSize="13px" fontWeight={600} mb="2px">
-        {t('misc.chatbot.statusCard.title')}
+        {t(titleKey)}
       </Text>
       <SimpleGrid columns={2} spacing="6px">
         {metrics.map((m) => (
@@ -215,6 +222,33 @@ export const FarmStatusCard = ({
     </Box>
   );
 };
+
+/** /soil — latest soil readings (from the get_soil_status tool). */
+export const SoilCard = ({
+  metrics = MOCK_SOIL.metrics,
+}: {
+  metrics?: MetricRow[];
+}) => (
+  <FarmStatusCard metrics={metrics} titleKey="misc.chatbot.soilCard.title" />
+);
+
+/** /plant — latest plant/canopy readings (from the get_plant_status tool). */
+export const PlantCard = ({
+  metrics = MOCK_PLANT.metrics,
+}: {
+  metrics?: MetricRow[];
+}) => (
+  <FarmStatusCard metrics={metrics} titleKey="misc.chatbot.plantCard.title" />
+);
+
+/** /water — latest water readings (from the get_water_status tool). */
+export const WaterCard = ({
+  metrics = MOCK_WATER.metrics,
+}: {
+  metrics?: MetricRow[];
+}) => (
+  <FarmStatusCard metrics={metrics} titleKey="misc.chatbot.waterCard.title" />
+);
 
 /** /zones — the caller's zones (from the list_zones tool). */
 export const ZonesCard = ({

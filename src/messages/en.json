@@ -1131,14 +1131,19 @@
         "status": "Overview of the farm's status",
         "weather": "Current weather conditions",
         "zones": "List my irrigation zones",
-        "clear": "Clear the conversation"
+        "clear": "Clear the conversation",
+        "soil": "Latest soil readings",
+        "plant": "Latest plant readings",
+        "water": "Latest water readings"
       },
       "examples": {
         "sitemap": "Show the site map",
         "alerts": "What are my alerts?",
         "status": "How is my farm doing?",
         "weather": "What's the weather?",
-        "zones": "What are my zones?"
+        "zones": "What are my zones?",
+        "soil": "How is my soil?",
+        "water": "How is my water?"
       },
       "commandsCard": {
         "title": "🧭 Available commands",
@@ -1172,7 +1177,10 @@
         "weather": "Looking at the weather…",
         "sitemap": "Searching the app…",
         "zones": "Looking at your zones…",
-        "analyzing": "Analyzing the data…"
+        "analyzing": "Analyzing the data…",
+        "soil": "Reading your soil…",
+        "plant": "Checking your plants…",
+        "water": "Measuring your water…"
       },
       "rate": {
         "up": "Good answer",
@@ -1198,13 +1206,50 @@
           "airTemp": "Air temperature",
           "humidity": "Air humidity",
           "pressure": "Pressure",
-          "batterySignal": "Battery / signal"
+          "batterySignal": "Battery / signal",
+          "soilMoistureMedium": "Soil moisture (medium)",
+          "soilMoistureHigh": "Soil moisture (shallow)",
+          "soilMoistureLow": "Soil moisture (deep)",
+          "soilTempMedium": "Soil temperature (medium)",
+          "soilTempHigh": "Soil temperature (shallow)",
+          "soilTempLow": "Soil temperature (deep)",
+          "phSoil": "Soil pH",
+          "soilSalinity": "Soil salinity",
+          "soilConductivity": "Soil conductivity",
+          "ecSoilMedium": "Soil EC (medium)",
+          "ecSoilHigh": "Soil EC (shallow)",
+          "ecSoilLow": "Soil EC (deep)",
+          "leafMoisture": "Leaf moisture",
+          "leafTemperature": "Leaf temperature",
+          "fruitSize": "Fruit size",
+          "largeFruitDiameter": "Large fruit diameter",
+          "waterFlow": "Water flow",
+          "waterPressure": "Water pressure",
+          "waterEC": "Water conductivity",
+          "waterPH": "Water pH",
+          "precipitation": "Precipitation rate",
+          "waterLevel": "Water level"
         },
         "weather": {
           "condition": "Conditions",
           "wind": "Wind",
           "sunny": "Sunny"
         }
+      },
+      "soilCard": {
+        "title": "🌱 Your soil",
+        "intro": "Here are your latest soil readings:",
+        "empty": "No soil readings yet."
+      },
+      "plantCard": {
+        "title": "🌿 Your plants",
+        "intro": "Here are your latest plant readings:",
+        "empty": "No plant readings yet."
+      },
+      "waterCard": {
+        "title": "💧 Your water",
+        "intro": "Here are your latest water readings:",
+        "empty": "No water readings yet."
       }
     },
     "googleMapWeather": {

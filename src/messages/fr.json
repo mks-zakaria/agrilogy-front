@@ -1131,14 +1131,19 @@
         "status": "Aperçu de l'état de l'exploitation",
         "weather": "Conditions météo actuelles",
         "zones": "Lister mes zones d'irrigation",
-        "clear": "Effacer la conversation"
+        "clear": "Effacer la conversation",
+        "soil": "Dernières mesures du sol",
+        "plant": "Dernières mesures des plantes",
+        "water": "Dernières mesures de l'eau"
       },
       "examples": {
         "sitemap": "Afficher le plan du site",
         "alerts": "Quelles sont mes alertes ?",
         "status": "Comment va mon exploitation ?",
         "weather": "Quel temps fait-il ?",
-        "zones": "Quelles sont mes zones ?"
+        "zones": "Quelles sont mes zones ?",
+        "soil": "Comment est mon sol ?",
+        "water": "Comment est mon eau ?"
       },
       "commandsCard": {
         "title": "🧭 Commandes disponibles",
@@ -1172,7 +1177,10 @@
         "weather": "Consultation de la météo…",
         "sitemap": "Recherche dans l'application…",
         "zones": "Consultation de vos zones…",
-        "analyzing": "Analyse des données…"
+        "analyzing": "Analyse des données…",
+        "soil": "Lecture de votre sol…",
+        "plant": "Vérification de vos plantes…",
+        "water": "Mesure de votre eau…"
       },
       "rate": {
         "up": "Bonne réponse",
@@ -1198,13 +1206,50 @@
           "airTemp": "Température de l'air",
           "humidity": "Humidité de l'air",
           "pressure": "Pression",
-          "batterySignal": "Batterie / signal"
+          "batterySignal": "Batterie / signal",
+          "soilMoistureMedium": "Humidité du sol (moyenne)",
+          "soilMoistureHigh": "Humidité du sol (surface)",
+          "soilMoistureLow": "Humidité du sol (profondeur)",
+          "soilTempMedium": "Température du sol (moyenne)",
+          "soilTempHigh": "Température du sol (surface)",
+          "soilTempLow": "Température du sol (profondeur)",
+          "phSoil": "pH du sol",
+          "soilSalinity": "Salinité du sol",
+          "soilConductivity": "Conductivité du sol",
+          "ecSoilMedium": "CE du sol (moyenne)",
+          "ecSoilHigh": "CE du sol (surface)",
+          "ecSoilLow": "CE du sol (profondeur)",
+          "leafMoisture": "Humidité foliaire",
+          "leafTemperature": "Température foliaire",
+          "fruitSize": "Taille des fruits",
+          "largeFruitDiameter": "Diamètre des gros fruits",
+          "waterFlow": "Débit d'eau",
+          "waterPressure": "Pression d'eau",
+          "waterEC": "Conductivité de l'eau",
+          "waterPH": "pH de l'eau",
+          "precipitation": "Taux de précipitation",
+          "waterLevel": "Niveau d'eau"
         },
         "weather": {
           "condition": "Conditions",
           "wind": "Vent",
           "sunny": "Ensoleillé"
         }
+      },
+      "soilCard": {
+        "title": "🌱 Votre sol",
+        "intro": "Voici vos dernières mesures du sol :",
+        "empty": "Aucune mesure du sol pour l'instant."
+      },
+      "plantCard": {
+        "title": "🌿 Vos plantes",
+        "intro": "Voici vos dernières mesures des plantes :",
+        "empty": "Aucune mesure des plantes pour l'instant."
+      },
+      "waterCard": {
+        "title": "💧 Votre eau",
+        "intro": "Voici vos dernières mesures de l'eau :",
+        "empty": "Aucune mesure de l'eau pour l'instant."
       }
     },
     "googleMapWeather": {
