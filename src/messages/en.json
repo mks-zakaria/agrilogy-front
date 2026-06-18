@@ -28,6 +28,7 @@
     "alerts": "Alerts",
     "notifications": "Notifications",
     "settings": "Settings",
+    "chat": "Assistant",
     "admin": "Admin",
     "logout": "Log out",
     "account": "Account",
@@ -1083,6 +1084,18 @@
         "alerts": {
           "label": "Alert management",
           "description": "View and manage all of your farm's alerts"
+        },
+        "vannesPompes": {
+          "label": "Valves & pumps",
+          "description": "Status and control of irrigation valves and pumps"
+        },
+        "notifications": {
+          "label": "Notifications",
+          "description": "Email alert configuration and history"
+        },
+        "settings": {
+          "label": "Settings",
+          "description": "Account, sensor and display preferences"
         }
       },
       "pageContext": "Current page context: {context}",
@@ -1091,9 +1104,84 @@
       "statusReady": "Ready",
       "close": "Close",
       "send": "Send",
-      "inputPlaceholder": "Ask your question or type /help...",
+      "inputPlaceholder": "Ask your question or type /sitemap...",
       "stopGeneration": "Stop generation ×",
-      "inputHint": "Enter to send, Shift+Enter for a new line"
+      "inputHint": "Enter to send, Shift+Enter for a new line",
+      "tabLabel": "ASSISTANT",
+      "openAssistant": "Open the Agrilogy assistant",
+      "newChat": "New conversation",
+      "expand": "Open full page",
+      "sitemap": {
+        "title": "📋 App pages",
+        "intro": "Here are the pages you can navigate to:"
+      },
+      "mock": {
+        "generic": "I'm in demo mode for now — the AI engine isn't wired up yet. Try the /sitemap command to see the site map."
+      },
+      "history": {
+        "empty": "No conversations yet. Start one!",
+        "show": "History",
+        "hide": "Hide history",
+        "delete": "Delete conversation"
+      },
+      "commands": {
+        "sitemap": "Show the site map",
+        "help": "List the available commands",
+        "alerts": "Show active alerts",
+        "status": "Overview of the farm's status",
+        "weather": "Current weather conditions",
+        "clear": "Clear the conversation"
+      },
+      "examples": {
+        "sitemap": "Show the site map",
+        "alerts": "What are my alerts?",
+        "status": "How is my farm doing?",
+        "weather": "What's the weather?"
+      },
+      "commandsCard": {
+        "title": "🧭 Available commands",
+        "intro": "Here's what I can do — click a command to try it:"
+      },
+      "alertsCard": {
+        "title": "🔔 Active alerts",
+        "intro": "Here are the active alerts on your farm:"
+      },
+      "statusCard": {
+        "title": "🌾 Farm status",
+        "intro": "Here's a snapshot of your key metrics:"
+      },
+      "weatherCard": {
+        "title": "🌤️ Current weather",
+        "intro": "Here are the current weather conditions:"
+      },
+      "cleared": "Conversation cleared.",
+      "pageGreeting": {
+        "dashboard": "You're on the dashboard. Ask me for an overview, or type /status for a quick farm snapshot.",
+        "soil": "You're viewing soil data. Ask about soil moisture, temperature, pH or salinity — or type /status.",
+        "station": "You're on the weather station. Ask about temperature, ET0, wind or rainfall — or type /weather.",
+        "plant": "You're tracking your plants. Ask about fruit size, leaf humidity or temperature.",
+        "water": "You're on water data. Ask about flow, pressure, pH or conductivity.",
+        "vannesPompes": "You're managing valves & pumps. Ask about the state of an irrigation valve or pump.",
+        "alerts": "You're on alert management. Type /alerts to see active alerts, or ask a question.",
+        "notifications": "You're on notifications. Ask me about email alert setup or the history.",
+        "settings": "You're in settings. Ask how to configure your account, sensors or display."
+      },
+      "data": {
+        "sensor": {
+          "soilMoisture": "Soil moisture",
+          "soilTemp": "Soil temperature",
+          "vpd": "VPD",
+          "et0": "ET0",
+          "airTemp": "Air temperature",
+          "humidity": "Air humidity",
+          "batterySignal": "Battery / signal"
+        },
+        "weather": {
+          "condition": "Conditions",
+          "wind": "Wind",
+          "sunny": "Sunny"
+        }
+      }
     },
     "googleMapWeather": {
       "title": "Farm & sectors",

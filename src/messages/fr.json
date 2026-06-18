@@ -28,6 +28,7 @@
     "alerts": "Alertes",
     "notifications": "Notifications",
     "settings": "Paramètres",
+    "chat": "Assistant",
     "admin": "Administration",
     "logout": "Déconnexion",
     "account": "Compte",
@@ -1083,6 +1084,18 @@
         "alerts": {
           "label": "Gestion des alertes",
           "description": "Consultation et gestion de toutes les alertes de votre exploitation"
+        },
+        "vannesPompes": {
+          "label": "Vannes et pompes",
+          "description": "État et commande des vannes et pompes d'irrigation"
+        },
+        "notifications": {
+          "label": "Notifications",
+          "description": "Configuration des alertes email et historique"
+        },
+        "settings": {
+          "label": "Paramètres",
+          "description": "Préférences du compte, capteurs et affichage"
         }
       },
       "pageContext": "Contexte de la page actuelle : {context}",
@@ -1091,9 +1104,84 @@
       "statusReady": "Prêt",
       "close": "Fermer",
       "send": "Envoyer",
-      "inputPlaceholder": "Posez votre question ou tapez /help...",
+      "inputPlaceholder": "Posez votre question ou tapez /sitemap...",
       "stopGeneration": "Arrêter la génération ×",
-      "inputHint": "Entrée pour envoyer, Maj+Entrée pour nouvelle ligne"
+      "inputHint": "Entrée pour envoyer, Maj+Entrée pour nouvelle ligne",
+      "tabLabel": "ASSISTANT",
+      "openAssistant": "Ouvrir l'assistant Agrilogy",
+      "newChat": "Nouvelle conversation",
+      "expand": "Ouvrir en pleine page",
+      "sitemap": {
+        "title": "📋 Pages de l'application",
+        "intro": "Voici les pages que vous pouvez consulter :"
+      },
+      "mock": {
+        "generic": "Je suis en mode démonstration pour l'instant — la connexion au moteur d'IA n'est pas encore activée. Essayez la commande /sitemap pour afficher le plan du site."
+      },
+      "history": {
+        "empty": "Aucune conversation pour le moment. Démarrez-en une !",
+        "show": "Historique",
+        "hide": "Masquer l'historique",
+        "delete": "Supprimer la conversation"
+      },
+      "commands": {
+        "sitemap": "Afficher le plan du site",
+        "help": "Lister les commandes disponibles",
+        "alerts": "Afficher les alertes actives",
+        "status": "Aperçu de l'état de l'exploitation",
+        "weather": "Conditions météo actuelles",
+        "clear": "Effacer la conversation"
+      },
+      "examples": {
+        "sitemap": "Afficher le plan du site",
+        "alerts": "Quelles sont mes alertes ?",
+        "status": "Comment va mon exploitation ?",
+        "weather": "Quel temps fait-il ?"
+      },
+      "commandsCard": {
+        "title": "🧭 Commandes disponibles",
+        "intro": "Voici ce que je peux faire — cliquez une commande pour l'essayer :"
+      },
+      "alertsCard": {
+        "title": "🔔 Alertes actives",
+        "intro": "Voici les alertes actives sur votre exploitation :"
+      },
+      "statusCard": {
+        "title": "🌾 État de l'exploitation",
+        "intro": "Voici un aperçu de vos mesures clés :"
+      },
+      "weatherCard": {
+        "title": "🌤️ Météo actuelle",
+        "intro": "Voici les conditions météo actuelles :"
+      },
+      "cleared": "Conversation effacée.",
+      "pageGreeting": {
+        "dashboard": "Vous êtes sur le tableau de bord. Demandez-moi une vue d'ensemble, ou tapez /status pour un aperçu rapide de l'exploitation.",
+        "soil": "Vous consultez les données du sol. Posez vos questions sur l'humidité, la température, le pH ou la salinité — ou tapez /status.",
+        "station": "Vous êtes sur la station météo. Demandez la température, l'ET0, le vent ou les précipitations — ou tapez /weather.",
+        "plant": "Vous suivez vos plantes. Demandez la taille des fruits, l'humidité ou la température des feuilles.",
+        "water": "Vous êtes sur les données d'eau. Demandez le débit, la pression, le pH ou la conductivité.",
+        "vannesPompes": "Vous gérez les vannes et pompes. Demandez l'état d'une vanne ou d'une pompe d'irrigation.",
+        "alerts": "Vous êtes sur la gestion des alertes. Tapez /alerts pour voir les alertes actives, ou posez votre question.",
+        "notifications": "Vous êtes sur les notifications. Demandez-moi la configuration des alertes email ou l'historique.",
+        "settings": "Vous êtes dans les paramètres. Demandez-moi comment configurer votre compte, vos capteurs ou l'affichage."
+      },
+      "data": {
+        "sensor": {
+          "soilMoisture": "Humidité du sol",
+          "soilTemp": "Température du sol",
+          "vpd": "VPD",
+          "et0": "ET0",
+          "airTemp": "Température de l'air",
+          "humidity": "Humidité de l'air",
+          "batterySignal": "Batterie / signal"
+        },
+        "weather": {
+          "condition": "Conditions",
+          "wind": "Vent",
+          "sunny": "Ensoleillé"
+        }
+      }
     },
     "googleMapWeather": {
       "title": "Exploitation & secteurs",
