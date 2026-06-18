@@ -19,6 +19,8 @@ export type ChatCardType =
 
 export type ChatCard = { type: ChatCardType; data?: unknown };
 
+export type MessageRating = 'up' | 'down';
+
 export interface Message {
   id: string;
   role: MessageRole;
@@ -26,6 +28,8 @@ export interface Message {
   isError?: boolean;
   /** Optional structured attachment (sitemap, etc.). */
   card?: ChatCard;
+  /** User feedback on an assistant reply (thumbs up/down). */
+  rating?: MessageRating;
   timestamp: Date;
 }
 
