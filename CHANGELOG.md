@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.35.0...v1.36.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** render the LLM's free-text reply ([#206](https://github.com/AgriLogy/agrilogy-front/issues/206)) ([d3b1eb6](https://github.com/AgriLogy/agrilogy-front/commit/d3b1eb6acc71ec2155fe71b9a174c4006176c5a8))
+
 # [1.35.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.34.0...v1.35.0) (2026-06-18)
 
 
