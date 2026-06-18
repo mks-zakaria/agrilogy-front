@@ -6,6 +6,7 @@ import { keyframes } from '@emotion/react';
 import { useTranslations } from 'next-intl';
 import { ChatThread } from './ChatThread';
 import { useChat } from './ChatContext';
+import { pageKeyFromPath } from './siteRoutes';
 
 const HIDDEN_PATHS = new Set(['/login']);
 const CHAT_PAGE = '/chat';
@@ -229,7 +230,11 @@ export const ChatDock = () => {
 
         {/* Conversation */}
         <Box flex={1} minH={0}>
-          <ChatThread autoFocus={open} onNavigate={() => setOpen(false)} />
+          <ChatThread
+            autoFocus={open}
+            onNavigate={() => setOpen(false)}
+            pageContextKey={pageKeyFromPath(pathname)}
+          />
         </Box>
       </Box>
     </>
