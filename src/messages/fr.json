@@ -1135,7 +1135,9 @@
         "soil": "Dernières mesures du sol",
         "plant": "Dernières mesures des plantes",
         "water": "Dernières mesures de l'eau",
-        "trend": "Évolution d'un capteur"
+        "trend": "Évolution d'un capteur",
+        "irrigation": "Dois-je arroser ? (conseil)",
+        "notifications": "Notifications récentes"
       },
       "examples": {
         "sitemap": "Afficher le plan du site",
@@ -1145,7 +1147,9 @@
         "zones": "Quelles sont mes zones ?",
         "soil": "Comment est mon sol ?",
         "water": "Comment est mon eau ?",
-        "trend": "Comment a évolué l'humidité du sol aujourd'hui ?"
+        "trend": "Comment a évolué l'humidité du sol aujourd'hui ?",
+        "irrigation": "Dois-je arroser aujourd'hui ?",
+        "notifications": "Afficher mes notifications récentes"
       },
       "commandsCard": {
         "title": "🧭 Commandes disponibles",
@@ -1183,7 +1187,9 @@
         "soil": "Lecture de votre sol…",
         "plant": "Vérification de vos plantes…",
         "water": "Mesure de votre eau…",
-        "trend": "Lecture des tendances…"
+        "trend": "Lecture des tendances…",
+        "irrigation": "Évaluation de l'irrigation…",
+        "notifications": "Récupération des notifications…"
       },
       "rate": {
         "up": "Bonne réponse",
@@ -1265,6 +1271,26 @@
         "rising": "En hausse",
         "falling": "En baisse",
         "flat": "Stable"
+      },
+      "irrigationCard": {
+        "title": "💧 Conseil d’irrigation",
+        "titleZone": "💧 Irrigation — {zone}",
+        "intro": "Voici ma recommandation d’irrigation :",
+        "empty": "Aucune donnée d’irrigation disponible pour le moment.",
+        "irrigate": "Arroser",
+        "hold": "Attendre",
+        "unknown": "Indéterminé",
+        "soilMoisture": "Humidité du sol",
+        "threshold": "Seuil critique",
+        "et0": "ET0",
+        "vpd": "VPD",
+        "water": "Eau est.",
+        "duration": "Durée est."
+      },
+      "notificationsCard": {
+        "title": "🔔 Notifications récentes",
+        "intro": "Voici vos notifications récentes :",
+        "empty": "Aucune notification pour le moment."
       }
     },
     "googleMapWeather": {

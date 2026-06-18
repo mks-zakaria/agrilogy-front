@@ -197,6 +197,40 @@ export const COMMANDS: CommandDef[] = [
     introKey: 'misc.chatbot.trendCard.intro',
   },
   {
+    name: 'irrigation',
+    slash: '/irrigation',
+    descKey: 'misc.chatbot.commands.irrigation',
+    triggers: [
+      '/irrigation',
+      '/advice',
+      '/conseil',
+      'should i irrigate',
+      'irrigation advice',
+      'irrigate',
+      'dois-je arroser',
+      'arroser',
+      'conseil',
+      'الري',
+    ],
+    card: 'irrigation',
+    introKey: 'misc.chatbot.irrigationCard.intro',
+  },
+  {
+    name: 'notifications',
+    slash: '/notifications',
+    descKey: 'misc.chatbot.commands.notifications',
+    triggers: [
+      '/notifications',
+      '/notifs',
+      'notifications',
+      'my notifications',
+      'mes notifications',
+      'الإشعارات',
+    ],
+    card: 'notifications',
+    introKey: 'misc.chatbot.notificationsCard.intro',
+  },
+  {
     name: 'clear',
     slash: '/clear',
     descKey: 'misc.chatbot.commands.clear',
@@ -222,6 +256,8 @@ export const EXAMPLE_PROMPTS: { textKey: string; send: string }[] = [
   { textKey: 'misc.chatbot.examples.soil', send: '/soil' },
   { textKey: 'misc.chatbot.examples.water', send: '/water' },
   { textKey: 'misc.chatbot.examples.trend', send: '/trend' },
+  { textKey: 'misc.chatbot.examples.irrigation', send: '/irrigation' },
+  { textKey: 'misc.chatbot.examples.notifications', send: '/notifications' },
 ];
 
 const norm = (s: string) => s.trim().toLowerCase();
