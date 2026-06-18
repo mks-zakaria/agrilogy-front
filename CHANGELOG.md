@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.34.0...v1.35.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** robot icon + fetch data from the backend tools ([#204](https://github.com/AgriLogy/agrilogy-front/issues/204)) ([593f274](https://github.com/AgriLogy/agrilogy-front/commit/593f274fe50bb7d768223785fbd82e2528e84e8b))
+
 # [1.34.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.33.2...v1.34.0) (2026-06-18)
 
 
