@@ -1,4 +1,9 @@
-import { routeMockReply, streamReply, COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
+import {
+  routeMockReply,
+  streamReply,
+  COMMANDS,
+  EXAMPLE_PROMPTS,
+} from './mockEngine';
 
 describe('routeMockReply', () => {
   it.each([
@@ -7,12 +12,15 @@ describe('routeMockReply', () => {
     ['/alerts', 'alerts', 'alerts'],
     ['/status', 'status', 'farmStatus'],
     ['/weather', 'weather', 'weather'],
-  ])('routes %s to command %s with its card (instant)', (input, command, card) => {
-    const r = routeMockReply(input);
-    expect(r.command).toBe(command);
-    expect(r.card).toEqual({ type: card });
-    expect(r.stream).toBe(false);
-  });
+  ])(
+    'routes %s to command %s with its card (instant)',
+    (input, command, card) => {
+      const r = routeMockReply(input);
+      expect(r.command).toBe(command);
+      expect(r.card).toEqual({ type: card });
+      expect(r.stream).toBe(false);
+    }
+  );
 
   it('routes /clear to a clear action with no card', () => {
     const r = routeMockReply('/clear');

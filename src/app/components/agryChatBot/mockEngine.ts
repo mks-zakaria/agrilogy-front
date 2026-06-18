@@ -49,7 +49,16 @@ export const COMMANDS: CommandDef[] = [
     name: 'sitemap',
     slash: '/sitemap',
     descKey: 'misc.chatbot.commands.sitemap',
-    triggers: ['/sitemap', '/map', '/pages', 'sitemap', 'site map', 'plan du site', 'navigation', 'خريطة الموقع'],
+    triggers: [
+      '/sitemap',
+      '/map',
+      '/pages',
+      'sitemap',
+      'site map',
+      'plan du site',
+      'navigation',
+      'خريطة الموقع',
+    ],
     card: 'sitemap',
     introKey: 'misc.chatbot.sitemap.intro',
   },
@@ -57,7 +66,16 @@ export const COMMANDS: CommandDef[] = [
     name: 'help',
     slash: '/help',
     descKey: 'misc.chatbot.commands.help',
-    triggers: ['/help', '/commands', '/aide', 'help', 'aide', 'commandes', 'مساعدة', 'الأوامر'],
+    triggers: [
+      '/help',
+      '/commands',
+      '/aide',
+      'help',
+      'aide',
+      'commandes',
+      'مساعدة',
+      'الأوامر',
+    ],
     card: 'commands',
     introKey: 'misc.chatbot.commandsCard.intro',
   },
@@ -65,7 +83,15 @@ export const COMMANDS: CommandDef[] = [
     name: 'alerts',
     slash: '/alerts',
     descKey: 'misc.chatbot.commands.alerts',
-    triggers: ['/alerts', '/alertes', 'alerts', 'alertes', 'my alerts', 'mes alertes', 'تنبيهات'],
+    triggers: [
+      '/alerts',
+      '/alertes',
+      'alerts',
+      'alertes',
+      'my alerts',
+      'mes alertes',
+      'تنبيهات',
+    ],
     card: 'alerts',
     introKey: 'misc.chatbot.alertsCard.intro',
   },
@@ -73,7 +99,15 @@ export const COMMANDS: CommandDef[] = [
     name: 'status',
     slash: '/status',
     descKey: 'misc.chatbot.commands.status',
-    triggers: ['/status', '/farm', '/etat', 'farm status', 'état de la ferme', 'etat de la ferme', 'حالة المزرعة'],
+    triggers: [
+      '/status',
+      '/farm',
+      '/etat',
+      'farm status',
+      'état de la ferme',
+      'etat de la ferme',
+      'حالة المزرعة',
+    ],
     card: 'farmStatus',
     introKey: 'misc.chatbot.statusCard.intro',
   },
@@ -81,7 +115,15 @@ export const COMMANDS: CommandDef[] = [
     name: 'weather',
     slash: '/weather',
     descKey: 'misc.chatbot.commands.weather',
-    triggers: ['/weather', '/meteo', '/météo', 'weather', 'météo', 'meteo', 'طقس'],
+    triggers: [
+      '/weather',
+      '/meteo',
+      '/météo',
+      'weather',
+      'météo',
+      'meteo',
+      'طقس',
+    ],
     card: 'weather',
     introKey: 'misc.chatbot.weatherCard.intro',
   },
@@ -89,7 +131,13 @@ export const COMMANDS: CommandDef[] = [
     name: 'clear',
     slash: '/clear',
     descKey: 'misc.chatbot.commands.clear',
-    triggers: ['/clear', '/clr', '/effacer', 'clear chat', 'effacer la conversation'],
+    triggers: [
+      '/clear',
+      '/clr',
+      '/effacer',
+      'clear chat',
+      'effacer la conversation',
+    ],
     action: 'clear',
     introKey: 'misc.chatbot.cleared',
   },
@@ -116,7 +164,8 @@ function matchCommand(text: string): CommandDef | null {
   // 2) natural-language "contains" (guard against tiny tokens)
   for (const c of COMMANDS) {
     for (const trig of c.triggers) {
-      if (!trig.startsWith('/') && trig.length >= 4 && text.includes(trig)) return c;
+      if (!trig.startsWith('/') && trig.length >= 4 && text.includes(trig))
+        return c;
     }
   }
   return null;

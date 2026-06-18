@@ -1,15 +1,27 @@
 'use client';
-import { Box, Flex, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  SimpleGrid,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { useTranslations } from 'next-intl';
 import { COMMANDS } from './mockEngine';
-import { MOCK_ALERTS, MOCK_FARM_STATUS, MOCK_WEATHER, type Severity } from './mockData';
+import {
+  MOCK_ALERTS,
+  MOCK_FARM_STATUS,
+  MOCK_WEATHER,
+  type Severity,
+} from './mockData';
 import { useChat } from './ChatContext';
 
 function useSeverityColor() {
   const critical = useColorModeValue('red.500', 'red.300');
   const warning = useColorModeValue('orange.500', 'orange.300');
   const ok = useColorModeValue('green.500', 'green.300');
-  return (s: Severity) => (s === 'critical' ? critical : s === 'warning' ? warning : ok);
+  return (s: Severity) =>
+    s === 'critical' ? critical : s === 'warning' ? warning : ok;
 }
 
 const rowStyle = (cardBg: string, cardBorder: string) => ({
@@ -48,7 +60,12 @@ export const CommandsCard = () => {
           transition="all 0.15s"
           _hover={{ borderColor: slashHover, transform: 'translateX(2px)' }}
         >
-          <Text fontSize="12.5px" fontWeight={600} color={slashColor} fontFamily="mono">
+          <Text
+            fontSize="12.5px"
+            fontWeight={600}
+            color={slashColor}
+            fontFamily="mono"
+          >
             {c.slash}
           </Text>
           <Text fontSize="11px" color={descColor}>
@@ -75,8 +92,19 @@ export const AlertsCard = () => {
         {t('misc.chatbot.alertsCard.title')}
       </Text>
       {MOCK_ALERTS.map((a) => (
-        <Flex key={a.id} align="center" gap="8px" {...rowStyle(cardBg, cardBorder)}>
-          <Box w="8px" h="8px" borderRadius="50%" bg={sevColor(a.severity)} flexShrink={0} />
+        <Flex
+          key={a.id}
+          align="center"
+          gap="8px"
+          {...rowStyle(cardBg, cardBorder)}
+        >
+          <Box
+            w="8px"
+            h="8px"
+            borderRadius="50%"
+            bg={sevColor(a.severity)}
+            flexShrink={0}
+          />
           <Box flex={1} minW={0}>
             <Text fontSize="12.5px" fontWeight={600} color={nameColor}>
               {t(`misc.chatbot.data.sensor.${a.sensorKey}`)}
@@ -85,7 +113,12 @@ export const AlertsCard = () => {
               {a.zone}
             </Text>
           </Box>
-          <Text fontSize="12.5px" fontWeight={700} color={sevColor(a.severity)} fontFamily="mono">
+          <Text
+            fontSize="12.5px"
+            fontWeight={700}
+            color={sevColor(a.severity)}
+            fontFamily="mono"
+          >
             {a.value}
           </Text>
         </Flex>
@@ -113,7 +146,12 @@ export const FarmStatusCard = () => {
             <Text fontSize="10.5px" color={labelColor} noOfLines={1}>
               {t(`misc.chatbot.data.sensor.${m.key}`)}
             </Text>
-            <Text fontSize="14px" fontWeight={700} color={sevColor(m.status)} fontFamily="mono">
+            <Text
+              fontSize="14px"
+              fontWeight={700}
+              color={sevColor(m.status)}
+              fontFamily="mono"
+            >
               {m.value}
             </Text>
           </Box>
@@ -132,9 +170,15 @@ export const WeatherCard = () => {
   const valueColor = useColorModeValue('gray.800', 'gray.100');
 
   const rows: { label: string; value: string }[] = [
-    { label: t('misc.chatbot.data.weather.condition'), value: t(`misc.chatbot.data.weather.${MOCK_WEATHER.conditionKey}`) },
+    {
+      label: t('misc.chatbot.data.weather.condition'),
+      value: t(`misc.chatbot.data.weather.${MOCK_WEATHER.conditionKey}`),
+    },
     { label: t('misc.chatbot.data.sensor.airTemp'), value: MOCK_WEATHER.tempC },
-    { label: t('misc.chatbot.data.sensor.humidity'), value: MOCK_WEATHER.humidity },
+    {
+      label: t('misc.chatbot.data.sensor.humidity'),
+      value: MOCK_WEATHER.humidity,
+    },
     { label: t('misc.chatbot.data.weather.wind'), value: MOCK_WEATHER.wind },
     { label: t('misc.chatbot.data.sensor.et0'), value: MOCK_WEATHER.et0 },
   ];
@@ -145,11 +189,21 @@ export const WeatherCard = () => {
         {t('misc.chatbot.weatherCard.title')}
       </Text>
       {rows.map((r) => (
-        <Flex key={r.label} justify="space-between" align="center" {...rowStyle(cardBg, cardBorder)}>
+        <Flex
+          key={r.label}
+          justify="space-between"
+          align="center"
+          {...rowStyle(cardBg, cardBorder)}
+        >
           <Text fontSize="12px" color={labelColor}>
             {r.label}
           </Text>
-          <Text fontSize="12.5px" fontWeight={600} color={valueColor} fontFamily="mono">
+          <Text
+            fontSize="12.5px"
+            fontWeight={600}
+            color={valueColor}
+            fontFamily="mono"
+          >
             {r.value}
           </Text>
         </Flex>

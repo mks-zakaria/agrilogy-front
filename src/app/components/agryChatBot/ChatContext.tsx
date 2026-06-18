@@ -154,8 +154,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         }
         // New conversation: title from the first user message.
         convId = uuid();
-        const title =
-          text.length > 40 ? `${text.slice(0, 40).trim()}…` : text;
+        const title = text.length > 40 ? `${text.slice(0, 40).trim()}…` : text;
         const conv: Conversation = {
           id: convId,
           title,
@@ -182,9 +181,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         replyText,
         (chunk) =>
           patchLastMessage(targetId, (m) =>
-            m.role === 'assistant'
-              ? { ...m, content: m.content + chunk }
-              : m
+            m.role === 'assistant' ? { ...m, content: m.content + chunk } : m
           ),
         controller.signal,
         { instant: !result.stream }

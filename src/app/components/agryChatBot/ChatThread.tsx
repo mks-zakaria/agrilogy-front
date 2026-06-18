@@ -4,7 +4,12 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Box, Flex, Text, Textarea, useColorModeValue } from '@chakra-ui/react';
 import { AgrilogyMessageBubble } from './MessageBubble';
 import { SitemapCard } from './SitemapCard';
-import { CommandsCard, AlertsCard, FarmStatusCard, WeatherCard } from './MockCards';
+import {
+  CommandsCard,
+  AlertsCard,
+  FarmStatusCard,
+  WeatherCard,
+} from './MockCards';
 import { COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
 import { useChat } from './ChatContext';
 import type { ChatCardType } from './types';
@@ -122,12 +127,15 @@ export const ChatThread = ({
       : t('misc.chatbot.welcome');
 
   // Slash-command autocomplete: when the input is a "/query", offer matches.
-  const slashQuery = input.startsWith('/') ? input.slice(1).toLowerCase() : null;
+  const slashQuery = input.startsWith('/')
+    ? input.slice(1).toLowerCase()
+    : null;
   const slashMatches =
     slashQuery !== null
       ? COMMANDS.filter((c) => c.slash.slice(1).startsWith(slashQuery))
       : [];
-  const showSlashMenu = slashQuery !== null && slashMatches.length > 0 && !streaming;
+  const showSlashMenu =
+    slashQuery !== null && slashMatches.length > 0 && !streaming;
 
   const runCommand = (slash: string) => {
     sendMessage(slash);
@@ -183,7 +191,12 @@ export const ChatThread = ({
       >
         {/* Welcome + clickable starter prompts (only on an empty thread) */}
         {messages.length === 0 && (
-          <Box display="flex" flexDirection="column" alignItems="flex-start" gap="10px">
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="flex-start"
+            gap="10px"
+          >
             <Box
               maxW="78%"
               px="13px"
@@ -227,7 +240,8 @@ export const ChatThread = ({
 
         {messages.map((msg, i) => {
           const isLast = i === messages.length - 1;
-          const showTyping = isLast && isTypingIndicator && msg.role === 'assistant';
+          const showTyping =
+            isLast && isTypingIndicator && msg.role === 'assistant';
 
           if (msg.card) {
             return (
@@ -271,7 +285,11 @@ export const ChatThread = ({
           }
 
           return (
-            <AgrilogyMessageBubble key={msg.id} message={msg} isTyping={showTyping} />
+            <AgrilogyMessageBubble
+              key={msg.id}
+              message={msg}
+              isTyping={showTyping}
+            />
           );
         })}
         <div ref={endRef} />
@@ -323,7 +341,12 @@ export const ChatThread = ({
                 transition="background 0.12s"
                 _hover={{ bg: menuHoverBg }}
               >
-                <Text fontSize="12.5px" fontWeight={600} color={menuSlash} fontFamily="mono">
+                <Text
+                  fontSize="12.5px"
+                  fontWeight={600}
+                  color={menuSlash}
+                  fontFamily="mono"
+                >
                   {c.slash}
                 </Text>
                 <Text fontSize="11px" color={menuDesc}>
@@ -379,7 +402,9 @@ export const ChatThread = ({
             justifyContent="center"
             opacity={canSend ? 1 : 0.35}
             transition="background 0.15s, transform 0.15s"
-            _hover={canSend ? { bg: sendHoverBg, transform: 'scale(1.05)' } : {}}
+            _hover={
+              canSend ? { bg: sendHoverBg, transform: 'scale(1.05)' } : {}
+            }
             _active={canSend ? { transform: 'scale(0.95)' } : {}}
             disabled={!canSend}
             aria-label={t('misc.chatbot.send')}
