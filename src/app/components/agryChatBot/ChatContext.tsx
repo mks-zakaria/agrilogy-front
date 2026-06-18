@@ -26,7 +26,7 @@ import {
 } from './conversationApi';
 import { routeMockReply, streamReply } from './mockEngine';
 import { requestAssistant } from './chatService';
-import type { ChatCard, Conversation, Message } from './types';
+import type { ChatCard, Conversation, Message, MessageRating } from './types';
 
 interface ChatContextValue {
   conversations: Conversation[];
@@ -37,6 +37,7 @@ interface ChatContextValue {
   selectConversation: (id: string) => void;
   deleteConversation: (id: string) => void;
   sendMessage: (text: string) => void;
+  rateMessage: (messageId: string, rating: MessageRating) => void;
   stop: () => void;
 }
 
@@ -261,6 +262,28 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     setStreaming(false);
   }, []);
 
+  // Thumbs up/down on an assistant reply; toggles off if the same is re-clicked.
+  // The change flows through the debounced server sync.
+  const rateMessage = useCallback(
+    (messageId: string, rating: MessageRating) => {
+      setConversations((prev) =>
+        prev.map((c) => {
+          if (c.id !== activeId) return c;
+          return {
+            ...c,
+            messages: c.messages.map((m) =>
+              m.id === messageId
+                ? { ...m, rating: m.rating === rating ? undefined : rating }
+                : m
+            ),
+            updatedAt: new Date(),
+          };
+        })
+      );
+    },
+    [activeId]
+  );
+
   const value: ChatContextValue = {
     conversations,
     activeId,
@@ -270,6 +293,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     selectConversation,
     deleteConversation,
     sendMessage,
+    rateMessage,
     stop,
   };
 

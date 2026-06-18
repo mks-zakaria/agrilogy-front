@@ -1156,6 +1156,18 @@
         "intro": "Voici les conditions météo actuelles :"
       },
       "cleared": "Conversation effacée.",
+      "status": {
+        "thinking": "Réflexion…",
+        "sensors": "Lecture de vos capteurs…",
+        "alerts": "Vérification de vos alertes…",
+        "weather": "Consultation de la météo…",
+        "sitemap": "Recherche dans l'application…",
+        "analyzing": "Analyse des données…"
+      },
+      "rate": {
+        "up": "Bonne réponse",
+        "down": "Réponse à améliorer"
+      },
       "pageGreeting": {
         "dashboard": "Vous êtes sur le tableau de bord. Demandez-moi une vue d'ensemble, ou tapez /status pour un aperçu rapide de l'exploitation.",
         "soil": "Vous consultez les données du sol. Posez vos questions sur l'humidité, la température, le pH ou la salinité — ou tapez /status.",

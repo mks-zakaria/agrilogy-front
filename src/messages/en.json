@@ -1156,6 +1156,18 @@
         "intro": "Here are the current weather conditions:"
       },
       "cleared": "Conversation cleared.",
+      "status": {
+        "thinking": "Thinking…",
+        "sensors": "Reading your sensors…",
+        "alerts": "Checking your alerts…",
+        "weather": "Looking at the weather…",
+        "sitemap": "Searching the app…",
+        "analyzing": "Analyzing the data…"
+      },
+      "rate": {
+        "up": "Good answer",
+        "down": "Needs improvement"
+      },
       "pageGreeting": {
         "dashboard": "You're on the dashboard. Ask me for an overview, or type /status for a quick farm snapshot.",
         "soil": "You're viewing soil data. Ask about soil moisture, temperature, pH or salinity — or type /status.",
