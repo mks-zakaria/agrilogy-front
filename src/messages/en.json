@@ -1155,6 +1155,17 @@
         "intro": "Here are the current weather conditions:"
       },
       "cleared": "Conversation cleared.",
+      "pageGreeting": {
+        "dashboard": "You're on the dashboard. Ask me for an overview, or type /status for a quick farm snapshot.",
+        "soil": "You're viewing soil data. Ask about soil moisture, temperature, pH or salinity — or type /status.",
+        "station": "You're on the weather station. Ask about temperature, ET0, wind or rainfall — or type /weather.",
+        "plant": "You're tracking your plants. Ask about fruit size, leaf humidity or temperature.",
+        "water": "You're on water data. Ask about flow, pressure, pH or conductivity.",
+        "vannesPompes": "You're managing valves & pumps. Ask about the state of an irrigation valve or pump.",
+        "alerts": "You're on alert management. Type /alerts to see active alerts, or ask a question.",
+        "notifications": "You're on notifications. Ask me about email alert setup or the history.",
+        "settings": "You're in settings. Ask how to configure your account, sensors or display."
+      },
       "data": {
         "sensor": {
           "soilMoisture": "Soil moisture",

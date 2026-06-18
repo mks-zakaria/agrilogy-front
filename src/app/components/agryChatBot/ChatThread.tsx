@@ -43,6 +43,9 @@ interface ChatThreadProps {
   onNavigate?: () => void;
   /** Focus the input on mount (slide-out opens). */
   autoFocus?: boolean;
+  /** Sitemap route key of the page the assistant is opened on, for a
+   *  per-page welcome greeting. Null/omitted → generic greeting. */
+  pageContextKey?: string | null;
 }
 
 /**
@@ -50,7 +53,11 @@ interface ChatThreadProps {
  * typing indicator, and the input. Reads/writes the shared chat context, so it
  * behaves identically on the /chat page and in the global slide-out.
  */
-export const ChatThread = ({ onNavigate, autoFocus }: ChatThreadProps) => {
+export const ChatThread = ({
+  onNavigate,
+  autoFocus,
+  pageContextKey,
+}: ChatThreadProps) => {
   const t = useTranslations();
   const locale = useLocale();
   const timeTag = locale === 'ar' ? 'ar' : locale === 'en' ? 'en-GB' : 'fr-FR';
@@ -104,6 +111,15 @@ export const ChatThread = ({ onNavigate, autoFocus }: ChatThreadProps) => {
   }, [autoFocus]);
 
   const canSend = !!input.trim() && !streaming;
+
+  // Per-page greeting on the slide-out; generic everywhere else.
+  const pageGreetingKey = pageContextKey
+    ? `misc.chatbot.pageGreeting.${pageContextKey}`
+    : null;
+  const welcome =
+    pageGreetingKey && t.has(pageGreetingKey)
+      ? t(pageGreetingKey)
+      : t('misc.chatbot.welcome');
 
   // Slash-command autocomplete: when the input is a "/query", offer matches.
   const slashQuery = input.startsWith('/') ? input.slice(1).toLowerCase() : null;
@@ -180,7 +196,7 @@ export const ChatThread = ({ onNavigate, autoFocus }: ChatThreadProps) => {
               fontSize="13.5px"
               lineHeight="1.55"
             >
-              {t('misc.chatbot.welcome')}
+              {welcome}
             </Box>
             <Flex wrap="wrap" gap="6px">
               {EXAMPLE_PROMPTS.map((ex) => (

@@ -1155,6 +1155,17 @@
         "intro": "Voici les conditions météo actuelles :"
       },
       "cleared": "Conversation effacée.",
+      "pageGreeting": {
+        "dashboard": "Vous êtes sur le tableau de bord. Demandez-moi une vue d'ensemble, ou tapez /status pour un aperçu rapide de l'exploitation.",
+        "soil": "Vous consultez les données du sol. Posez vos questions sur l'humidité, la température, le pH ou la salinité — ou tapez /status.",
+        "station": "Vous êtes sur la station météo. Demandez la température, l'ET0, le vent ou les précipitations — ou tapez /weather.",
+        "plant": "Vous suivez vos plantes. Demandez la taille des fruits, l'humidité ou la température des feuilles.",
+        "water": "Vous êtes sur les données d'eau. Demandez le débit, la pression, le pH ou la conductivité.",
+        "vannesPompes": "Vous gérez les vannes et pompes. Demandez l'état d'une vanne ou d'une pompe d'irrigation.",
+        "alerts": "Vous êtes sur la gestion des alertes. Tapez /alerts pour voir les alertes actives, ou posez votre question.",
+        "notifications": "Vous êtes sur les notifications. Demandez-moi la configuration des alertes email ou l'historique.",
+        "settings": "Vous êtes dans les paramètres. Demandez-moi comment configurer votre compte, vos capteurs ou l'affichage."
+      },
       "data": {
         "sensor": {
           "soilMoisture": "Humidité du sol",

@@ -25,3 +25,23 @@ export const SITEMAP_ROUTES: SitemapRoute[] = [
   { path: '/notifications', key: 'notifications', icon: '📩' },
   { path: '/settings', key: 'settings', icon: '⚙️' },
 ];
+
+/**
+ * Map a pathname to its sitemap route key (e.g. "/soil" -> "soil",
+ * "/alerts/wind-speed" -> "alerts"), used to give the assistant per-page
+ * context. Returns null for unknown paths (fall back to a generic greeting).
+ */
+export function pageKeyFromPath(pathname: string | null): string | null {
+  if (!pathname) return null;
+  const normalized =
+    pathname !== '/' && pathname.endsWith('/')
+      ? pathname.slice(0, -1)
+      : pathname;
+  if (normalized === '/') return 'dashboard';
+  const match = SITEMAP_ROUTES.find(
+    (r) =>
+      r.path !== '/' &&
+      (normalized === r.path || normalized.startsWith(`${r.path}/`))
+  );
+  return match?.key ?? null;
+}
