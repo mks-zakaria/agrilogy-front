@@ -19,6 +19,11 @@ import React, {
 } from 'react';
 import { useTranslations } from 'next-intl';
 import { loadConversations, saveConversations } from './chatHistoryStorage';
+import {
+  fetchServerConversations,
+  pushConversation,
+  removeServerConversation,
+} from './conversationApi';
 import { routeMockReply, streamReply } from './mockEngine';
 import { requestAssistant } from './chatService';
 import type { ChatCard, Conversation, Message } from './types';
@@ -50,15 +55,34 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const abortRef = useRef<AbortController | null>(null);
   const hydrated = useRef(false);
 
-  // Hydrate from localStorage once on mount (client only).
+  // Hydrate on mount: prefer the server (cross-device), fall back to
+  // localStorage offline. On first server load, migrate any local-only
+  // conversations up so nothing is lost.
   useEffect(() => {
-    const loaded = loadConversations();
-    setConversations(loaded);
-    setActiveId(loaded[0]?.id ?? null);
-    hydrated.current = true;
+    let cancelled = false;
+    (async () => {
+      const local = loadConversations();
+      const server = await fetchServerConversations();
+      if (cancelled) return;
+      let initial = local;
+      if (server === null) {
+        initial = local; // offline / unauth → local only
+      } else if (server.length === 0 && local.length > 0) {
+        initial = local;
+        local.forEach((c) => void pushConversation(c)); // migrate up
+      } else {
+        initial = server;
+      }
+      setConversations(initial);
+      setActiveId(initial[0]?.id ?? null);
+      hydrated.current = true;
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  // Persist whenever conversations change (after hydration).
+  // Write-through cache to localStorage on every change (after hydration).
   useEffect(() => {
     if (hydrated.current) saveConversations(conversations);
   }, [conversations]);
@@ -67,6 +91,15 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     () => conversations.find((c) => c.id === activeId) ?? null,
     [conversations, activeId]
   );
+
+  // Sync the active conversation to the server, debounced, once a turn settles
+  // (not on every streamed token).
+  useEffect(() => {
+    if (!hydrated.current || streaming || !activeConversation) return;
+    const snapshot = activeConversation;
+    const handle = setTimeout(() => void pushConversation(snapshot), 700);
+    return () => clearTimeout(handle);
+  }, [activeConversation, streaming]);
 
   const newConversation = useCallback(() => {
     abortRef.current?.abort();
@@ -80,6 +113,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
   const deleteConversation = useCallback(
     (id: string) => {
+      void removeServerConversation(id);
       setConversations((prev) => {
         const next = prev.filter((c) => c.id !== id);
         if (id === activeId) setActiveId(next[0]?.id ?? null);
