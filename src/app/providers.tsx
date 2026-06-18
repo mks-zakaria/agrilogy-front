@@ -19,6 +19,8 @@ import { EmotionCacheProvider } from './EmotionCache';
 import { theme } from './theme';
 import { antdTheme } from './styles/antdTheme';
 import PeriodicZoneNotificationScheduler from './components/main/PeriodicZoneNotificationScheduler';
+import { ChatProvider } from './components/agryChatBot/ChatContext';
+import { ChatDock } from './components/agryChatBot/ChatDock';
 import { dirFor, type Locale } from '../i18n/config';
 
 const antdLocales: Record<Locale, AntdLocale> = {
@@ -103,8 +105,11 @@ export function Providers({
     <EmotionCacheProvider>
       <ChakraProvider theme={chakraTheme}>
         <ThemedAntdProvider locale={locale} dir={dir}>
-          <PeriodicZoneNotificationScheduler />
-          {children}
+          <ChatProvider>
+            <PeriodicZoneNotificationScheduler />
+            {children}
+            <ChatDock />
+          </ChatProvider>
         </ThemedAntdProvider>
       </ChakraProvider>
     </EmotionCacheProvider>

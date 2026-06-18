@@ -36,7 +36,7 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, MoonIcon, SunIcon, BellIcon } from '@chakra-ui/icons';
 import { FaUser, FaHome, FaCog } from 'react-icons/fa';
-import { IoLogOut } from 'react-icons/io5';
+import { IoChatbubbleEllipses, IoLogOut } from 'react-icons/io5';
 import Image from 'next/image';
 import logo from '../../public/logo.png';
 import useColorModeStyles from '@/app/utils/useColorModeStyles';
@@ -110,6 +110,7 @@ const MobileMenu = () => {
       icon: <BellIcon />,
     },
     { href: '/settings', label: t('nav.settings'), icon: <FaCog /> },
+    { href: '/chat', label: t('nav.chat'), icon: <IoChatbubbleEllipses /> },
   ];
 
   const NavRow = ({ item }: { item: NavItem }) => {
