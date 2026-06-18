@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.42.0...v1.43.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** irrigation advice + notifications cards ([#220](https://github.com/AgriLogy/agrilogy-front/issues/220)) ([200527a](https://github.com/AgriLogy/agrilogy-front/commit/200527aa036bea106c10988cb584329055e1247b))
+
 # [1.42.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.41.0...v1.42.0) (2026-06-18)
 
 
