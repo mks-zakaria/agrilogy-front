@@ -3,6 +3,7 @@ import { KeyboardEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Box, Flex, Text, Textarea, useColorModeValue } from '@chakra-ui/react';
 import { AgrilogyMessageBubble } from './MessageBubble';
+import { Markdown } from './Markdown';
 import { SitemapCard } from './SitemapCard';
 import {
   CommandsCard,
@@ -259,9 +260,9 @@ export const ChatThread = ({
                 alignItems="flex-start"
               >
                 {msg.content.trim() && (
-                  <Text fontSize="13px" mb="6px" color={asstBubbleText}>
-                    {msg.content}
-                  </Text>
+                  <Box fontSize="13px" mb="6px" color={asstBubbleText}>
+                    <Markdown>{msg.content}</Markdown>
+                  </Box>
                 )}
                 <Box
                   maxW="92%"
