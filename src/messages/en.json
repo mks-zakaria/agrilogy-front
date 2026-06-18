@@ -1134,7 +1134,8 @@
         "clear": "Clear the conversation",
         "soil": "Latest soil readings",
         "plant": "Latest plant readings",
-        "water": "Latest water readings"
+        "water": "Latest water readings",
+        "trend": "Sensor trend over time"
       },
       "examples": {
         "sitemap": "Show the site map",
@@ -1143,7 +1144,8 @@
         "weather": "What's the weather?",
         "zones": "What are my zones?",
         "soil": "How is my soil?",
-        "water": "How is my water?"
+        "water": "How is my water?",
+        "trend": "How has my soil moisture changed today?"
       },
       "commandsCard": {
         "title": "🧭 Available commands",
@@ -1180,7 +1182,8 @@
         "analyzing": "Analyzing the data…",
         "soil": "Reading your soil…",
         "plant": "Checking your plants…",
-        "water": "Measuring your water…"
+        "water": "Measuring your water…",
+        "trend": "Reading the trends…"
       },
       "rate": {
         "up": "Good answer",
@@ -1250,6 +1253,18 @@
         "title": "💧 Your water",
         "intro": "Here are your latest water readings:",
         "empty": "No water readings yet."
+      },
+      "trendCard": {
+        "title": "📈 Trend",
+        "intro": "Here is the recent trend:",
+        "empty": "Not enough data for a trend yet.",
+        "min": "Min",
+        "avg": "Avg",
+        "max": "Max",
+        "count": "{count} samples in the window",
+        "rising": "Rising",
+        "falling": "Falling",
+        "flat": "Stable"
       }
     },
     "googleMapWeather": {

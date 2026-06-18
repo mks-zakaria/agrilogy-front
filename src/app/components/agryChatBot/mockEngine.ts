@@ -178,6 +178,25 @@ export const COMMANDS: CommandDef[] = [
     introKey: 'misc.chatbot.waterCard.intro',
   },
   {
+    name: 'trend',
+    slash: '/trend',
+    descKey: 'misc.chatbot.commands.trend',
+    triggers: [
+      '/trend',
+      '/trends',
+      '/tendance',
+      'trend',
+      'trends',
+      'history',
+      'evolution',
+      'évolution',
+      'tendance',
+      'الاتجاه',
+    ],
+    card: 'trend',
+    introKey: 'misc.chatbot.trendCard.intro',
+  },
+  {
     name: 'clear',
     slash: '/clear',
     descKey: 'misc.chatbot.commands.clear',
@@ -202,6 +221,7 @@ export const EXAMPLE_PROMPTS: { textKey: string; send: string }[] = [
   { textKey: 'misc.chatbot.examples.zones', send: '/zones' },
   { textKey: 'misc.chatbot.examples.soil', send: '/soil' },
   { textKey: 'misc.chatbot.examples.water', send: '/water' },
+  { textKey: 'misc.chatbot.examples.trend', send: '/trend' },
 ];
 
 const norm = (s: string) => s.trim().toLowerCase();

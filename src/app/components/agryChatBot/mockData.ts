@@ -245,3 +245,34 @@ export const MOCK_WATER: { metrics: MetricRow[] } = {
     },
   ],
 };
+
+export type TrendDirection = 'rising' | 'falling' | 'flat';
+
+export interface TrendRow {
+  key: string;
+  label: string;
+  unit: string;
+  latest: number | null;
+  min: number | null;
+  max: number | null;
+  avg: number | null;
+  count: number;
+  direction: TrendDirection;
+  window_start: string;
+  window_end: string;
+  error?: string;
+}
+
+export const MOCK_TREND: TrendRow = {
+  key: 'soilMoisture',
+  label: 'Soil moisture',
+  unit: '%',
+  latest: 31.4,
+  min: 24.8,
+  max: 33.2,
+  avg: 29.6,
+  count: 96,
+  direction: 'falling',
+  window_start: '2026-06-17T22:00:00Z',
+  window_end: '2026-06-18T22:00:00Z',
+};
