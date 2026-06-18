@@ -7,27 +7,10 @@ import { useTranslations } from 'next-intl';
 import { ChatThread } from './ChatThread';
 import { useChat } from './ChatContext';
 import { pageKeyFromPath } from './siteRoutes';
+import { RobotIcon } from './RobotIcon';
 
 const HIDDEN_PATHS = new Set(['/login']);
 const CHAT_PAGE = '/chat';
-
-const LeafIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <path
-      d="M21 3C21 3 13 3 8 8C3.58 12.42 4 18 4 18C4 18 9.58 18.42 14 14C19 9 19 1 19 1"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4 20L9 15"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-  </svg>
-);
 
 const CloseIcon = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
@@ -128,7 +111,7 @@ export const ChatDock = () => {
         _hover={{ bg: brandHover, pr: '4px' }}
         aria-label={t('misc.chatbot.openAssistant')}
       >
-        <LeafIcon size={18} />
+        <RobotIcon size={20} />
         <Text
           fontSize="10px"
           fontWeight={700}
@@ -185,7 +168,7 @@ export const ChatDock = () => {
             justify="center"
             flexShrink={0}
           >
-            <LeafIcon size={16} />
+            <RobotIcon size={18} />
           </Flex>
           <Box flex={1} minW={0}>
             <Text fontSize="13px" fontWeight={600} color={headerName}>
