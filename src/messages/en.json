@@ -1123,6 +1123,53 @@
         "show": "History",
         "hide": "Hide history",
         "delete": "Delete conversation"
+      },
+      "commands": {
+        "sitemap": "Show the site map",
+        "help": "List the available commands",
+        "alerts": "Show active alerts",
+        "status": "Overview of the farm's status",
+        "weather": "Current weather conditions",
+        "clear": "Clear the conversation"
+      },
+      "examples": {
+        "sitemap": "Show the site map",
+        "alerts": "What are my alerts?",
+        "status": "How is my farm doing?",
+        "weather": "What's the weather?"
+      },
+      "commandsCard": {
+        "title": "🧭 Available commands",
+        "intro": "Here's what I can do — click a command to try it:"
+      },
+      "alertsCard": {
+        "title": "🔔 Active alerts",
+        "intro": "Here are the active alerts on your farm:"
+      },
+      "statusCard": {
+        "title": "🌾 Farm status",
+        "intro": "Here's a snapshot of your key metrics:"
+      },
+      "weatherCard": {
+        "title": "🌤️ Current weather",
+        "intro": "Here are the current weather conditions:"
+      },
+      "cleared": "Conversation cleared.",
+      "data": {
+        "sensor": {
+          "soilMoisture": "Soil moisture",
+          "soilTemp": "Soil temperature",
+          "vpd": "VPD",
+          "et0": "ET0",
+          "airTemp": "Air temperature",
+          "humidity": "Air humidity",
+          "batterySignal": "Battery / signal"
+        },
+        "weather": {
+          "condition": "Conditions",
+          "wind": "Wind",
+          "sunny": "Sunny"
+        }
       }
     },
     "googleMapWeather": {

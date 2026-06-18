@@ -1,34 +1,59 @@
-import { routeMockReply, streamReply } from './mockEngine';
+import { routeMockReply, streamReply, COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
 
 describe('routeMockReply', () => {
-  it('routes the /sitemap command to the sitemap card (instant)', () => {
-    const r = routeMockReply('/sitemap');
-    expect(r.command).toBe('sitemap');
-    expect(r.card).toEqual({ type: 'sitemap' });
+  it.each([
+    ['/sitemap', 'sitemap', 'sitemap'],
+    ['/help', 'help', 'commands'],
+    ['/alerts', 'alerts', 'alerts'],
+    ['/status', 'status', 'farmStatus'],
+    ['/weather', 'weather', 'weather'],
+  ])('routes %s to command %s with its card (instant)', (input, command, card) => {
+    const r = routeMockReply(input);
+    expect(r.command).toBe(command);
+    expect(r.card).toEqual({ type: card });
     expect(r.stream).toBe(false);
-    expect(r.replyKey).toBe('misc.chatbot.sitemap.intro');
   });
 
-  it('treats /help as a sitemap request', () => {
-    expect(routeMockReply('/help').command).toBe('sitemap');
+  it('routes /clear to a clear action with no card', () => {
+    const r = routeMockReply('/clear');
+    expect(r.command).toBe('clear');
+    expect(r.action).toBe('clear');
+    expect(r.card).toBeUndefined();
   });
 
   it.each([
-    'show me the site map',
-    'SITEMAP please',
-    'plan du site',
-    'خريطة الموقع',
-  ])('recognizes natural-language sitemap request: %s', (input) => {
-    const r = routeMockReply(input);
-    expect(r.card).toEqual({ type: 'sitemap' });
+    ['show me the site map', 'sitemap'],
+    ['plan du site', 'sitemap'],
+    ['what are my alertes', 'alerts'],
+    ['météo', 'weather'],
+    ['خريطة الموقع', 'sitemap'],
+  ])('recognizes natural language: %s', (input, command) => {
+    expect(routeMockReply(input).command).toBe(command);
   });
 
   it('falls back to a generic streamed reply otherwise', () => {
-    const r = routeMockReply('how is my soil doing?');
+    const r = routeMockReply('tell me a joke');
     expect(r.command).toBeUndefined();
     expect(r.card).toBeUndefined();
     expect(r.stream).toBe(true);
     expect(r.replyKey).toBe('misc.chatbot.mock.generic');
+  });
+});
+
+describe('command registry', () => {
+  it('every command has a slash form, description key and intro key', () => {
+    for (const c of COMMANDS) {
+      expect(c.slash.startsWith('/')).toBe(true);
+      expect(c.descKey).toMatch(/^misc\.chatbot\./);
+      expect(c.introKey).toMatch(/^misc\.chatbot\./);
+    }
+  });
+
+  it('every example prompt resolves to a known command or generic', () => {
+    for (const ex of EXAMPLE_PROMPTS) {
+      expect(typeof ex.send).toBe('string');
+      expect(ex.textKey).toMatch(/^misc\.chatbot\.examples\./);
+    }
   });
 });
 

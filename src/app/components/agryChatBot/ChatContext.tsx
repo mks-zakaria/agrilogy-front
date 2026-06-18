@@ -108,6 +108,22 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       const text = raw.trim();
       if (!text || streaming) return;
 
+      const routed = routeMockReply(text);
+
+      // /clear wipes the active conversation instead of replying.
+      if (routed.action === 'clear') {
+        if (activeId) {
+          setConversations((prev) =>
+            prev.map((c) =>
+              c.id === activeId
+                ? { ...c, messages: [], updatedAt: new Date() }
+                : c
+            )
+          );
+        }
+        return;
+      }
+
       const now = new Date();
       const userMsg: Message = {
         id: uuid(),
@@ -151,8 +167,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       });
       if (!activeId) setActiveId(convId);
 
-      // Route + stream the mock reply.
-      const result = routeMockReply(text);
+      // Stream the routed mock reply.
+      const result = routed;
       const replyText = t(result.replyKey, result.values);
       const card: ChatCard | undefined = result.card;
       const targetId = convId as string;
