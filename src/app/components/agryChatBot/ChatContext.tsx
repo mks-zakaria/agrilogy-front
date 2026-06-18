@@ -178,7 +178,11 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       requestAssistant(text)
         .then((reply) => {
           if (controller.signal.aborted) return undefined;
-          const replyText = t(reply.replyKey, reply.values);
+          const replyText = reply.text
+            ? reply.text
+            : reply.replyKey
+              ? t(reply.replyKey, reply.values)
+              : '';
           const card: ChatCard | undefined = reply.card;
           return streamReply(
             replyText,

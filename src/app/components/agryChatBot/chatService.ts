@@ -15,8 +15,11 @@ import { MOCK_ALERTS, MOCK_FARM_STATUS, MOCK_WEATHER } from './mockData';
 import type { ChatCardType } from './types';
 
 export interface ChatReply {
-  replyKey: string;
+  /** i18n key for the reply text (rule-based path). */
+  replyKey?: string;
   values?: Record<string, string>;
+  /** Free-text reply from the LLM, when present (takes precedence over replyKey). */
+  text?: string;
   card?: { type: ChatCardType; data?: unknown };
   action?: 'clear';
   /** Stream the reply text token-by-token (free-text answers) vs. render instantly (cards). */
@@ -24,7 +27,7 @@ export interface ChatReply {
   source: 'backend' | 'mock';
 }
 
-/** Backend intent → UI card type. */
+/** Backend intent → UI card type (rule-based path). */
 const INTENT_TO_CARD: Record<string, ChatCardType | undefined> = {
   sitemap: 'sitemap',
   commands: 'commands',
@@ -33,9 +36,18 @@ const INTENT_TO_CARD: Record<string, ChatCardType | undefined> = {
   weather: 'weather',
 };
 
+/** Tool name → UI card type (LLM path, where intent is just "llm"). */
+const TOOL_TO_CARD: Record<string, ChatCardType | undefined> = {
+  get_sitemap: 'sitemap',
+  get_active_alerts: 'alerts',
+  get_farm_status: 'farmStatus',
+  get_weather: 'weather',
+};
+
 interface AssistantApiResponse {
   intent: string;
-  reply_key: string;
+  reply_key: string | null;
+  reply: string | null;
   tool: string | null;
   data: unknown;
 }
@@ -52,22 +64,32 @@ export async function requestAssistant(
     });
     if (data.intent === 'clear') {
       return {
-        replyKey: data.reply_key,
+        replyKey: data.reply_key ?? undefined,
         action: 'clear',
         stream: false,
         source: 'backend',
       };
     }
-    const cardType = INTENT_TO_CARD[data.intent];
+    const text = data.reply?.trim() || undefined;
+    const cardType =
+      INTENT_TO_CARD[data.intent] ??
+      (data.tool ? TOOL_TO_CARD[data.tool] : undefined);
     if (cardType) {
       return {
-        replyKey: data.reply_key,
+        replyKey: data.reply_key ?? undefined,
+        text,
         card: { type: cardType, data: data.data },
         stream: false,
         source: 'backend',
       };
     }
-    return { replyKey: data.reply_key, stream: true, source: 'backend' };
+    // Free-text answer (LLM smalltalk or rule-based generic) — stream it.
+    return {
+      replyKey: data.reply_key ?? undefined,
+      text,
+      stream: true,
+      source: 'backend',
+    };
   } catch {
     return mockFallback(message);
   }
