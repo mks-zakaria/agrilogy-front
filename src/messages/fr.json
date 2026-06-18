@@ -1134,7 +1134,8 @@
         "clear": "Effacer la conversation",
         "soil": "Dernières mesures du sol",
         "plant": "Dernières mesures des plantes",
-        "water": "Dernières mesures de l'eau"
+        "water": "Dernières mesures de l'eau",
+        "trend": "Évolution d'un capteur"
       },
       "examples": {
         "sitemap": "Afficher le plan du site",
@@ -1143,7 +1144,8 @@
         "weather": "Quel temps fait-il ?",
         "zones": "Quelles sont mes zones ?",
         "soil": "Comment est mon sol ?",
-        "water": "Comment est mon eau ?"
+        "water": "Comment est mon eau ?",
+        "trend": "Comment a évolué l'humidité du sol aujourd'hui ?"
       },
       "commandsCard": {
         "title": "🧭 Commandes disponibles",
@@ -1180,7 +1182,8 @@
         "analyzing": "Analyse des données…",
         "soil": "Lecture de votre sol…",
         "plant": "Vérification de vos plantes…",
-        "water": "Mesure de votre eau…"
+        "water": "Mesure de votre eau…",
+        "trend": "Lecture des tendances…"
       },
       "rate": {
         "up": "Bonne réponse",
@@ -1250,6 +1253,18 @@
         "title": "💧 Votre eau",
         "intro": "Voici vos dernières mesures de l'eau :",
         "empty": "Aucune mesure de l'eau pour l'instant."
+      },
+      "trendCard": {
+        "title": "📈 Tendance",
+        "intro": "Voici la tendance récente :",
+        "empty": "Pas encore assez de données pour une tendance.",
+        "min": "Min",
+        "avg": "Moy",
+        "max": "Max",
+        "count": "{count} mesures sur la période",
+        "rising": "En hausse",
+        "falling": "En baisse",
+        "flat": "Stable"
       }
     },
     "googleMapWeather": {

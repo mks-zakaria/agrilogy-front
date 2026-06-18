@@ -14,12 +14,13 @@ import {
   SoilCard,
   PlantCard,
   WaterCard,
+  TrendCard,
 } from './MockCards';
 import { COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
 import { useChat } from './ChatContext';
 import type { ChatCard } from './types';
 import type { SitemapRoute } from './siteRoutes';
-import type { AlertRow, MetricRow, ZoneRow } from './mockData';
+import type { AlertRow, MetricRow, TrendRow, ZoneRow } from './mockData';
 
 const renderCard = (card: ChatCard, onNavigate?: () => void) => {
   const data = (card.data ?? {}) as {
@@ -47,6 +48,8 @@ const renderCard = (card: ChatCard, onNavigate?: () => void) => {
       return <PlantCard metrics={data.metrics} />;
     case 'water':
       return <WaterCard metrics={data.metrics} />;
+    case 'trend':
+      return <TrendCard trend={card.data as TrendRow | undefined} />;
     default:
       return null;
   }

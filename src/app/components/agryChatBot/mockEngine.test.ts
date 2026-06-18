@@ -16,6 +16,7 @@ describe('routeMockReply', () => {
     ['/soil', 'soil', 'soil'],
     ['/plant', 'plant', 'plant'],
     ['/water', 'water', 'water'],
+    ['/trend', 'trend', 'trend'],
   ])(
     'routes %s to command %s with its card (instant)',
     (input, command, card) => {
@@ -43,6 +44,7 @@ describe('routeMockReply', () => {
     ['how is my soil today', 'soil'],
     ['leaf temperature', 'plant'],
     ['water status', 'water'],
+    ['show me the trend', 'trend'],
     ['خريطة الموقع', 'sitemap'],
   ])('recognizes natural language: %s', (input, command) => {
     expect(routeMockReply(input).command).toBe(command);

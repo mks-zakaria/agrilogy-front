@@ -24,6 +24,7 @@ const STATUS_KEYS = [
   'soil',
   'plant',
   'water',
+  'trend',
   'analyzing',
 ];
 

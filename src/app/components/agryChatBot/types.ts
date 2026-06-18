@@ -19,7 +19,8 @@ export type ChatCardType =
   | 'zones'
   | 'soil'
   | 'plant'
-  | 'water';
+  | 'water'
+  | 'trend';
 
 export type ChatCard = { type: ChatCardType; data?: unknown };
 

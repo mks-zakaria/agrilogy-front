@@ -13,12 +13,14 @@ import {
   MOCK_FARM_STATUS,
   MOCK_PLANT,
   MOCK_SOIL,
+  MOCK_TREND,
   MOCK_WATER,
   MOCK_WEATHER,
   MOCK_ZONES,
   type AlertRow,
   type MetricRow,
   type Severity,
+  type TrendRow,
   type ZoneRow,
 } from './mockData';
 import { useChat } from './ChatContext';
@@ -360,6 +362,109 @@ export const WeatherCard = ({
           </Text>
         </Flex>
       ))}
+    </Box>
+  );
+};
+
+/** /trend — rolling-window trend of one sensor (from the get_sensor_trend tool). */
+export const TrendCard = ({ trend = MOCK_TREND }: { trend?: TrendRow }) => {
+  const t = useTranslations();
+  const sensorLabel = useSensorLabel();
+  const cardBg = useColorModeValue('gray.50', 'gray.700');
+  const cardBorder = useColorModeValue('gray.200', 'gray.600');
+  const labelColor = useColorModeValue('gray.500', 'gray.400');
+  const valueColor = useColorModeValue('gray.800', 'gray.100');
+  const emptyColor = useColorModeValue('gray.400', 'gray.500');
+  const rising = useColorModeValue('green.600', 'green.300');
+  const falling = useColorModeValue('red.500', 'red.300');
+  const flat = useColorModeValue('gray.500', 'gray.400');
+
+  const title = t('misc.chatbot.trendCard.title');
+
+  // No data (or unknown sensor) → graceful empty state.
+  if (trend.error || trend.count === 0) {
+    return (
+      <Box display="flex" flexDirection="column" gap="6px" w="100%">
+        <Text fontSize="13px" fontWeight={600} mb="2px">
+          {title}
+        </Text>
+        <Text fontSize="12px" color={emptyColor}>
+          {t('misc.chatbot.trendCard.empty')}
+        </Text>
+      </Box>
+    );
+  }
+
+  const dirColor =
+    trend.direction === 'rising'
+      ? rising
+      : trend.direction === 'falling'
+        ? falling
+        : flat;
+  const dirArrow =
+    trend.direction === 'rising'
+      ? '↑'
+      : trend.direction === 'falling'
+        ? '↓'
+        : '→';
+  const stats: Array<[string, number | null]> = [
+    [t('misc.chatbot.trendCard.min'), trend.min],
+    [t('misc.chatbot.trendCard.avg'), trend.avg],
+    [t('misc.chatbot.trendCard.max'), trend.max],
+  ];
+
+  return (
+    <Box display="flex" flexDirection="column" gap="6px" w="100%">
+      <Text fontSize="13px" fontWeight={600} mb="2px">
+        {title}
+      </Text>
+      <Flex
+        justify="space-between"
+        align="center"
+        {...rowStyle(cardBg, cardBorder)}
+      >
+        <Box minW={0}>
+          <Text fontSize="12px" color={labelColor} noOfLines={1}>
+            {sensorLabel(trend.key, trend.label)}
+          </Text>
+          <Text
+            fontSize="18px"
+            fontWeight={700}
+            color={valueColor}
+            fontFamily="mono"
+          >
+            {fmt(trend.latest, trend.unit)}
+          </Text>
+        </Box>
+        <Flex align="center" gap="4px" color={dirColor} flexShrink={0}>
+          <Text fontSize="18px" fontWeight={700}>
+            {dirArrow}
+          </Text>
+          <Text fontSize="12px" fontWeight={600}>
+            {t(`misc.chatbot.trendCard.${trend.direction}`)}
+          </Text>
+        </Flex>
+      </Flex>
+      <SimpleGrid columns={3} gap="6px">
+        {stats.map(([lbl, val]) => (
+          <Box key={lbl} {...rowStyle(cardBg, cardBorder)} textAlign="center">
+            <Text fontSize="10px" color={labelColor} textTransform="uppercase">
+              {lbl}
+            </Text>
+            <Text
+              fontSize="12.5px"
+              fontWeight={600}
+              color={valueColor}
+              fontFamily="mono"
+            >
+              {fmt(val, trend.unit)}
+            </Text>
+          </Box>
+        ))}
+      </SimpleGrid>
+      <Text fontSize="10px" color={labelColor}>
+        {t('misc.chatbot.trendCard.count', { count: trend.count })}
+      </Text>
     </Box>
   );
 };
