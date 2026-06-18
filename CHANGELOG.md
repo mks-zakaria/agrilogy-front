@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.36.0...v1.37.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** render replies as Markdown ([#208](https://github.com/AgriLogy/agrilogy-front/issues/208)) ([624efb1](https://github.com/AgriLogy/agrilogy-front/commit/624efb14a746fcdb5d5dabad4f033e8f234bf54a))
+
 # [1.36.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.35.0...v1.36.0) (2026-06-18)
 
 
