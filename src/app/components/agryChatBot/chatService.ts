@@ -14,6 +14,9 @@ import { SITEMAP_ROUTES } from './siteRoutes';
 import {
   MOCK_ALERTS,
   MOCK_FARM_STATUS,
+  MOCK_PLANT,
+  MOCK_SOIL,
+  MOCK_WATER,
   MOCK_WEATHER,
   MOCK_ZONES,
 } from './mockData';
@@ -40,6 +43,9 @@ const INTENT_TO_CARD: Record<string, ChatCardType | undefined> = {
   farm_status: 'farmStatus',
   weather: 'weather',
   zones: 'zones',
+  soil: 'soil',
+  plant: 'plant',
+  water: 'water',
 };
 
 /** Tool name → UI card type (LLM path, where intent is just "llm"). */
@@ -50,6 +56,9 @@ const TOOL_TO_CARD: Record<string, ChatCardType | undefined> = {
   get_weather: 'weather',
   list_zones: 'zones',
   get_zone_detail: 'zones',
+  get_soil_status: 'soil',
+  get_plant_status: 'plant',
+  get_water_status: 'water',
 };
 
 interface AssistantApiResponse {
@@ -115,6 +124,12 @@ function mockDataFor(type: ChatCardType): unknown {
       return MOCK_WEATHER;
     case 'zones':
       return MOCK_ZONES;
+    case 'soil':
+      return MOCK_SOIL;
+    case 'plant':
+      return MOCK_PLANT;
+    case 'water':
+      return MOCK_WATER;
     default:
       return undefined; // 'commands' renders from frontend metadata
   }

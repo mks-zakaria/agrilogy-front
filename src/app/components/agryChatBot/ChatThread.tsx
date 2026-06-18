@@ -11,6 +11,9 @@ import {
   FarmStatusCard,
   WeatherCard,
   ZonesCard,
+  SoilCard,
+  PlantCard,
+  WaterCard,
 } from './MockCards';
 import { COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
 import { useChat } from './ChatContext';
@@ -38,6 +41,12 @@ const renderCard = (card: ChatCard, onNavigate?: () => void) => {
       return <WeatherCard metrics={data.metrics} />;
     case 'zones':
       return <ZonesCard zones={data.zones} />;
+    case 'soil':
+      return <SoilCard metrics={data.metrics} />;
+    case 'plant':
+      return <PlantCard metrics={data.metrics} />;
+    case 'water':
+      return <WaterCard metrics={data.metrics} />;
     default:
       return null;
   }

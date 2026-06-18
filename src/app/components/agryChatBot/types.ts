@@ -16,7 +16,10 @@ export type ChatCardType =
   | 'alerts'
   | 'farmStatus'
   | 'weather'
-  | 'zones';
+  | 'zones'
+  | 'soil'
+  | 'plant'
+  | 'water';
 
 export type ChatCard = { type: ChatCardType; data?: unknown };
 

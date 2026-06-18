@@ -146,6 +146,38 @@ export const COMMANDS: CommandDef[] = [
     introKey: 'misc.chatbot.zonesCard.intro',
   },
   {
+    name: 'soil',
+    slash: '/soil',
+    descKey: 'misc.chatbot.commands.soil',
+    triggers: ['/soil', '/sol', 'soil', 'my soil', 'sol', 'التربة'],
+    card: 'soil',
+    introKey: 'misc.chatbot.soilCard.intro',
+  },
+  {
+    name: 'plant',
+    slash: '/plant',
+    descKey: 'misc.chatbot.commands.plant',
+    triggers: [
+      '/plant',
+      '/plante',
+      'plant',
+      'leaf',
+      'canopy',
+      'plante',
+      'النبات',
+    ],
+    card: 'plant',
+    introKey: 'misc.chatbot.plantCard.intro',
+  },
+  {
+    name: 'water',
+    slash: '/water',
+    descKey: 'misc.chatbot.commands.water',
+    triggers: ['/water', '/eau', 'water', 'irrigation water', 'eau', 'الماء'],
+    card: 'water',
+    introKey: 'misc.chatbot.waterCard.intro',
+  },
+  {
     name: 'clear',
     slash: '/clear',
     descKey: 'misc.chatbot.commands.clear',
@@ -168,6 +200,8 @@ export const EXAMPLE_PROMPTS: { textKey: string; send: string }[] = [
   { textKey: 'misc.chatbot.examples.status', send: '/status' },
   { textKey: 'misc.chatbot.examples.weather', send: '/weather' },
   { textKey: 'misc.chatbot.examples.zones', send: '/zones' },
+  { textKey: 'misc.chatbot.examples.soil', send: '/soil' },
+  { textKey: 'misc.chatbot.examples.water', send: '/water' },
 ];
 
 const norm = (s: string) => s.trim().toLowerCase();

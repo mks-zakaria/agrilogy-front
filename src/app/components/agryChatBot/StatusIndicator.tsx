@@ -21,6 +21,9 @@ const STATUS_KEYS = [
   'weather',
   'sitemap',
   'zones',
+  'soil',
+  'plant',
+  'water',
   'analyzing',
 ];
 
