@@ -10,18 +10,20 @@ import {
   AlertsCard,
   FarmStatusCard,
   WeatherCard,
+  ZonesCard,
 } from './MockCards';
 import { COMMANDS, EXAMPLE_PROMPTS } from './mockEngine';
 import { useChat } from './ChatContext';
 import type { ChatCard } from './types';
 import type { SitemapRoute } from './siteRoutes';
-import type { AlertRow, MetricRow } from './mockData';
+import type { AlertRow, MetricRow, ZoneRow } from './mockData';
 
 const renderCard = (card: ChatCard, onNavigate?: () => void) => {
   const data = (card.data ?? {}) as {
     routes?: SitemapRoute[];
     alerts?: AlertRow[];
     metrics?: MetricRow[];
+    zones?: ZoneRow[];
   };
   switch (card.type) {
     case 'sitemap':
@@ -34,6 +36,8 @@ const renderCard = (card: ChatCard, onNavigate?: () => void) => {
       return <FarmStatusCard metrics={data.metrics} />;
     case 'weather':
       return <WeatherCard metrics={data.metrics} />;
+    case 'zones':
+      return <ZonesCard zones={data.zones} />;
     default:
       return null;
   }

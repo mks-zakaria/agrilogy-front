@@ -15,7 +15,8 @@ export type ChatCardType =
   | 'commands'
   | 'alerts'
   | 'farmStatus'
-  | 'weather';
+  | 'weather'
+  | 'zones';
 
 export type ChatCard = { type: ChatCardType; data?: unknown };
 

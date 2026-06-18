@@ -12,9 +12,11 @@ import {
   MOCK_ALERTS,
   MOCK_FARM_STATUS,
   MOCK_WEATHER,
+  MOCK_ZONES,
   type AlertRow,
   type MetricRow,
   type Severity,
+  type ZoneRow,
 } from './mockData';
 import { useChat } from './ChatContext';
 
@@ -210,6 +212,78 @@ export const FarmStatusCard = ({
           </Box>
         ))}
       </SimpleGrid>
+    </Box>
+  );
+};
+
+/** /zones — the caller's zones (from the list_zones tool). */
+export const ZonesCard = ({
+  zones = MOCK_ZONES.zones,
+}: {
+  zones?: ZoneRow[];
+}) => {
+  const t = useTranslations();
+  const cardBg = useColorModeValue('gray.50', 'gray.700');
+  const cardBorder = useColorModeValue('gray.200', 'gray.600');
+  const nameColor = useColorModeValue('gray.800', 'gray.100');
+  const metaColor = useColorModeValue('gray.500', 'gray.400');
+  const valueColor = useColorModeValue('green.600', 'green.300');
+  const emptyColor = useColorModeValue('gray.400', 'gray.500');
+
+  return (
+    <Box display="flex" flexDirection="column" gap="6px" w="100%">
+      <Text fontSize="13px" fontWeight={600} mb="2px">
+        {t('misc.chatbot.zonesCard.title')}
+      </Text>
+      {zones.length === 0 ? (
+        <Text fontSize="12px" color={emptyColor}>
+          {t('misc.chatbot.zonesCard.empty')}
+        </Text>
+      ) : (
+        zones.map((z) => (
+          <Flex
+            key={z.id}
+            align="center"
+            gap="8px"
+            {...rowStyle(cardBg, cardBorder)}
+          >
+            <Box flex={1} minW={0}>
+              <Text
+                fontSize="12.5px"
+                fontWeight={600}
+                color={nameColor}
+                noOfLines={1}
+              >
+                {z.name}
+              </Text>
+              <Text fontSize="11px" color={metaColor}>
+                {[
+                  z.area_m2 != null
+                    ? t('misc.chatbot.zonesCard.area', { value: z.area_m2 })
+                    : null,
+                  z.critical_moisture != null
+                    ? t('misc.chatbot.zonesCard.critical', {
+                        value: z.critical_moisture,
+                      })
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </Text>
+            </Box>
+            {z.area_m2 != null && (
+              <Text
+                fontSize="12.5px"
+                fontWeight={700}
+                color={valueColor}
+                fontFamily="mono"
+              >
+                {z.area_m2} m²
+              </Text>
+            )}
+          </Flex>
+        ))
+      )}
     </Box>
   );
 };

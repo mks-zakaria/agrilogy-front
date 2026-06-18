@@ -12,6 +12,7 @@ describe('routeMockReply', () => {
     ['/alerts', 'alerts', 'alerts'],
     ['/status', 'status', 'farmStatus'],
     ['/weather', 'weather', 'weather'],
+    ['/zones', 'zones', 'zones'],
   ])(
     'routes %s to command %s with its card (instant)',
     (input, command, card) => {
@@ -34,6 +35,8 @@ describe('routeMockReply', () => {
     ['plan du site', 'sitemap'],
     ['what are my alertes', 'alerts'],
     ['météo', 'weather'],
+    ['mes zones', 'zones'],
+    ['list zones', 'zones'],
     ['خريطة الموقع', 'sitemap'],
   ])('recognizes natural language: %s', (input, command) => {
     expect(routeMockReply(input).command).toBe(command);

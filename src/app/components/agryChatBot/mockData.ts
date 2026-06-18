@@ -85,6 +85,42 @@ export const MOCK_FARM_STATUS: { metrics: MetricRow[] } = {
   ],
 };
 
+export interface ZoneRow {
+  id: number | string;
+  name: string;
+  area_m2: number | null;
+  critical_moisture: number | null;
+  soil_param_TAW?: number | null;
+  soil_param_FC?: number | null;
+  soil_param_WP?: number | null;
+  soil_param_RAW?: number | null;
+}
+
+export const MOCK_ZONES: { zones: ZoneRow[] } = {
+  zones: [
+    {
+      id: 1,
+      name: 'Zone de maraîchage 1',
+      area_m2: 1200,
+      critical_moisture: 20,
+      soil_param_TAW: 50,
+      soil_param_FC: 32,
+      soil_param_WP: 12,
+      soil_param_RAW: 25,
+    },
+    {
+      id: 2,
+      name: 'Verger sud',
+      area_m2: 3400,
+      critical_moisture: 25,
+      soil_param_TAW: 60,
+      soil_param_FC: 35,
+      soil_param_WP: 14,
+      soil_param_RAW: 30,
+    },
+  ],
+};
+
 export const MOCK_WEATHER: { metrics: MetricRow[] } = {
   metrics: [
     { key: 'airTemp', label: 'Air temperature', value: 28, unit: '°C' },
