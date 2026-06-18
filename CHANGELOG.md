@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.38.0...v1.39.0) (2026-06-18)
+
+
+### Features
+
+* **assistant:** live status words + thumbs rating ([#212](https://github.com/AgriLogy/agrilogy-front/issues/212)) ([29843df](https://github.com/AgriLogy/agrilogy-front/commit/29843df2a2daac1c204580072b9170f0e5112495))
+
 # [1.38.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.37.0...v1.38.0) (2026-06-18)
 
 
