@@ -1,3 +1,15 @@
+# [1.44.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.43.0...v1.44.0) (2026-06-19)
+
+
+### Bug Fixes
+
+* **assistant:** don't drop the first reply/card in a new conversation ([#222](https://github.com/AgriLogy/agrilogy-front/issues/222)) ([9936b94](https://github.com/AgriLogy/agrilogy-front/commit/9936b9444fff4a6093102d134cb4a2443b7d377c)), closes [#221](https://github.com/AgriLogy/agrilogy-front/issues/221)
+
+
+### Features
+
+* **weather:** let users change the dashboard location ([#224](https://github.com/AgriLogy/agrilogy-front/issues/224)) ([fca28e9](https://github.com/AgriLogy/agrilogy-front/commit/fca28e98d694421708055bf36a10534c61daca41)), closes [#223](https://github.com/AgriLogy/agrilogy-front/issues/223)
+
 # [1.43.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.42.0...v1.43.0) (2026-06-18)
 
 
