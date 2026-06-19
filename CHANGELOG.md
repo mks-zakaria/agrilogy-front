@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.45.0...v1.46.0) (2026-06-19)
+
+
+### Features
+
+* **assistant:** make replies page-aware via current-page context ([#228](https://github.com/AgriLogy/agrilogy-front/issues/228)) ([7a0ef72](https://github.com/AgriLogy/agrilogy-front/commit/7a0ef72e73b11cec4a3b2202cf658e660bbed077)), closes [#227](https://github.com/AgriLogy/agrilogy-front/issues/227)
+
 # [1.45.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.44.0...v1.45.0) (2026-06-19)
 
 
