@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.44.0...v1.45.0) (2026-06-19)
+
+
+### Features
+
+* **crop-calendar:** farmer crop calendar (Kc per zone) ([#226](https://github.com/AgriLogy/agrilogy-front/issues/226)) ([2892cd2](https://github.com/AgriLogy/agrilogy-front/commit/2892cd28019ab8bbc3196c07c0131822f7784325)), closes [#225](https://github.com/AgriLogy/agrilogy-front/issues/225)
+
 # [1.44.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.43.0...v1.44.0) (2026-06-19)
 
 
