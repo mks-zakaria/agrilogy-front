@@ -18,6 +18,8 @@ import React, {
   useState,
 } from 'react';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
+import { pageKeyFromPath } from './siteRoutes';
 import { loadConversations, saveConversations } from './chatHistoryStorage';
 import {
   fetchServerConversations,
@@ -50,6 +52,7 @@ const uuid = () =>
 
 export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations();
+  const pathname = usePathname();
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [streaming, setStreaming] = useState(false);
@@ -213,8 +216,12 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       setStreaming(true);
 
       // Ask the backend orchestrator (falls back to the local mock on failure),
-      // then stream the resolved reply text and attach any card.
-      requestAssistant(text)
+      // then stream the resolved reply text and attach any card. Pass the page
+      // the user is on so the assistant can answer contextually ("analyze this
+      // page") and pick the right tool for that screen.
+      requestAssistant(text, {
+        context: pageKeyFromPath(pathname) ?? undefined,
+      })
         .then((reply) => {
           if (controller.signal.aborted) return undefined;
           const replyText = reply.text
@@ -258,7 +265,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
           setStreaming(false);
         });
     },
-    [activeId, streaming, t, patchLastMessage]
+    [activeId, streaming, t, patchLastMessage, pathname]
   );
 
   const stop = useCallback(() => {
