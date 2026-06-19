@@ -173,12 +173,19 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         timestamp: new Date(),
       };
 
-      // Resolve (or create) the conversation we're appending to.
-      let convId = activeId;
+      // Resolve (or create) the conversation we're appending to. Decide the id
+      // UP FRONT — never inside the setConversations updater, which React does
+      // not run synchronously. Reading an updater-assigned id on the next line
+      // is a race: for the first message of a brand-new conversation it would
+      // still be null, so setActiveId(null) left the thread on the welcome
+      // screen and the reply + its card were patched onto a null id and
+      // silently dropped (notably under RTL, where render timing loses the race).
+      const isNew = !activeId;
+      const targetId = activeId ?? uuid();
       setConversations((prev) => {
-        if (convId && prev.some((c) => c.id === convId)) {
+        if (!isNew && prev.some((c) => c.id === targetId)) {
           return prev.map((c) =>
-            c.id === convId
+            c.id === targetId
               ? {
                   ...c,
                   messages: [...c.messages, userMsg, assistantMsg],
@@ -188,10 +195,9 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
           );
         }
         // New conversation: title from the first user message.
-        convId = uuid();
         const title = text.length > 40 ? `${text.slice(0, 40).trim()}…` : text;
         const conv: Conversation = {
-          id: convId,
+          id: targetId,
           title,
           messages: [userMsg, assistantMsg],
           createdAt: now,
@@ -199,9 +205,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         };
         return [conv, ...prev];
       });
-      if (!activeId) setActiveId(convId);
-
-      const targetId = convId as string;
+      if (isNew) setActiveId(targetId);
 
       abortRef.current?.abort();
       const controller = new AbortController();
