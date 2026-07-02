@@ -26,6 +26,7 @@ import { IoLogOut } from 'react-icons/io5';
 import { FaBell, FaCog, FaHome, FaWater, FaCalendarAlt } from 'react-icons/fa';
 import { RobotIcon } from '@/app/components/agryChatBot/RobotIcon';
 import useColorModeStyles from '@/app/utils/useColorModeStyles';
+import ReportIssueButton from '@/app/components/main/ReportIssueButton';
 
 const Sidebar = () => {
   const {
@@ -144,6 +145,8 @@ const Sidebar = () => {
         </VStack>
 
         <Spacer minH={4} />
+
+        <ReportIssueButton variant="sidebar" />
 
         <Tooltip label={t('logout.signOut')} placement="right" hasArrow>
           <Flex
