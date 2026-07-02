@@ -38,7 +38,11 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401 && !isAuthEndpoint) {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      window.location.href = '/login';
+      // Already on /login → redirecting again just reloads the page in a
+      // loop (any stray unauthenticated call would retrigger it forever).
+      if (!window.location.pathname.startsWith('/login')) {
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }
