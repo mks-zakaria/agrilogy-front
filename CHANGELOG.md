@@ -1,3 +1,10 @@
+# [1.49.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.48.1...v1.49.0) (2026-07-02)
+
+
+### Features
+
+* **feedback:** move Report-an-issue into the sidebar above logout ([#242](https://github.com/AgriLogy/agrilogy-front/issues/242)) ([472216f](https://github.com/AgriLogy/agrilogy-front/commit/472216f43e581254c82f8a7a040bcad4cab1596f))
+
 ## [1.48.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.48.0...v1.48.1) (2026-07-02)
 
 
