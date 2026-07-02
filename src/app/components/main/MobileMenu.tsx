@@ -47,6 +47,7 @@ import { FaBell, FaSeedling, FaWater, FaCalendarAlt } from 'react-icons/fa';
 import { WiDaySunny } from 'react-icons/wi';
 import { GiGrapes, GiValve } from 'react-icons/gi';
 import NavbarNotificationsButton from '@/app/components/main/NavbarNotificationsButton';
+import ReportIssueButton from '@/app/components/main/ReportIssueButton';
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
 
 const HEADER_H = '64px';
@@ -193,6 +194,7 @@ const MobileMenu = () => {
 
       <HStack spacing={1}>
         <LanguageSwitcher />
+        <ReportIssueButton />
         <NavbarNotificationsButton />
         <Menu placement="bottom-end">
           <MenuButton
