@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.47.0...v1.48.0) (2026-07-02)
+
+
+### Features
+
+* **feedback:** Report-an-issue popover with screen recording ([#238](https://github.com/AgriLogy/agrilogy-front/issues/238)) ([65c0f1d](https://github.com/AgriLogy/agrilogy-front/commit/65c0f1d3dd107a995484036a176df417017eaaaa))
+
 # [1.47.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.46.0...v1.47.0) (2026-06-19)
 
 
