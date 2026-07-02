@@ -1,3 +1,10 @@
+## [1.48.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.48.0...v1.48.1) (2026-07-02)
+
+
+### Bug Fixes
+
+* **auth:** stop the /login reload loop caused by unauthenticated assistant sync ([#240](https://github.com/AgriLogy/agrilogy-front/issues/240)) ([d915eb4](https://github.com/AgriLogy/agrilogy-front/commit/d915eb4dbde8632276bab787d81c04c08fe7c06c))
+
 # [1.48.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.47.0...v1.48.0) (2026-07-02)
 
 
