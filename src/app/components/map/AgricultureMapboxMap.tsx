@@ -986,7 +986,11 @@ export default function AgricultureMapboxMap({
         <Text fontSize="3xl" aria-hidden>
           🗺️
         </Text>
-        <Text fontWeight="semibold" color="gray.600" _dark={{ color: 'gray.300' }}>
+        <Text
+          fontWeight="semibold"
+          color="gray.600"
+          _dark={{ color: 'gray.300' }}
+        >
           {t('misc.map.unavailableTitle')}
         </Text>
         <Text fontSize="sm">{t('misc.map.unavailableBody')}</Text>

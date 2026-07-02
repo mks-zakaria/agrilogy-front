@@ -66,7 +66,12 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     let cancelled = false;
     (async () => {
       const local = loadConversations();
-      const server = await fetchServerConversations();
+      // Unauthenticated (e.g. the /login page, where this global provider is
+      // also mounted): don't hit the API at all — a 401 would trip the axios
+      // interceptor's redirect-to-login and reload-loop the login page.
+      const server = localStorage.getItem('accessToken')
+        ? await fetchServerConversations()
+        : null;
       if (cancelled) return;
       let initial = local;
       if (server === null) {

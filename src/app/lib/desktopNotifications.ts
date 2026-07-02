@@ -10,7 +10,11 @@
 
 const ENABLED_KEY = 'agrilogy_desktop_notifications_enabled_v1';
 
-export type DesktopPermission = 'default' | 'granted' | 'denied' | 'unsupported';
+export type DesktopPermission =
+  | 'default'
+  | 'granted'
+  | 'denied'
+  | 'unsupported';
 
 export function isSupported(): boolean {
   return typeof window !== 'undefined' && 'Notification' in window;
@@ -51,7 +55,8 @@ export function isActive(): boolean {
 export async function requestPermission(): Promise<DesktopPermission> {
   if (!isSupported()) return 'unsupported';
   try {
-    const result = (await Notification.requestPermission()) as DesktopPermission;
+    const result =
+      (await Notification.requestPermission()) as DesktopPermission;
     if (result === 'granted') setEnabledPref(true);
     return result;
   } catch {

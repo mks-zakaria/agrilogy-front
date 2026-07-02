@@ -105,3 +105,5 @@ push-personal.sh
 # Local agent / editor scratch — should never be committed
 .claude/
 Untitled-*
+# Turborepo local cache — build artifact, never commit
+.turbo/

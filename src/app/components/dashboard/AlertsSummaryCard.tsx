@@ -139,12 +139,13 @@ const AlertsSummaryCard = () => {
                       )}
                     </HStack>
                     <Text fontSize="xs" color={metaColor}>
-                      {new Date(
-                        a.last_triggered_at as string
-                      ).toLocaleString(localeTag(locale), {
-                        dateStyle: 'short',
-                        timeStyle: 'short',
-                      })}
+                      {new Date(a.last_triggered_at as string).toLocaleString(
+                        localeTag(locale),
+                        {
+                          dateStyle: 'short',
+                          timeStyle: 'short',
+                        }
+                      )}
                     </Text>
                   </Box>
                 </HStack>
