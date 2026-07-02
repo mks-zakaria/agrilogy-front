@@ -66,7 +66,10 @@ const ReportIssueButton: React.FC = () => {
   const cancellingRef = useRef(false);
 
   const stopRecordingCleanup = useCallback(() => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state !== 'inactive'
+    ) {
       mediaRecorderRef.current.stop();
     }
     if (timerRef.current) clearInterval(timerRef.current);
@@ -123,7 +126,9 @@ const ReportIssueButton: React.FC = () => {
           setState('form');
           return;
         }
-        const blob = new Blob(recordingChunksRef.current, { type: 'video/webm' });
+        const blob = new Blob(recordingChunksRef.current, {
+          type: 'video/webm',
+        });
         const duration = recordingSecondsRef.current;
         const thumb = await extractVideoThumbnail(blob);
         setVideoBlob(blob);
@@ -208,12 +213,7 @@ const ReportIssueButton: React.FC = () => {
     if (state === 'success') {
       return (
         <VStack spacing={3} py={4} textAlign="center">
-          <Box
-            fontSize="2xl"
-            color="primary.500"
-            aria-hidden
-            lineHeight={1}
-          >
+          <Box fontSize="2xl" color="primary.500" aria-hidden lineHeight={1}>
             ✓
           </Box>
           <Text fontWeight="semibold" color={textColor}>
@@ -357,7 +357,11 @@ const ReportIssueButton: React.FC = () => {
               <Button size="xs" onClick={() => handleSubmit(true)}>
                 {t('media.submitWithout')}
               </Button>
-              <Button size="xs" variant="ghost" onClick={() => handleSubmit(false)}>
+              <Button
+                size="xs"
+                variant="ghost"
+                onClick={() => handleSubmit(false)}
+              >
                 {t('actions.tryAgain')}
               </Button>
             </HStack>

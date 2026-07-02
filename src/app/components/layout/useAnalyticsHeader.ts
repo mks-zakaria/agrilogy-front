@@ -126,7 +126,9 @@ export function useAnalyticsHeader(): AnalyticsHeaderState {
   const [activeGraph, setActiveGraph] = useState<ActiveGraphResponse | null>(
     null
   );
-  const [range, setRangeState] = useState<ChartDateRange>(defaultChartDateRange);
+  const [range, setRangeState] = useState<ChartDateRange>(
+    defaultChartDateRange
+  );
   // Default to hourly so freshly-loaded pages tame high-frequency devices
   // (e.g. router 02's per-minute flood) out of the box.
   const [frequency, setFrequencyState] = useState<ChartFrequency>({

@@ -465,7 +465,10 @@ const Notification: React.FC<NotificationProps> = ({
                 {t('notifications.card.irrigation')}
               </Text>
             </HStack>
-            <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={{ base: 1.5, sm: 3 }}>
+            <SimpleGrid
+              columns={{ base: 1, sm: 3 }}
+              spacing={{ base: 1.5, sm: 3 }}
+            >
               <VStack align="stretch" spacing={0.5}>
                 <Text fontSize="xs" color={muted}>
                   {t('notifications.card.idealPeriod')}

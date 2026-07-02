@@ -70,7 +70,10 @@ const detectOs = (): string => {
   if (ua.includes('Android')) return 'Android';
   if (ua.includes('Mac OS X')) return 'macOS';
   if (ua.includes('Linux')) return 'Linux';
-  return (navigator as NavigatorWithUserAgentData).userAgentData?.platform ?? 'Unknown';
+  return (
+    (navigator as NavigatorWithUserAgentData).userAgentData?.platform ??
+    'Unknown'
+  );
 };
 
 export const buildMetadata = (
@@ -95,7 +98,8 @@ export const buildMetadata = (
   timestamp_utc: new Date().toISOString(),
   local_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   user_country:
-    (typeof localStorage !== 'undefined' && localStorage.getItem('country')) || '',
+    (typeof localStorage !== 'undefined' && localStorage.getItem('country')) ||
+    '',
   session_duration_seconds: Math.floor((Date.now() - sessionStart) / 1000),
   referrer: document.referrer,
 });
@@ -144,7 +148,7 @@ export const uploadVideo = async (blob: Blob): Promise<string> => {
 export const isCloudinaryConfigured = (): boolean =>
   Boolean(
     process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME &&
-      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
   );
 
 /** POST the report to agri-api. Auth header is injected by the api client. */

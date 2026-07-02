@@ -226,9 +226,9 @@ const NotificationsMain: React.FC = () => {
 
   // ---- read/unread + filters ---------------------------------------------
   const [statusFilter, setStatusFilter] = useState<'all' | 'unread'>('all');
-  const [levelFilter, setLevelFilter] = useState<'all' | NotificationDecisionLevel>(
-    'all'
-  );
+  const [levelFilter, setLevelFilter] = useState<
+    'all' | NotificationDecisionLevel
+  >('all');
   const [zoneFilter, setZoneFilter] = useState<'all' | number>('all');
 
   const unreadCount = useMemo(
@@ -276,8 +276,16 @@ const NotificationsMain: React.FC = () => {
     label: string;
     scheme: string;
   }> = [
-    { value: 'all', label: t('notifications.filters.allLevels'), scheme: 'brand' },
-    { value: 'critical', label: t('notifications.card.tagCritical'), scheme: 'red' },
+    {
+      value: 'all',
+      label: t('notifications.filters.allLevels'),
+      scheme: 'brand',
+    },
+    {
+      value: 'critical',
+      label: t('notifications.card.tagCritical'),
+      scheme: 'red',
+    },
     {
       value: 'advisory',
       label: t('notifications.card.tagAdvisory'),

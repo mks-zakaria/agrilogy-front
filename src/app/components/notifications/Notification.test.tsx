@@ -9,7 +9,9 @@ import { render, screen } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import Notification, { type NotificationPayload } from './Notification';
 
-const basePayload = (over: Partial<NotificationPayload> = {}): NotificationPayload => ({
+const basePayload = (
+  over: Partial<NotificationPayload> = {}
+): NotificationPayload => ({
   yesterday_temperature: '21.4',
   today_temperature: '24.8',
   yesterday_humidity: '58',
@@ -29,7 +31,9 @@ const basePayload = (over: Partial<NotificationPayload> = {}): NotificationPaylo
   ...over,
 });
 
-const renderCard = (props: Partial<React.ComponentProps<typeof Notification>> = {}) =>
+const renderCard = (
+  props: Partial<React.ComponentProps<typeof Notification>> = {}
+) =>
   render(
     <ChakraProvider>
       <Notification
