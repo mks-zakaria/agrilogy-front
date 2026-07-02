@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.46.0...v1.47.0) (2026-06-19)
+
+
+### Features
+
+* **vannes-pompes:** real irrigation control surface (programs + commands) ([#230](https://github.com/AgriLogy/agrilogy-front/issues/230)) ([2dd867f](https://github.com/AgriLogy/agrilogy-front/commit/2dd867f6d15f33654fd0f57dba615937c039d5b0))
+
 # [1.46.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.45.0...v1.46.0) (2026-06-19)
 
 
