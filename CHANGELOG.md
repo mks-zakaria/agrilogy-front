@@ -1,3 +1,10 @@
+# [1.51.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.50.0...v1.51.0) (2026-07-03)
+
+
+### Features
+
+* **weather:** farmer weather center modal (UV, rain, wind, ET0, soil) ([#246](https://github.com/AgriLogy/agrilogy-front/issues/246)) ([e6596cc](https://github.com/AgriLogy/agrilogy-front/commit/e6596cce809c66867a6cd3f78e1dd4d42e4994e5))
+
 # [1.50.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.49.0...v1.50.0) (2026-07-03)
 
 
