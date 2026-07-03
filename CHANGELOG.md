@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.49.0...v1.50.0) (2026-07-03)
+
+
+### Features
+
+* **weather:** use-my-location button in the Météo location picker ([#244](https://github.com/AgriLogy/agrilogy-front/issues/244)) ([e9b72ea](https://github.com/AgriLogy/agrilogy-front/commit/e9b72eadb960d169ea84d88882f725f5662d57cf))
+
 # [1.49.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.48.1...v1.49.0) (2026-07-02)
 
 
