@@ -36,14 +36,14 @@ const SensorLeafMain = ({
     const fetchData = async () => {
       try {
         const [moistureRes, temperatureRes] = await Promise.all([
-          api.get('api/sensors/leafmoisture/', {
+          api.get('/sensors/leafmoisture', {
             params: {
               start_date: startDate,
               end_date: endDate,
               zone: selectedZone,
             },
           }),
-          api.get('api/sensors/leaftemperature/', {
+          api.get('/sensors/leaftemperature', {
             params: {
               start_date: startDate,
               end_date: endDate,
