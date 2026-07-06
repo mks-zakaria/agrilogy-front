@@ -1,3 +1,10 @@
+## [1.51.1](https://github.com/AgriLogy/agrilogy-front/compare/v1.51.0...v1.51.1) (2026-07-06)
+
+
+### Bug Fixes
+
+* **leaf:** correct sensor endpoint URLs so the Feuille chart loads ([#97](https://github.com/AgriLogy/agrilogy-front/issues/97)) ([86ae6a9](https://github.com/AgriLogy/agrilogy-front/commit/86ae6a98efb7365556b41827e0ef607f4899fe84))
+
 # [1.51.0](https://github.com/AgriLogy/agrilogy-front/compare/v1.50.0...v1.51.0) (2026-07-03)
 
 
