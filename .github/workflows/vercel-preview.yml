@@ -1,0 +1,92 @@
+name: Vercel Preview
+
+# Build and deploy a Vercel Preview for every PR to main, then comment the URL so
+# changes are reviewable on a live deployment before merge. Production still ships
+# via the existing flow — this only adds previews.
+#
+# Deploys through the Vercel CLI with a token (VERCEL_TOKEN repo secret), which
+# bypasses both the stale personal-Hobby account connection and the author-block
+# on git-integration deploys. The org/project IDs are identifiers (not secrets)
+# and point at the existing Team project agrilogys-projects/agrilogy-front.
+
+on:
+  pull_request:
+    branches: [main]
+
+# One in-flight preview per PR; newer pushes cancel the older build.
+concurrency:
+  group: vercel-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  VERCEL_ORG_ID: team_0qvi19Uq395tQgY3GWshb0YV
+  VERCEL_PROJECT_ID: prj_BNkl0eG3RTp1xmx6npQZgDHky3Hb
+
+jobs:
+  deploy-preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    # Only run for same-repo PRs (fork PRs have no access to the token secret).
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel environment (preview)
+        run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build project artifacts
+        run: vercel build --token="$VERCEL_TOKEN"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy prebuilt artifacts to Vercel (preview)
+        id: deploy
+        run: |
+          url="$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Comment preview URL on the PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = "${{ steps.deploy.outputs.url }}";
+            const marker = "<!-- vercel-preview -->";
+            const body = `${marker}\n### ▲ Vercel Preview\n\nThis PR is deployed to a live preview:\n\n**${url}**\n\n_Updated on every push to this PR._`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
