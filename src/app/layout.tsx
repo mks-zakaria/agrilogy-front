@@ -10,15 +10,15 @@ import { chakraColorModeConfig } from './colorModeConfig';
 import { dirFor, type Locale } from '../i18n/config';
 
 export const metadata: Metadata = {
-  title: { default: 'Agrilogy', template: '%s · Agrilogy' },
+  title: { default: 'Agrogo', template: '%s · Agrogo' },
   description:
-    'Agrilogy is an innovative agriculture automation solution designed to enhance productivity, sustainability, and efficiency in farming. By utilizing smart technology and data-driven insights, Agrilogy optimizes irrigation, crop monitoring, and supply chain management, empowering farmers to achieve higher yields and reduce costs while promoting eco-friendly practices.',
+    'Agrogo is an innovative agriculture automation solution designed to enhance productivity, sustainability, and efficiency in farming. By utilizing smart technology and data-driven insights, Agrogo optimizes irrigation, crop monitoring, and supply chain management, empowering farmers to achieve higher yields and reduce costs while promoting eco-friendly practices.',
   // Field use is mostly mobile — make "add to home screen" behave like an app.
-  applicationName: 'Agrilogy',
+  applicationName: 'Agrogo',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Agrilogy',
+    title: 'Agrogo',
   },
 };
 

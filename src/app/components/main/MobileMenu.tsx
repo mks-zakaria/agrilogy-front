@@ -186,7 +186,7 @@ const MobileMenu = () => {
           height={40}
           width={120}
           src={logo}
-          alt="Agrilogy"
+          alt="Agrogo"
           priority
           style={{ objectFit: 'contain' }}
         />
@@ -276,7 +276,7 @@ const MobileMenu = () => {
               {t('nav.navigation')}
             </Text>
             <Text fontSize="xl" fontWeight="bold">
-              Agrilogy
+              Agrogo
             </Text>
           </DrawerHeader>
           <DrawerBody px={3} py={5}>
